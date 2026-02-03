@@ -1,0 +1,30 @@
+# 虚拟环境
+venv/
+.claude/
+
+# 配置文件(包含 API Key)
+config.yaml
+
+# 生成的数据和输出
+/old
+*.pyc
+__pycache__/
+/src/image_autogen/__pycache__/
+/src/__pycache__/
+
+# 先忽略目录内所有内容
+/data/chroma_db/*
+/data/input/*
+/data/knowledge_source/*
+/data/knowledge_add/*
+
+# 再放行占位文件，让目录能被提交
+!/data/chroma_db/.gitkeep
+!/data/knowledge_source/.gitkeep
+!/data/knowledge_add/.gitkeep
+!/data/input/.gitkeep
+!/data/input/使用abacustest计算晶体的弹性性质.md
+
+# IDE 配置
+.vscode/
+.idea/
