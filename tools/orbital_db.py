@@ -95,7 +95,7 @@ def query_github_candidates(element: str) -> list:
         list of str: 文件名列表，网络失败时返回空列表
     """
     import urllib.request
-    import json as _json
+    import json
 
     url = "https://api.github.com/repos/deepmodeling/abacus-develop/contents/tests/PP_ORB"
     try:
@@ -104,11 +104,13 @@ def query_github_candidates(element: str) -> list:
             headers={"User-Agent": "AutoTutorial3.0-OrbitalChecker"}
         )
         with urllib.request.urlopen(req, timeout=10) as response:
-            data = _json.loads(response.read().decode())
+            data = json.loads(response.read().decode())
         return [
             item["name"]
             for item in data
             if item["name"].startswith(element + "_") and item["name"].endswith(".orb")
         ]
     except Exception:
+        # 任何失败（网络、rate limit、API 结构变更）均返回空列表
+        # 空列表触发 testCLAUDE.md 2.3b 的「手动输入」分支，不会静默丢失错误
         return []
