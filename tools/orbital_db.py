@@ -124,6 +124,13 @@ def add_correction(wrong: str, correct: str):
         wrong: 错误的文件名（如 "Si_gga_7au_100Ry_2s2p1d.orb"）
         correct: 正确的文件名（如 "Si_gga_8au_100Ry_2s2p1d.orb"）
     """
+    # 前置校验 1：wrong 与 correct 相同时无意义，拒绝写入
+    if wrong == correct:
+        raise ValueError(f"wrong 和 correct 相同：{wrong}，无需添加映射")
+    # 前置校验 2：key 已存在时内存已是最新，跳过文件写入（幂等保证）
+    if wrong in ORBITAL_CORRECTIONS:
+        return
+
     from pathlib import Path as _Path
 
     # 1. 更新内存状态
