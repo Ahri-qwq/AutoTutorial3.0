@@ -114,3 +114,35 @@ def query_github_candidates(element: str) -> list:
         # 任何失败（网络、rate limit、API 结构变更）均返回空列表
         # 空列表触发 testCLAUDE.md 2.3b 的「手动输入」分支，不会静默丢失错误
         return []
+
+
+def add_correction(wrong: str, correct: str):
+    """
+    向 ORBITAL_CORRECTIONS 添加新映射，同时更新内存状态和源文件。
+
+    Args:
+        wrong: 错误的文件名（如 "Si_gga_7au_100Ry_2s2p1d.orb"）
+        correct: 正确的文件名（如 "Si_gga_8au_100Ry_2s2p1d.orb"）
+    """
+    from pathlib import Path as _Path
+
+    # 1. 更新内存状态
+    ORBITAL_CORRECTIONS[wrong] = correct
+    ALL_KNOWN_ORBITALS.add(correct)
+
+    # 2. 读取源文件
+    db_path = _Path(__file__).resolve()
+    content = db_path.read_text(encoding='utf-8')
+
+    # 3. 在 ORBITAL_CORRECTIONS 结束的 } 前插入新条目
+    #    文件中的标记：}\n\n# 扁平化已知文件名集合
+    element = wrong.split("_")[0] if "_" in wrong else "unknown"
+    new_entry = f'    # {element}: 运行时自动发现（测试阶段用户确认）\n    "{wrong}": "{correct}",\n'
+    marker = '}\n\n# 扁平化已知文件名集合'
+    if marker not in content:
+        raise RuntimeError("orbital_db.py 格式已变化，无法自动插入新映射，请手动添加。")
+    content = content.replace(marker, new_entry + marker, 1)
+
+    # 4. 写回文件
+    db_path.write_text(content, encoding='utf-8')
+    print(f"[orbital_db] 已写入新映射：{wrong} -> {correct}")
