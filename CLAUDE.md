@@ -295,15 +295,20 @@
 - 整合 Step 4、5、6 的所有修改，生成`process/07_fix.md`
 - 确保前言、正文、附录完整，且无重复
 
-**7.1b 轨道文件名自动验证（如教程含 LCAO 计算）**
+**7.1b 自动验证：轨道文件名 + INPUT 参数兼容性（如教程含 LCAO 计算）**
 
 如果教程涉及 LCAO 基组（即包含 `.orb` 轨道文件），执行：
 ```bash
 python tools/orbital_validator.py process/07_fix.md --fix
 ```
 
-- 有 NG 问题并自动修正时：确认修正内容合理，更新 process/07_fix.md
-- 有 ?? 问题无法自动修正时：手动查阅 ABACUS GitHub 确认正确文件名
+此命令同时检测并修正：
+1. **轨道文件名错误**（如 `Si_gga_7au_100Ry_2s2p1d.orb` → `Si_gga_8au_100Ry_2s2p1d.orb`）
+2. **INPUT 参数兼容性问题**（如 `nbands auto` → 删除，ABACUS v3.10.x 不支持）
+
+处理规则：
+- 有 NG/自动修正时：确认修正内容合理，更新 `process/07_fix.md`
+- 有 ?? 无法自动修正时：手动查阅 ABACUS GitHub 确认正确文件名
 - 全部 OK 时：直接继续 7.2
 
 **Think Aloud：** 说明发现了哪些轨道文件名问题，如何处理
