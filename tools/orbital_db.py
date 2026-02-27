@@ -82,3 +82,33 @@ def validate_orbital(filename: str):
         return False, None, f"未知文件名。{element} 的已知轨道文件：{', '.join(suggestions)}"
 
     return False, None, f"未知文件名，无法自动修正。请到 https://github.com/deepmodeling/abacus-develop/tree/develop/tests/PP_ORB 查找正确文件名"
+
+
+def query_github_candidates(element: str) -> list:
+    """
+    查询 ABACUS GitHub，返回该元素的所有已知 .orb 文件名。
+
+    Args:
+        element: 元素符号，如 "Si"、"Ti"
+
+    Returns:
+        list of str: 文件名列表，网络失败时返回空列表
+    """
+    import urllib.request
+    import json as _json
+
+    url = "https://api.github.com/repos/deepmodeling/abacus-develop/contents/tests/PP_ORB"
+    try:
+        req = urllib.request.Request(
+            url,
+            headers={"User-Agent": "AutoTutorial3.0-OrbitalChecker"}
+        )
+        with urllib.request.urlopen(req, timeout=10) as response:
+            data = _json.loads(response.read().decode())
+        return [
+            item["name"]
+            for item in data
+            if item["name"].startswith(element + "_") and item["name"].endswith(".orb")
+        ]
+    except Exception:
+        return []
