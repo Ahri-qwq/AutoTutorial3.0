@@ -341,6 +341,44 @@ chapters: N
 
 ---
 
+### Step 8: 询问是否执行计算测试（可选）
+**目标：** 在教程生成完成后，询问用户是否需要将教程提交到 Bohrium 进行实际计算验证
+
+**执行：**
+
+完成 Step 7 后，向用户询问：
+
+```
+教程已生成完毕。
+
+是否需要执行计算测试？测试将把教程中的案例提交到 Bohrium 云平台实际运行，
+验证参数、文件名、计算流程是否正确可复现。
+
+需要以下条件：
+  - 已配置 Bohrium 账号和 AccessKey（bohr config set access_key <key>）
+  - 教程包含可运行的计算案例（INPUT/STRU/KPT 文件）
+
+是否执行测试？（是/否）
+```
+
+**若用户选择"否"：** 结束，输出教程文件路径，流程完毕。
+
+**若用户选择"是"：** 按以下方式启动测试流程：
+
+1. 设置路径变量（根据当前工作目录自动填写）：
+```
+tutorial_path = "_workspace/<当前任务目录>/07_Final_Tutorial_<标题>.md"
+test_dir      = "_workspace/<当前任务目录>/test_<YYYYMMDD_HHMMSS>/"
+```
+
+2. 切换到 `testCLAUDE.md` 定义的完整测试流程，从 **Step 1** 开始执行，`tutorial_path` 和 `test_dir` 已知，无需再次询问。
+
+**Think Aloud：** 说明教程路径、测试目录，以及你对本篇教程计算流程的初步理解（串行/并行任务、依赖关系），为 testCLAUDE.md Step 3 的任务提交做预热。
+
+**完成标志：** 用户选择"否"则直接完成；用户选择"是"则切换到 testCLAUDE.md Step 1。
+
+---
+
 ## 工具使用
 
 ### retriever.py - RAG检索工具
