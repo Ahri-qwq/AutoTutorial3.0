@@ -11,11 +11,29 @@ import re
 import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from orbital_db import ORBITAL_CORRECTIONS
+from orbital_db import ORBITAL_CORRECTIONS, query_github_candidates
 from pathlib import Path
 from typing import Dict, List, Optional
 from datetime import datetime, timedelta
 import shutil
+
+
+class OrbitalNotFoundError(Exception):
+    """
+    轨道文件下载失败且无已知映射时抛出。
+    携带 GitHub 候选列表，供 Claude 在 testCLAUDE.md 流程中处理。
+
+    Attributes:
+        filename: 请求的错误文件名
+        candidates: GitHub 返回的该元素候选文件名列表（可能为空）
+    """
+    def __init__(self, filename: str, candidates: list):
+        self.filename = filename
+        self.candidates = candidates
+        super().__init__(
+            f"轨道文件不存在：{filename}\n"
+            f"候选文件：{candidates if candidates else '（GitHub 查询失败，请手动提供）'}"
+        )
 
 
 class BohriumJobManager:
@@ -230,6 +248,11 @@ class PseudopotentialManager:
                 except Exception as e:
                     print(f"  [警告] 验证下载文件失败: {e}")
 
+        # 如果是轨道文件，查询 GitHub 候选列表并抛出结构化异常
+        if file_type == "orbital":
+            element = filename.split("_")[0] if "_" in filename else ""
+            candidates = query_github_candidates(element) if element else []
+            raise OrbitalNotFoundError(filename, candidates)
         raise Exception(f"下载失败: {filename} - 所有下载源都失败")
 
     def copy_to_dir(self, filename: str, target_dir: Path, file_type: str = "pseudopotential"):
