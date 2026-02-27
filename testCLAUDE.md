@@ -258,17 +258,19 @@ bohr config set project_id 205855
 **1.1 创建测试工作目录**
 
 ```bash
-# 生成时间戳目录
+# 从教程路径提取父目录，在其中创建带时间戳的 test 子目录
+# $tutorial_path 为用户提供的教程文件路径（如 "_workspace/20260203_XXX/07_Final_Tutorial_*.md"）
+$tutorial_dir = Split-Path $tutorial_path -Parent   # → _workspace/20260203_XXX
 $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
-$tutorial_name = "elastic_tutorial"  # 从教程文件名提取
-mkdir test_workspace/${timestamp}_${tutorial_name}
-cd test_workspace/${timestamp}_${tutorial_name}
+$test_dir = "$tutorial_dir/test_$timestamp"          # → _workspace/20260203_XXX/test_20260226_144949
+mkdir $test_dir
+# 不再 cd，后续所有命令从项目根目录运行，路径均用 $test_dir 前缀
 ```
 
 **1.2 调用教程解析工具**
 
 ```bash
-python ../../tools/test_framework_integrated.py --tutorial ../../_workspace/XXX/07_final.md --phase analyze
+python tools/test_framework_integrated.py "$tutorial_path" --test-dir "$test_dir" --phase prepare
 ```
 
 **解析内容：**
@@ -359,38 +361,12 @@ echo "[KPT内容]" > Si/01_relax/KPT
 
 **2.3 下载赝势和轨道文件**
 
-使用内置的文件管理器自动下载：
-```bash
-python ../../tools/test_framework_integrated.py --phase download_files --case Si
-```
+Step 1.2 的 `--phase prepare` 命令已自动完成以下操作：
+1. 从本地缓存（`tools/pseudopotentials/`、`tools/orbitals/`）复制已缓存文件
+2. 若未缓存，从 ABACUS 仓库下载并验证（检查 HTML/404 错误）
+3. 自动应用文件映射表（如 `Si_gga_7au_100Ry_2s2p1d.orb` → `Si_gga_8au_100Ry_2s2p1d.orb`）
 
-**下载逻辑：**
-1. 检查本地缓存（`tools/pseudopotentials/`、`tools/orbitals/`）
-2. 如已缓存，复制到案例目录
-3. 如未缓存，从ABACUS仓库下载：
-   - 赝势：`http://abacus.deepmodeling.com/...[文件名].upf`
-   - 轨道：`http://abacus.deepmodeling.com/...[文件名].orb`
-4. 验证下载内容（检查HTML/404错误）
-5. 应用文件映射表（如`Si_gga_7au_100Ry_2s2p1d.orb` → `Si_gga_8au_100Ry_2s2p1d.orb`）
-
-**输出示例：**
-```
-=== 下载依赖文件 ===
-
-[检查] Si_ONCV_PBE-1.0.upf
-  ✅ 已缓存（tools/pseudopotentials/Si_ONCV_PBE-1.0.upf）
-  [复制] → Si/01_relax/Si_ONCV_PBE-1.0.upf
-
-[检查] Si_gga_7au_100Ry_2s2p1d.orb
-  ⚠️  文件不存在，应用映射表
-  [映射] Si_gga_7au_100Ry_2s2p1d.orb → Si_gga_8au_100Ry_2s2p1d.orb
-  [下载] https://abacus.deepmodeling.com/.../Si_gga_8au_100Ry_2s2p1d.orb
-  ✅ 下载完成（78 KB）
-  [缓存] → tools/orbitals/Si_gga_8au_100Ry_2s2p1d.orb
-  [复制] → Si/01_relax/Si_gga_8au_100Ry_2s2p1d.orb
-
-✅ 所有依赖文件已准备
-```
+确认 Step 1.2 输出中显示"✅ 所有依赖文件已准备"后继续。若出现 `OrbitalNotFoundError`，按 Step 2.3b 处理。
 
 **2.3b 处理轨道文件不存在（OrbitalNotFoundError）**
 
@@ -440,7 +416,7 @@ add_correction('{wrong}', '{correct}')
 python -c "
 import json, os
 from datetime import datetime
-report_path = 'orbital_fix_report.json'
+report_path = f'{test_dir}/orbital_fix_report.json'
 report = json.loads(open(report_path).read()) if os.path.exists(report_path) else {'tutorial': '', 'corrections': []}
 report['tutorial'] = '[当前教程路径]'
 report['corrections'].append({
@@ -470,7 +446,45 @@ print('[记录] 修正报告已更新')
 }
 ```
 
-**2.5 修复STRU文件格式（如需要）**
+**2.5 检查 INPUT 参数兼容性**
+
+扫描已准备的 INPUT 文件，查找已知不兼容参数：
+```bash
+grep -rn "nbands.*auto" "$test_dir/"
+```
+
+**若发现 `nbands auto`：**
+
+1. 修改对应 INPUT 文件，删除 `nbands auto` 这一行（ABACUS 未指定时自动计算，效果相同）
+
+2. 将修改记录追加到 `"$test_dir/param_fix_report.json"`：
+```bash
+python -c "
+import json, os
+from datetime import datetime
+report_path = '$test_dir/param_fix_report.json'
+report = json.loads(open(report_path).read()) if os.path.exists(report_path) else {'tutorial': '', 'fixes': []}
+report['tutorial'] = '$tutorial_path'
+report['fixes'].append({
+    'type': 'input_param',
+    'param': 'nbands auto',
+    'action': 'removed',
+    'reason': 'ABACUS v3.10.x不支持auto关键字，删除后ABACUS自动计算',
+    'location': '教程对应代码块（已修改INPUT文件）',
+    'timestamp': datetime.now().isoformat()
+})
+open(report_path, 'w', encoding='utf-8').write(json.dumps(report, ensure_ascii=False, indent=2))
+print('[记录] param_fix_report.json 已更新')
+"
+```
+
+**Think Aloud：** 说明发现了哪些参数问题，如何处理，是否影响后续计算
+
+**若未发现任何问题：** 跳过此步骤。
+
+---
+
+**2.6 修复STRU文件格式（如需要）**
 
 自动检测并修复旧格式：
 ```python
@@ -522,11 +536,10 @@ NUMERICAL_ORBITAL
 **3.2 提交任务命令**
 
 ```bash
-# 进入案例目录
-cd Si/01_relax
-
-# 提交任务
+# 进入案例目录并提交
+Push-Location "$test_dir/Si/01_relax"
 bohr job submit -i job.json -p ./
+Pop-Location   # 返回项目根目录
 
 # 记录Job ID
 ```
@@ -672,7 +685,7 @@ done
 4. 收敛问题
 
 建议：
-- 查看日志：test_workspace/job_logs/job_21984267/
+- 查看日志：_workspace/XXX/test_YYYYMMDD/job_logs/job_21984267/
 - 参考故障排除清单（附录B）
 
 是否继续测试其他案例？(Y/n)
@@ -700,12 +713,12 @@ done
 
 ```bash
 # 创建日志目录
-mkdir -p ../../job_logs
+mkdir -p "$test_dir/job_logs"
 
 # 下载每个任务的结果
-for job_id in $(cat job_ids.json | jq -r '.[] | select(.status == "finished") | .job_id'); do
+for job_id in $(cat "$test_dir/job_ids.json" | jq -r '.[] | select(.status == "finished") | .job_id'); do
   echo "[下载] Job $job_id..."
-  bohr job download -j $job_id -o ../../job_logs/job_$job_id
+  bohr job download -j $job_id -o "$test_dir/job_logs/job_$job_id"
 done
 ```
 
@@ -744,15 +757,14 @@ done
 将下载的结果复制回原计算目录：
 ```bash
 # 复制优化后的结构到弹性计算目录
-cp ../../job_logs/job_21984267/OUT.ABACUS/STRU_ION_D Si/02_elastic/STRU
+cp "$test_dir/job_logs/job_21984267/OUT.ABACUS/STRU_ION_D" "$test_dir/Si/02_elastic/STRU"
 ```
 
 **5.3 运行后处理（如需要）**
 
 对于弹性计算，运行后处理提取弹性常数：
 ```bash
-cd Si/02_elastic
-python ../../../tools/test_framework_integrated.py --phase postprocess --type elastic
+python tools/test_framework_integrated.py continue "$test_dir"
 ```
 
 **Think Aloud：**
@@ -879,7 +891,7 @@ passed = relative_error <= tolerance  # 默认5%
 
 **生成时间：** 2026-02-26 11:15:32
 **测试教程：** _workspace/20260203_105918_弹性常数计算/07_final.md
-**测试目录：** test_workspace/20260226_103000_elastic_tutorial/
+**测试目录：** _workspace/20260203_105918_弹性常数计算/test_20260226_103000/
 
 ---
 
@@ -963,7 +975,7 @@ passed = relative_error <= tolerance  # 默认5%
 检查当前测试目录下是否存在 `orbital_fix_report.json`：
 
 ```bash
-ls orbital_fix_report.json 2>/dev/null && echo "存在" || echo "不存在"
+ls "$test_dir/orbital_fix_report.json" 2>/dev/null && echo "存在" || echo "不存在"
 ```
 
 **如果存在且本次测试通过：**
@@ -1017,6 +1029,60 @@ python tools/orbital_validator.py "{tutorial_path}" --fix
 
 ---
 
+### Step 7: 将测试发现的问题反向修正教程原文
+
+**目标：** 将测试过程中发现的轨道文件名错误、INPUT 参数问题等，写回教程原文，避免下次测试时重复出现相同问题。
+
+**前提条件：** 仅当 Step 6 测试结果为 **全部 PASS** 时执行。若测试失败，只记录不修改（避免用错误参数修改教程）。
+
+**执行：**
+
+**7.1 检查所有修正记录**
+
+```bash
+ls "$test_dir/orbital_fix_report.json" 2>/dev/null && echo "轨道修正记录：存在" || echo "轨道修正记录：无"
+ls "$test_dir/param_fix_report.json"   2>/dev/null && echo "参数修正记录：存在" || echo "参数修正记录：无"
+```
+
+**7.2 汇总并 Think Aloud**
+
+读取所有存在的 fix report，输出待修改清单：
+
+```
+[汇总] 本次测试发现以下需回写教程的修正：
+
+  轨道文件名：
+    - Si_gga_7au_100Ry_2s2p1d.orb → Si_gga_8au_100Ry_2s2p1d.orb（第385行）
+
+  INPUT 参数：
+    - nbands auto → 删除（ABACUS 自动计算）（第47行代码块）
+```
+
+若两个 report 均不存在，输出"本次测试无需回写教程"并跳过 7.3-7.4。
+
+**7.3 修正教程原文**
+
+```bash
+python tools/orbital_validator.py "$tutorial_path" --fix
+```
+
+`orbital_validator.py` 已同时处理：
+- 轨道文件名替换（来自 orbital_fix_report + orbital_db）
+- `nbands auto` 删除
+
+**7.4 Think Aloud：说明修改结果**
+
+- 说明修改了哪些行
+- 判断是否需要重走 CLAUDE.md 审查流程：
+  - 只删除 `nbands auto`：**无需**重走审查（参数删除不影响文章内容）
+  - 轨道文件名替换：**建议**重走 Step 5（案例审查），确保文件名一致性
+
+**完成标志：**
+- 所有 fix report 中的修正已应用到教程
+- 输出："✅ Step 7完成，教程原文已更新"
+
+---
+
 ## 工作总结
 
 完成所有步骤后，输出最终总结：
@@ -1033,7 +1099,7 @@ python tools/orbital_validator.py "{tutorial_path}" --fix
   ✅ 通过（7/7参数）
 
 测试报告：
-  test_workspace/20260226_103000_elastic_tutorial/test_report.md
+  _workspace/20260203_105918_弹性常数计算/test_report.md
 
 关键发现：
   - 所有弹性常数在5%容差范围内
