@@ -1,0 +1,8 @@
+{
+  "NiO-dftu-scf": {
+    "job_id": "22150516",
+    "status": "waiting",
+    "directory": "NiO_dftu",
+    "depends_on": null
+  }
+}

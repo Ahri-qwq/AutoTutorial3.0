@@ -1,0 +1,42 @@
+{
+    "save_path": "results",
+    "run_dft": [
+        {
+            "ifrun": true,
+            "example": [
+                "\u6676\u4f53_elastic\\org",
+                "\u6676\u4f53_elastic\\deformed_00",
+                "\u6676\u4f53_elastic\\deformed_01",
+                "\u6676\u4f53_elastic\\deformed_02",
+                "\u6676\u4f53_elastic\\deformed_03",
+                "\u6676\u4f53_elastic\\deformed_04",
+                "\u6676\u4f53_elastic\\deformed_05",
+                "\u6676\u4f53_elastic\\deformed_06",
+                "\u6676\u4f53_elastic\\deformed_07",
+                "\u6676\u4f53_elastic\\deformed_08",
+                "\u6676\u4f53_elastic\\deformed_09",
+                "\u6676\u4f53_elastic\\deformed_10",
+                "\u6676\u4f53_elastic\\deformed_11",
+                "\u6676\u4f53_elastic\\deformed_12",
+                "\u6676\u4f53_elastic\\deformed_13",
+                "\u6676\u4f53_elastic\\deformed_14",
+                "\u6676\u4f53_elastic\\deformed_15",
+                "\u6676\u4f53_elastic\\deformed_16",
+                "\u6676\u4f53_elastic\\deformed_17",
+                "\u6676\u4f53_elastic\\deformed_18",
+                "\u6676\u4f53_elastic\\deformed_19",
+                "\u6676\u4f53_elastic\\deformed_20",
+                "\u6676\u4f53_elastic\\deformed_21",
+                "\u6676\u4f53_elastic\\deformed_22",
+                "\u6676\u4f53_elastic\\deformed_23"
+            ],
+            "command": "OMP_NUM_THREADS=1 mpirun -np 16 abacus | tee out.log",
+            "image": "registry.dp.tech/dptech/abacus:LTSv3.10.1",
+            "bohrium": {
+                "scass_type": "c32_m64_cpu",
+                "job_type": "container",
+                "platform": "ali"
+            }
+        }
+    ]
+}

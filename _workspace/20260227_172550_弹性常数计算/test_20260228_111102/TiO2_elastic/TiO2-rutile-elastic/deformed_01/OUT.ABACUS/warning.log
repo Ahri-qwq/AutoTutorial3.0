@@ -1,0 +1,162 @@
+ AUTO_SET NBANDS to 34
+ AUTO_SET NBANDS to 34
+ Grid_Technique::init_atoms_on_grid  warning : No atom on this sub-FFT-mesh.
+      Processor           Atom
+              1             31
+              2             33
+              3             31
+              4             32
+              5             34
+              6             31
+              7             32
+              8             34
+              9             32
+             10             31
+             11             33
+             12             31
+             13              0
+             14              0
+             15              0
+             16              0
+                            startmag_type = 2
+                       charge from rho_at = 11.8903
+                         charge should be = 12
+                            startmag_type = 2
+                       charge from rho_at = 5.99905
+                         charge should be = 6
+
+ SETUP ATOMIC RHO FOR SPIN 1
+                 Electron number from rho = 48
+           total electron number from rho = 48
+                                should be = 48
+                 charge before normalized = 48
+                  charge after normalized = 48
+                 charge before normalized = 48.0000002492417
+                  charge after normalized = 48
+                 charge before normalized = 48.0000000000001
+                  charge after normalized = 48
+                 charge before normalized = 48.0000018149077
+                  charge after normalized = 48.0000000000001
+                 charge before normalized = 48.0000000000002
+                  charge after normalized = 48
+                 charge before normalized = 47.9999998881084
+                  charge after normalized = 48
+                 charge before normalized = 47.9999999999999
+                  charge after normalized = 48
+                 charge before normalized = 47.9999998248914
+                  charge after normalized = 48
+                 charge before normalized = 48.0000000000002
+                  charge after normalized = 48
+                 charge before normalized = 47.9999998574592
+                  charge after normalized = 47.9999999999999
+                 charge before normalized = 48
+                  charge after normalized = 48
+                 charge before normalized = 47.9999998991308
+                  charge after normalized = 48.0000000000002
+                 charge before normalized = 47.9999999999999
+                  charge after normalized = 48
+                 charge before normalized = 47.9999998861764
+                  charge after normalized = 48.0000000000001
+                 charge before normalized = 48
+                  charge after normalized = 48
+                 charge before normalized = 47.9999998864585
+                  charge after normalized = 48
+                 charge before normalized = 48
+                  charge after normalized = 48
+                 charge before normalized = 47.9999998863562
+                  charge after normalized = 48.0000000000001
+                 charge before normalized = 47.9999999999999
+                  charge after normalized = 48
+                 charge before normalized = 47.9999998862262
+                  charge after normalized = 48
+                 charge before normalized = 48.0000000000001
+                  charge after normalized = 48
+                 charge before normalized = 47.9999998862239
+                  charge after normalized = 48
+                 charge before normalized = 47.9999999999999
+                  charge after normalized = 48
+                 charge before normalized = 47.9999998862252
+                  charge after normalized = 47.9999999999999
+                 charge before normalized = 47.9999999999999
+                  charge after normalized = 48
+                 charge before normalized = 47.9999998862247
+                  charge after normalized = 48.0000000000001
+                            startmag_type = 2
+                       charge from rho_at = 11.8902694666839
+                         charge should be = 12
+                            startmag_type = 2
+                       charge from rho_at = 5.99904704283839
+                         charge should be = 6
+
+ SETUP ATOMIC RHO FOR SPIN 1
+                 Electron number from rho = 47.9999999999999
+           total electron number from rho = 47.9999999999999
+                                should be = 48
+                            startmag_type = 2
+                       charge from rho_at = 11.8902694666839
+                         charge should be = 12
+                            startmag_type = 2
+                       charge from rho_at = 5.99904704283839
+                         charge should be = 6
+
+ SETUP ATOMIC RHO FOR SPIN 1
+                 Electron number from rho = 47.9999999999999
+           total electron number from rho = 47.9999999999999
+                                should be = 48
+ Grid_Technique::init_atoms_on_grid  warning : No atom on this sub-FFT-mesh.
+      Processor           Atom
+              1             31
+              2             33
+              3             31
+              4             32
+              5             34
+              6             31
+              7             32
+              8             34
+              9             32
+             10             31
+             11             33
+             12             31
+             13              0
+             14              0
+             15              0
+             16              0
+                 charge before normalized = 48
+                  charge after normalized = 48
+                 charge before normalized = 47.9999999091285
+                  charge after normalized = 47.9999999999999
+                 charge before normalized = 48.0000000000001
+                  charge after normalized = 48
+                 charge before normalized = 47.999999910138
+                  charge after normalized = 48
+                 charge before normalized = 48
+                  charge after normalized = 48
+                 charge before normalized = 47.9999999098942
+                  charge after normalized = 48
+                 charge before normalized = 48
+                  charge after normalized = 48
+                 charge before normalized = 47.9999999100685
+                  charge after normalized = 48.0000000000001
+                 charge before normalized = 48.0000000000001
+                  charge after normalized = 48
+                 charge before normalized = 47.9999999100728
+                  charge after normalized = 48.0000000000001
+                 charge before normalized = 47.9999999999999
+                  charge after normalized = 48
+                 charge before normalized = 47.9999999100712
+                  charge after normalized = 48
+                 charge before normalized = 48
+                  charge after normalized = 48
+                 charge before normalized = 47.9999999100718
+                  charge after normalized = 48
+                            startmag_type = 2
+                       charge from rho_at = 11.8902694666839
+                         charge should be = 12
+                            startmag_type = 2
+                       charge from rho_at = 5.99904704283839
+                         charge should be = 6
+
+ SETUP ATOMIC RHO FOR SPIN 1
+                 Electron number from rho = 47.9999999999999
+           total electron number from rho = 47.9999999999999
+                                should be = 48

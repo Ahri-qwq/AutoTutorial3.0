@@ -1,0 +1,40 @@
+{
+    "save_path": "results",
+    "run_dft": {
+        "example": [
+            "./deformed_00",
+            "./deformed_01",
+            "./deformed_02",
+            "./deformed_03",
+            "./deformed_04",
+            "./deformed_05",
+            "./deformed_06",
+            "./deformed_07",
+            "./deformed_08",
+            "./deformed_09",
+            "./deformed_10",
+            "./deformed_11",
+            "./deformed_12",
+            "./deformed_13",
+            "./deformed_14",
+            "./deformed_15",
+            "./deformed_16",
+            "./deformed_17",
+            "./deformed_18",
+            "./deformed_19",
+            "./deformed_20",
+            "./deformed_21",
+            "./deformed_22",
+            "./deformed_23",
+            "./org"
+        ],
+        "command": "export ABACUS_PP_PATH=./ && export ABACUS_ORB_PATH=./ && OMP_NUM_THREADS=1 mpirun -np 16 abacus",
+        "image": "registry.dp.tech/dptech/abacus:LTSv3.10.1",
+        "bohrium": {
+            "scass_type": "c16_m32_cpu",
+            "job_type": "container",
+            "platform": "ali",
+            "project_id": 205855
+        }
+    }
+}

@@ -1,0 +1,14 @@
+{
+  "TiO2-relax": {
+    "job_id": "22148838",
+    "status": "waiting",
+    "directory": "TiO2_relax/TiO2-rutile",
+    "depends_on": null
+  },
+  "TiO2-elastic": {
+    "job_id": null,
+    "status": "pending",
+    "directory": "TiO2_elastic",
+    "depends_on": "22148838"
+  }
+}

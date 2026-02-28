@@ -1,0 +1,42 @@
+{
+    "save_path": "results",
+    "run_dft": [
+        {
+            "ifrun": true,
+            "example": [
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\org",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_00",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_01",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_02",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_03",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_04",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_05",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_06",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_07",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_08",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_09",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_10",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_11",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_12",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_13",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_14",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_15",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_16",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_17",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_18",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_19",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_20",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_21",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_22",
+                "_workspace/20260227_172550_\u5f39\u6027\u5e38\u6570\u8ba1\u7b97/test_20260228_111102/TiO2_elastic/TiO2-rutile-elastic\\deformed_23"
+            ],
+            "command": "OMP_NUM_THREADS=1 mpirun -np 16 abacus | tee out.log",
+            "image": "registry.dp.tech/dptech/abacus:LTSv3.10.1",
+            "bohrium": {
+                "scass_type": "c32_m64_cpu",
+                "job_type": "container",
+                "platform": "ali"
+            }
+        }
+    ]
+}

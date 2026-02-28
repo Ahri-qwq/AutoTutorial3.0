@@ -1,0 +1,24 @@
+INPUT_PARAMETERS
+pseudo_dir      ./
+orbital_dir     ./
+calculation     scf
+symmetry     1
+ecutwfc     100
+scf_thr     1e-07
+scf_nmax     100
+smearing_method     gauss
+smearing_sigma     0.015
+mixing_type     broyden
+mixing_beta     0.8
+basis_type     lcao
+ks_solver     genelpa
+precision     double  # or single
+cal_force     1
+cal_stress     1
+kspacing     0.14 # unit in 1/bohr
+relax_method     cg # or bfgs, bfgs_trad, cg_bfgs, sd, fire
+relax_nmax     60
+force_thr_ev     0.01  # unit in eV/A
+stress_thr     0.5 # unit in kbar
+fixed_axes     None # or volume, shape, a, b, c, ab, ac, bc; only valid for cell-relax calculation to fix some axes
+#gamma_only     0

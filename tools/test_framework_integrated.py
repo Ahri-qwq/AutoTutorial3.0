@@ -33,6 +33,7 @@ from test_plugins.relax_plugin import RelaxPlugin
 from test_plugins.elastic_plugin import ElasticPlugin
 from test_plugins.band_plugin import BandPlugin
 from test_plugins.dos_plugin import DOSPlugin
+from test_plugins.dftu_plugin import DFTUPlugin
 
 
 class FullTestExecutor:
@@ -68,7 +69,8 @@ class FullTestExecutor:
             RelaxPlugin(self.job_manager, self.pp_manager),
             ElasticPlugin(self.job_manager, self.pp_manager),
             BandPlugin(self.job_manager, self.pp_manager),
-            DOSPlugin(self.job_manager, self.pp_manager)
+            DOSPlugin(self.job_manager, self.pp_manager),
+            DFTUPlugin(self.job_manager, self.pp_manager),
         ]
 
         # 存储每个插件的测试信息和任务

@@ -5,6 +5,12 @@ venv/
 # 配置文件(包含 API Key)
 config.yaml
 
+# 其他数据
+/data/玻尔/*
+/data/分享会和公众号/*
+/data/未经计算测试的教程/*
+/data/docs/*
+
 # 生成的数据和输出
 /old
 *.pyc
@@ -17,6 +23,7 @@ __pycache__/
 /data/input/*
 /data/knowledge_source/*
 /data/knowledge_add/*
+
 
 # 再放行占位文件，让目录能被提交
 !/data/chroma_db/.gitkeep

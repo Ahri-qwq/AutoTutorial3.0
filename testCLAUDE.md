@@ -29,6 +29,11 @@
 - 提供清晰的错误分析和修复建议
 - 记录失败位置和状态，便于恢复或调试
 
+### 5. 插件缺失时自主扩展（⭐ 新原则）
+- 若 `analysis.json` 为空，**不要停止等待用户**，立即进入 Step 1.5 自主创建插件
+- 框架可扩展：任何新计算类型都可以通过新增插件解决
+- 参考 `docs/DFTU_PLUGIN_DEVELOPMENT_REPORT.md` 了解完整开发模式
+
 ---
 
 ## 执行模式
@@ -58,6 +63,23 @@
   - Step 3: 准备提交N个任务 → 显示任务列表，询问是否提交
   - Step 6: 检测到测试失败 → 询问是否继续分析或停止
 - 每步完成后显示"按任意键继续"提示
+
+---
+
+## 当前框架已支持的计算类型
+
+以下计算类型已有对应插件，可直接测试：
+
+| 插件 | calc_type | 检测关键词 |
+|------|-----------|------------|
+| RelaxPlugin | relax | `calculation = relax/cell-relax` |
+| ElasticPlugin | elastic | `弹性常数`、`elastic` |
+| BandPlugin | band | `能带结构`、`band structure` |
+| DOSPlugin | dos | `态密度`、`density of states` |
+| DFTUPlugin | dftu | `dft_plus_u = 1`、`DFT+U` |
+
+**⚠️ 如果你的教程不在以上列表中，`analysis.json` 将为空。**
+此时请直接跳转到 **Step 1.5 创建新插件**，不要在其他步骤排查。
 
 ---
 
@@ -283,50 +305,233 @@ python tools/test_framework_integrated.py "$tutorial_path" --test-dir "$test_dir
 **输出示例：**
 ```
 === 解析教程 ===
-教程标题：弹性常数计算
-教程路径：_workspace/20260203_105918_弹性常数计算/07_final.md
+教程路径：_workspace/.../07_final.md
 
-[解析] 发现案例：Si（立方晶系）
-  计算步骤：
-    1. 结构优化（cell-relax）
-    2. 弹性常数计算（elastic）
+[解析] 发现案例：<案例名>（<晶系>）
+  计算步骤：1. 结构优化（cell-relax）  2. 弹性常数计算（elastic）
+  文件清单：INPUT（已提取）、STRU（已提取）、KPT（已提取）
+  依赖文件：<赝势文件>、<轨道文件>
+  预期结果：<参数>=<值> GPa、...
 
-  文件清单：
-    - INPUT（已提取）
-    - STRU（已提取）
-    - KPT（已提取）
+# ... 若有多个案例，每个案例输出相同格式 ...
 
-  依赖文件：
-    - Si_ONCV_PBE-1.0.upf（赝势）
-    - Si_gga_7au_100Ry_2s2p1d.orb（轨道）
-
-  预期结果：
-    - C₁₁ = 155.5 GPa
-    - C₁₂ = 58.3 GPa
-    - C₄₄ = 76.2 GPa
-    - 体模量 = 90.7 GPa
-
-[保存] 解析结果 → analysis.json
+[保存] 解析结果 → analysis.json（共 N 个案例）
 ✅ 解析完成
 ```
 
-**1.3 验证解析结果**
+**1.3 案例清单核对（⚠️ 强制步骤，不可跳过）**
 
-检查`analysis.json`内容：
-- 案例信息完整
-- 文件内容有效（非空）
-- 依赖文件列表清晰
+解析完成后，**首先检查 `analysis.json` 是否为空，再核对数量**：
+
+**① 检查 analysis.json 是否为空（优先）**
+
+读取 `$test_dir/01_analysis.json`，检查 `detected_types` 字段：
+
+```
+[核对] analysis.json → detected_types = [...]
+```
+
+- **`detected_types = []`（空列表）**：说明没有任何插件识别出教程，**禁止继续执行 Step 2**。
+  立即跳转到 **Step 1.4** 进行根因诊断。
+
+- **`detected_types` 非空**：继续执行下方数量核对。
+
+**② 数量核对（仅当 detected_types 非空时执行）**
+
+1. 从教程中手动扫描所有案例章节标题（如"## 三、案例一"、"## 四、案例二"）
+2. 统计教程中的案例总数 N_tutorial
+3. 检查 `analysis.json` 中 `case_names` 数组的条目数 N_json
+
+**强制输出：**
+```
+[核对] 教程案例数量：N 个
+  - 案例1：<案例名>
+  - 案例2：<案例名>   # 若只有 1 个案例则无此行
+  ...（按实际数量列出）
+
+[核对] analysis.json 案例数量：N 个
+
+✅ 数量一致，继续执行
+```
+或：
+```
+❌ 数量不一致！教程有 N_tutorial 个案例，analysis.json 只有 N_json 个。
+   缺失案例：[列出缺失的案例名]
+   → 必须排查解析结果，补全缺失案例后再继续。
+```
+
+**如果数量不一致，禁止继续执行 Step 2。** 必须找到缺失原因（解析器未识别、教程格式特殊等）并手动补全 `analysis.json`。
+
+---
+
+### Step 1.4：诊断 analysis.json 为空的原因（⭐ 重要分支）
+
+**触发条件：** `detected_types = []`（即 `analysis.json` 完全为空）
+
+**诊断步骤：**
+
+1. 阅读 `tools/test_plugins/PLUGIN_REGISTRY.md`，查看已注册插件列表和检测关键词
+
+2. 阅读教程，找到核心 INPUT 关键词，与注册表对比：
+   - **已注册但未检测到**：`can_handle()` 关键词未匹配 → 检查教程关键词格式（空格/大小写）
+   - **不在注册表中**：需要创建新插件 → 进入 Step 1.5
+
+3. 常见计算类型关键词速查：
+   - `calculation = scf` 且无 `dft_plus_u` → 普通 SCF，框架尚无通用 SCF 插件
+   - `dft_plus_u = 1` → DFT+U（已有 DFTUPlugin）
+   - `calculation = md` → 分子动力学（无插件）
+   - `esolver_type = tddft` → 实时 TDDFT（无插件）
+   - `yukawa_potential = 1` → Yukawa DFT+U（无插件）
+
+**Think Aloud：**
+- 说明查阅 PLUGIN_REGISTRY.md 的结论
+- 说明判断的计算类型和依据
+- 说明是哪个原因导致为空
+- 说明接下来要做什么（修复关键词 or 创建新插件）
+
+---
+
+### Step 1.5：创建新测试插件（⭐ 自主扩展框架）
+
+**目标：** 为新的计算类型创建标准测试插件，使 `analysis.json` 能正确输出。
+
+**本步骤是自主执行步骤，无需等待用户确认。**
+
+---
+
+**1.5.1 收集插件所需信息**
+
+在动手写代码前，必须明确以下 6 项：
+
+```
+1. calc_type（计算类型标识）：全小写，如 dftu / tddft / md / hse
+2. can_handle 关键词：教程 INPUT 代码块中的唯一特征（如 dft_plus_u = 1）
+3. INPUT 内容：从教程代码块提取，还是需要构造模板？
+4. STRU 内容：教程是否给出完整 STRU（含晶格矢量）？
+   → 若无，查 RAG 数据库 / ABACUS GitHub tests / Bohrium 数据集
+5. KPT：教程是否给出？若无，使用 4×4×4 Gamma
+6. expected_results：从教程中提取所有给出的数值
+```
+
+**STRU 不完整时的补全策略：**
+
+| 情况 | 推荐方法 |
+|------|----------|
+| 教程给出体系和晶格参数 | 从 RAG 检索 POSCAR/STRU，验证键长后使用 |
+| 教程提到数据集路径（如 Bohrium URL）| 从数据集文档或 ABACUS GitHub 对应测试找 STRU |
+| 教程有 Python 生成脚本 | 执行脚本生成 CIF → abacustest 转换为 STRU |
+| 以上均失败 | 用 ASE 自动生成，并在报告中注明"近似结构" |
+
+**验证容差选择原则：**
+
+| 物理量 | 推荐容差 | 理由 |
+|--------|----------|------|
+| 总能量（大负数如 -9255 eV）| 相对 0.1% | 绝对差几 eV 物理上微小，相对容差更合理 |
+| 能隙 | 相对 15% | 晶格矢量微小差异会导致能隙~10% 变化 |
+| 总磁矩（应为 0）| 绝对 0.1 | 直接判断是否近零 |
+| 绝对磁矩 | 相对 5% | 结构相近时磁矩稳定 |
+| 弹性常数 | 相对 5% | 标准弹性计算精度 |
+
+---
+
+**1.5.2 参照已有插件写代码**
+
+以 `tools/test_plugins/relax_plugin.py` 或 `tools/test_plugins/dftu_plugin.py` 为模板，创建新文件 `tools/test_plugins/<type>_plugin.py`。
+
+**必须实现的 6 个方法：**
+
+```python
+class XxxPlugin(BaseTestPlugin):
+
+    @property
+    def plugin_name(self) -> str: ...     # 中文名，如 "DFT+U 强关联体系测试"
+
+    @property
+    def calc_type(self) -> str: ...       # 如 "dftu"
+
+    def can_handle(self, tutorial_content) -> bool: ...   # 关键词检测
+
+    def extract_test_info(self, tutorial_content) -> TestInfo: ...
+    # 提取 INPUT/STRU/KPT，设置 expected_results / pseudopotentials / orbitals
+
+    def prepare_inputs(self, test_info, work_dir) -> List[Path]: ...
+    # 写文件，下载赝势/轨道，修复路径（_fix_input_file / fix_stru_paths）
+
+    def submit_jobs(self, input_dirs) -> List[str]: ...
+    # 通常直接调用 self.job_manager.create_job_config + submit_job
+
+    def validate_results(self, job_ids, work_dir, test_info) -> ValidationResult: ...
+    # 从 running_*.log 提取实际值，逐项对比
+
+    def generate_report_section(self, validation) -> str: ...
+    # Markdown 表格，同 RelaxPlugin 格式
+```
+
+---
+
+**1.5.3 注册新插件**
+
+在 `tools/test_framework_integrated.py` 中：
+
+```python
+# 1. 添加 import
+from test_plugins.<type>_plugin import <Type>Plugin
+
+# 2. 在 self.plugins 列表末尾添加
+self.plugins: List[BaseTestPlugin] = [
+    RelaxPlugin(...),
+    ElasticPlugin(...),
+    BandPlugin(...),
+    DOSPlugin(...),
+    DFTUPlugin(...),
+    <Type>Plugin(self.job_manager, self.pp_manager),  # ← 新增
+]
+```
+
+---
+
+**1.5.4 验证新插件**
+
+重新运行 prepare：
+```bash
+python tools/test_framework_integrated.py "$tutorial_path" --test-dir "$test_dir" --phase prepare
+```
+
+预期输出：
+```
+[OK] 检测到: <新插件名称>
+[OK] 提取测试信息: 案例 <体系名>
+[OK] 分析结果已保存: 01_analysis.json
+```
+
+验证 `01_analysis.json` 不再为空后，继续 Step 2。
+
+---
+
+**Think Aloud（贯穿整个 Step 1.5）：**
+- 说明判断的计算类型和依据
+- 说明如何处理 STRU 不完整的情况
+- 说明选择容差的理由
+- 说明插件注册后的验证结果
+
+**完成标志：**
+- 新插件文件已创建
+- `test_framework_integrated.py` 已更新
+- 重跑 prepare 后 `analysis.json` 非空
+- 在 `testCLAUDE.md` **附录D** 的"插件开发历史"表中追加一行（含插件文件名、计算类型、添加日期、首次测试教程）
+
+---
 
 **Think Aloud：**
 - 说明教程路径和主题
-- 说明发现的案例数量和类型
-- 说明提取的文件和参数
-- 说明预期结果
-- 如发现问题（格式错误、信息缺失），说明具体问题
+- **逐一列出**发现的所有案例名称和计算类型
+- 说明案例清单核对结果（数量是否一致）
+- 如发现问题（格式错误、信息缺失、数量不符），说明具体问题
 
 **完成标志：**
 - `analysis.json`已生成
-- 输出："✅ Step 1完成，发现N个测试案例"
+- **案例数量核对通过**（N_json == N_tutorial）
+- 输出："✅ Step 1完成，发现 N 个测试案例：[逐一列出案例名]"
 
 ---
 
@@ -336,27 +541,32 @@ python tools/test_framework_integrated.py "$tutorial_path" --test-dir "$test_dir
 
 **执行：**
 
+**⚠️ 循环执行原则：Steps 2–6 的所有操作必须对 `analysis.json` 中的 **每一个** 案例执行一遍（N=1 时只执行一遍，N=3 时执行三遍）。每完成一个案例，Think Aloud 说明"已完成 X/N"。**
+
 **2.1 创建案例目录结构**
 
+对 `analysis.json` 中的 **每一个** 案例，创建对应目录（目录名取自 `cases[i].name`）：
+
 ```bash
-# 示例：Si案例
-mkdir Si
-mkdir Si/01_relax
-mkdir Si/02_elastic
+# 对 cases[0]（以 <案例名> 为目录名，下同）
+mkdir $test_dir/<案例名>
+mkdir $test_dir/<案例名>/01_relax
+mkdir $test_dir/<案例名>/02_elastic   # 目录数量取决于该案例的计算步骤数
+
+# ... 对 cases[1], cases[2], ... 重复以上操作，直到所有案例目录建完
 ```
 
 **2.2 写入ABACUS输入文件**
 
-从`analysis.json`提取内容，写入文件：
+对每一个案例，从 `analysis.json` 中提取该案例的 `input_files`，写入对应目录：
+
 ```bash
-# 写入INPUT
-echo "[INPUT内容]" > Si/01_relax/INPUT
+# 对 cases[0]
+echo "[INPUT内容]" > $test_dir/<案例名>/01_relax/INPUT
+echo "[STRU内容]"  > $test_dir/<案例名>/01_relax/STRU
+echo "[KPT内容]"   > $test_dir/<案例名>/01_relax/KPT
 
-# 写入STRU
-echo "[STRU内容]" > Si/01_relax/STRU
-
-# 写入KPT
-echo "[KPT内容]" > Si/01_relax/KPT
+# ... 对 cases[1], cases[2], ... 重复以上操作
 ```
 
 **2.3 下载赝势和轨道文件**
@@ -508,11 +718,8 @@ NUMERICAL_ORBITAL
 - 说明任务配置（机型、镜像、核数）
 
 **完成标志：**
-- 所有案例目录已创建
-- INPUT/STRU/KPT文件已写入
-- 赝势和轨道文件已就位
-- job.json已生成
-- 输出："✅ Step 2完成，输入文件已准备"
+- **analysis.json 中所有 N 个案例的**目录已创建、INPUT/STRU/KPT 已写入、赝势和轨道文件已就位、job.json 已生成
+- 输出："✅ Step 2完成，已为 N 个案例准备输入文件：[逐一列出案例名]"
 
 ---
 
@@ -536,65 +743,49 @@ NUMERICAL_ORBITAL
 **3.2 提交任务命令**
 
 ```bash
-# 进入案例目录并提交
-Push-Location "$test_dir/Si/01_relax"
+# 对每个案例的首步任务，进入目录提交
+Push-Location "$test_dir/<案例名>/01_relax"
 bohr job submit -i job.json -p ./
 Pop-Location   # 返回项目根目录
+# 记录 Job ID，等待完成后再提交后续步骤
 
-# 记录Job ID
+# ... 对所有案例重复以上操作
 ```
 
 **输出示例：**
 ```
-=== 提交计算任务 ===
+=== 提交计算任务（共 N 个案例）===
 
-[提交] Si-relax（结构优化）
-  目录：Si/01_relax
-  配置：c16_m32_cpu, 8核
-  命令：export ABACUS_PP_PATH=./ && export ABACUS_ORB_PATH=./ && OMP_NUM_THREADS=1 mpirun -np 8 abacus
+【案例 1/N：<案例名>】
+[提交] <案例名>-relax（结构优化）
+  ✅ 提交成功  Job ID: XXXXXXX  状态：Waiting
+[等待] relax 完成后再提交 elastic...
 
-  ✅ 提交成功
-  Job ID: 21984267
-  状态：Waiting
-
-[等待] Si-relax完成后再提交Si-elastic...
+# ... 若有多个案例，每个案例输出相同格式 ...
 
 [记录] 任务信息 → job_ids.json
 ```
 
 **3.3 记录任务信息**
 
-保存到`job_ids.json`：
+保存到 `job_ids.json`，**所有案例的所有任务**均须入库：
 ```json
 {
-  "Si-relax": {
-    "job_id": "21984267",
-    "status": "waiting",
-    "submit_time": "2026-02-26 10:30:00",
-    "directory": "Si/01_relax",
-    "depends_on": null
-  },
-  "Si-elastic": {
-    "job_id": null,
-    "status": "pending",
-    "submit_time": null,
-    "directory": "Si/02_elastic",
-    "depends_on": "21984267"
-  }
+  "<案例名>-relax":   { "job_id": "XXXXXXX", "status": "waiting", "directory": "<案例名>/01_relax",  "depends_on": null },
+  "<案例名>-elastic": { "job_id": null,       "status": "pending", "directory": "<案例名>/02_elastic", "depends_on": "XXXXXXX" }
+  // ... 若有多个案例，每个案例添加相同结构的条目
 }
 ```
 
 **Think Aloud：**
-- 说明提交的任务数量和类型
+- 说明 **N 个案例共计提交了多少个任务**（格式："共 N 个案例，M 个任务"）
 - 说明任务依赖关系
 - 说明使用的机型和资源
-- 说明预计运行时间
-- 说明Job ID记录位置
 
 **完成标志：**
-- 所有任务已提交或等待依赖完成
-- job_ids.json已保存
-- 输出："✅ Step 3完成，已提交N个任务"
+- **analysis.json 中所有 N 个案例**的首步任务已提交，后续步骤已记录为 pending
+- job_ids.json 已保存
+- 输出："✅ Step 3完成，已提交 N 个案例的首批任务（共 M 个）：[逐一列出案例名]"
 
 ---
 
@@ -754,10 +945,11 @@ done
 
 **5.2 整理结果文件**
 
-将下载的结果复制回原计算目录：
+将下载的结果复制回原计算目录（对每个案例执行）：
 ```bash
-# 复制优化后的结构到弹性计算目录
-cp "$test_dir/job_logs/job_21984267/OUT.ABACUS/STRU_ION_D" "$test_dir/Si/02_elastic/STRU"
+# 对每个案例，将优化后结构复制到弹性计算目录
+cp "$test_dir/job_logs/job_<relax-jobid>/OUT.ABACUS/STRU_ION_D" "$test_dir/<案例名>/02_elastic/STRU"
+# ... 对所有案例重复
 ```
 
 **5.3 运行后处理（如需要）**
@@ -824,31 +1016,19 @@ passed = relative_error <= tolerance  # 默认5%
 
 **对比示例：**
 ```
-=== 结果对比 ===
-
-案例：Si（立方晶系）
+=== 结果对比（案例 1/N：<案例名>）===
 
 弹性常数对比：
 ┌─────────────┬──────────┬──────────┬──────────┬────────┐
 │ 参数        │ 教程预期 │ 实际结果 │ 相对误差 │ 状态   │
 ├─────────────┼──────────┼──────────┼──────────┼────────┤
-│ C₁₁ (GPa)   │ 155.5    │ 155.46   │ 0.03%    │ ✅ PASS│
-│ C₁₂ (GPa)   │ 58.3     │ 58.33    │ 0.05%    │ ✅ PASS│
-│ C₄₄ (GPa)   │ 76.2     │ 76.18    │ 0.03%    │ ✅ PASS│
+│ <参数名>    │ <预期值> │ <实际值> │ <误差>%  │ ✅/❌  │
+│ ...         │ ...      │ ...      │ ...      │ ...    │
 └─────────────┴──────────┴──────────┴──────────┴────────┘
 
-弹性模量对比：
-┌─────────────┬──────────┬──────────┬──────────┬────────┐
-│ 参数        │ 教程预期 │ 实际结果 │ 相对误差 │ 状态   │
-├─────────────┼──────────┼──────────┼──────────┼────────┤
-│ 体模量(GPa) │ 90.7     │ 90.71    │ 0.01%    │ ✅ PASS│
-│剪切模量(GPa)│ 65.1     │ 65.13    │ 0.05%    │ ✅ PASS│
-│杨氏模量(GPa)│ 157.7    │ 157.66   │ 0.03%    │ ✅ PASS│
-│ 泊松比      │ 0.21     │ 0.210    │ 0.00%    │ ✅ PASS│
-└─────────────┴──────────┴──────────┴──────────┴────────┘
+✅/❌ 案例测试通过/失败（M/M参数）
 
-✅ 测试通过（7/7）
-最大相对误差：0.05%
+# ... 若有多个案例，对每个案例输出相同格式
 ```
 
 **6.3 处理测试失败**
@@ -857,17 +1037,17 @@ passed = relative_error <= tolerance  # 默认5%
 ```
 ⚠️  部分测试失败
 
-案例：Si
+案例 X/N：<案例名>
 
 弹性常数对比：
 ┌─────────────┬──────────┬──────────┬──────────┬────────┐
 │ 参数        │ 教程预期 │ 实际结果 │ 相对误差 │ 状态   │
 ├─────────────┼──────────┼──────────┼──────────┼────────┤
-│ C₁₁ (GPa)   │ 155.5    │ 142.3    │ 8.49%    │ ❌ FAIL│
-│ C₁₂ (GPa)   │ 58.3     │ 58.33    │ 0.05%    │ ✅ PASS│
+│ <参数名>    │ <预期值> │ <实际值> │ X.XX%    │ ❌ FAIL│
+│ <参数名>    │ <预期值> │ <实际值> │ 0.0X%    │ ✅ PASS│
 └─────────────┴──────────┴──────────┴──────────┴────────┘
 
-❌ 测试失败（1/2 失败）
+❌ 测试失败（M_fail/M 失败）
 
 可能原因：
 1. 教程预期结果不准确
@@ -889,73 +1069,69 @@ passed = relative_error <= tolerance  # 默认5%
 ```markdown
 # 教程测试报告
 
-**生成时间：** 2026-02-26 11:15:32
-**测试教程：** _workspace/20260203_105918_弹性常数计算/07_final.md
-**测试目录：** _workspace/20260203_105918_弹性常数计算/test_20260226_103000/
+**生成时间：** YYYY-MM-DD HH:MM
+**测试教程：** _workspace/.../07_Final_Tutorial_XXX.md
+**测试目录：** _workspace/.../test_YYYYMMDD_HHMMSS/
 
 ---
 
 ## 测试概要
 
-- ✅ **测试状态：** 通过
-- 📊 **测试案例：** 1个（Si）
-- ⏱️ **总耗时：** 约15分钟
+- ✅/⚠️/❌ **测试状态：** 通过/部分通过/失败
+- 📊 **案例覆盖率：** N/N（<案例1名> ✅、<案例2名> ✅、...）
+- ⏱️ **总耗时：** 约XX分钟
 
 ---
 
-## 案例：Si（立方晶系）
+<!-- 对每个案例重复以下区块，标题格式：## 案例 X/N：<案例名> -->
+
+## 案例 1/N：<案例名>
 
 ### 计算步骤
 
-1. ✅ 结构优化（Job 21984267）- 21秒
-2. ✅ 弹性常数计算（Job 21984270）- 8分钟
+| 步骤 | Job ID | 状态 | 耗时 |
+|------|--------|------|------|
+| cell-relax | XXXXXXX | ✅ Finished | Xs |
+| deformed_00~23 + org | XXXXXXX~XX | ✅ Finished | ~Xs/个 |
 
-### 弹性常数对比
-
-| 参数 | 教程预期 | 实际结果 | 相对误差 | 状态 |
-|------|---------|---------|---------|------|
-| C₁₁ (GPa) | 155.5 | 155.46 | 0.03% | ✅ PASS |
-| C₁₂ (GPa) | 58.3 | 58.33 | 0.05% | ✅ PASS |
-| C₄₄ (GPa) | 76.2 | 76.18 | 0.03% | ✅ PASS |
-
-### 弹性模量对比
+### 结果对比
 
 | 参数 | 教程预期 | 实际结果 | 相对误差 | 状态 |
 |------|---------|---------|---------|------|
-| 体模量 (GPa) | 90.7 | 90.71 | 0.01% | ✅ PASS |
-| 剪切模量 (GPa) | 65.1 | 65.13 | 0.05% | ✅ PASS |
-| 杨氏模量 (GPa) | 157.7 | 157.66 | 0.03% | ✅ PASS |
-| 泊松比 | 0.21 | 0.210 | 0.00% | ✅ PASS |
+| <参数名> | <预期值> | <实际值> | <误差>% | ✅/❌ |
 
-### 总结
+---
 
-✅ 所有测试通过（7/7）
-- 最大相对误差：0.05%
-- 所有参数在5%容差范围内
+<!-- 若有案例 2、3 …，在此继续添加相同格式的区块 -->
+
+---
+
+## 根因分析（如有 ❌ 案例）
+
+（仅在有测试失败时填写）
 
 ---
 
 ## 结论
 
-✅ **教程内容准确**，计算流程可复现，结果与预期一致。
+✅/⚠️ **[总体结论]**，案例覆盖率 N/N。
 
 ---
 
 ## 测试详情
 
 ### 任务信息
-- Job 21984267: Si-relax（c16_m32_cpu, 8核）
-- Job 21984270: Si-elastic（c16_m32_cpu, 8核）
-
-### 文件清单
-- 输入文件：`Si/01_relax/`, `Si/02_elastic/`
-- 计算结果：`job_logs/job_21984267/`, `job_logs/job_21984270/`
-- 解析数据：`analysis.json`
+- Job XXXXXXX: <案例名>-cell-relax（c16_m32_cpu）
+- ...（所有案例的所有 Job）
 
 ### 环境信息
-- Python: 3.11.0
-- Bohrium CLI: 1.1.0
-- ABACUS镜像: registry.dp.tech/dptech/abacus:LTSv3.10.1
+- Python: X.X.X / Bohrium CLI: X.X.X
+- ABACUS 镜像: registry.dp.tech/dptech/abacus:LTSv3.10.1
+
+---
+
+**测试框架版本：** AutoTutorial 3.0
+```
 
 ---
 
@@ -963,11 +1139,30 @@ passed = relative_error <= tolerance  # 默认5%
 **生成工具：** test_framework_integrated.py
 ```
 
-**Think Aloud：**
-- 说明对比的参数数量和通过率
-- 说明最大相对误差
-- 如有失败，说明失败原因和建议
-- 说明测试报告保存位置
+**6.5 根目录清洁检查（防止 abacustest 逃逸文件）**
+
+测试完成后，扫描项目根目录是否有异常文件：
+
+```bash
+ls setting.json metrics*.json metrics*.csv 2>/dev/null && echo "发现逃逸文件" || echo "根目录干净"
+```
+
+**若发现文件（`setting.json`、`metrics*.json`、`metrics*.csv`）：**
+
+这些文件是 `abacustest` 的输出，本应写入 `$test_dir`。将其移入测试目录并在报告中注记：
+
+```bash
+mv setting.json metrics*.json metrics*.csv "$test_dir/" 2>/dev/null
+echo "[已修复] abacustest 逃逸文件已移入 $test_dir"
+```
+
+**根本原因说明：** `abacustest` 使用调用进程的工作目录（项目根目录）写出 `setting.json`、`metrics_elastic.csv` 等文件，即使用 `subprocess.run(cwd=...)` 指定子进程目录也无效。代码层面的修复在 `elastic_plugin.py` 中通过 `os.chdir` 解决（v1.1 已修复）。
+
+**若根目录干净：** 跳过，不输出任何内容。
+
+---
+
+
 
 **完成标志：**
 **6.4b 处理轨道文件修正记录**
@@ -1093,25 +1288,20 @@ python tools/orbital_validator.py "$tutorial_path" --fix
 ╚════════════════════════════════════════════════╝
 
 测试教程：
-  _workspace/20260203_105918_弹性常数计算/07_final.md
+  _workspace/.../07_Final_Tutorial_XXX.md
 
-测试结果：
-  ✅ 通过（7/7参数）
+案例覆盖率：N/N（全部测试）
+  - <案例1名>：✅/❌（M/M 参数）
+  - <案例2名>：✅/❌（M/M 参数）
+  # ... 按实际案例数量列出，1 个案例只有 1 行
 
 测试报告：
-  _workspace/20260203_105918_弹性常数计算/test_report.md
+  _workspace/.../test_report.md
 
 关键发现：
-  - 所有弹性常数在5%容差范围内
-  - 最大相对误差：0.05%
-  - 教程内容准确可复现
+  - [简要说明结果]
 
-总耗时：约15分钟
-
-下一步建议：
-  - 查看完整报告：test_report.md
-  - 如需调试，查看日志：job_logs/
-  - 如需重新测试，保留当前目录，重新运行即可
+总耗时：约XX分钟
 ```
 
 ---
@@ -1345,37 +1535,35 @@ ERROR: autotest2006 has detected a ABACUS STRU file format error
 
 ### analysis.json格式
 
+`cases` 数组有几个案例，就有几个条目。**单案例教程只有 1 个条目，多案例教程有 N 个**，结构相同：
+
 ```json
 {
   "tutorial_title": "教程标题",
   "tutorial_path": "教程路径",
   "cases": [
     {
-      "name": "Si",
+      "name": "<案例名>",
       "type": "elastic",
       "steps": [
         {
           "step": "relax",
-          "input_files": {
-            "INPUT": "...",
-            "STRU": "...",
-            "KPT": "..."
-          },
-          "pseudopotentials": ["Si_ONCV_PBE-1.0.upf"],
-          "orbitals": ["Si_gga_8au_100Ry_2s2p1d.orb"]
+          "input_files": { "INPUT": "...", "STRU": "...", "KPT": "..." },
+          "pseudopotentials": ["<赝势文件>"],
+          "orbitals": ["<轨道文件>"]
         }
       ],
       "expected_results": {
-        "C11": 155.5,
-        "C12": 58.3,
-        "C44": 76.2,
-        "bulk_modulus": 90.7
+        "<参数名>": <数值>
       },
       "tolerance": 0.05
     }
+    // 若有多个案例，在此继续添加相同结构的条目
   ]
 }
 ```
+
+**注意：** `cases` 数组必须包含教程中**所有**案例，缺一不可。
 
 ---
 
@@ -1412,7 +1600,31 @@ Si
 
 ---
 
-## 参考文档
+## 附录D: 未来计算类型扩展参考
+
+### 已知待扩展场景
+
+| 教程主题 | 核心关键词 | 主要挑战 | 参考 |
+|----------|-----------|----------|------|
+| HSE06 杂化泛函 | `exx_hybrid_type = hse` | 计算量大，需增大 maxRunTime | — |
+| 声子谱 Phonopy | Phonopy 后处理脚本 | 多步骤：SCF → 位移 → 后处理 | — |
+| 实时 TDDFT | `esolver_type = tddft` | 结果是轨迹，难以定量对比 | — |
+| 分子动力学 MD | `calculation = md` | 轨迹验证，不用对比单一数值 | — |
+| DFT+U（已完成）| `dft_plus_u = 1` | 结构不完整，磁矩容差 | dftu_plugin.py |
+
+### 插件开发历史
+
+| 插件 | 计算类型 | 添加日期 | 首次测试教程 |
+|------|----------|----------|--------------|
+| relax_plugin.py | relax | 2026-02 | 弹性常数教程 |
+| elastic_plugin.py | elastic | 2026-02 | 弹性常数教程 |
+| band_plugin.py | band | 2026-02 | 能带结构教程 |
+| dos_plugin.py | dos | 2026-02 | 态密度教程 |
+| dftu_plugin.py | dftu | 2026-02-28 | DFT+U 强关联体系教程 |
+
+> 每次新增插件时，在此表格追加一行。
+
+---
 
 ### AutoTutorial 3.0相关
 - 教程生成指南：`CLAUDE.md`

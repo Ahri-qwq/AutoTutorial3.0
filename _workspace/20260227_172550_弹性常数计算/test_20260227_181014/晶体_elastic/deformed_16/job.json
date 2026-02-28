@@ -1,0 +1,10 @@
+{
+  "job_name": "Si_elastic_deformed_16",
+  "command": "export ABACUS_PP_PATH=./ && export ABACUS_ORB_PATH=./ && OMP_NUM_THREADS=1 mpirun -np 16 abacus",
+  "log_file": "OUT.ABACUS/running_relax.log",
+  "project_id": 205855,
+  "platform": "ali",
+  "job_type": "container",
+  "machine_type": "c16_m32_cpu",
+  "image_address": "registry.dp.tech/dptech/abacus:LTSv3.10.1"
+}

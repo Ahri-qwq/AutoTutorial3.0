@@ -1,0 +1,17 @@
+{
+  "Si-cell-relax": {
+    "job_id": "22146102",
+    "job_group_id": "15951551",
+    "status": "waiting",
+    "submit_time": "2026-02-27",
+    "directory": "晶体_relax",
+    "depends_on": null
+  },
+  "Si-elastic": {
+    "job_id": null,
+    "status": "pending",
+    "submit_time": null,
+    "directory": "晶体_elastic",
+    "depends_on": "22146102"
+  }
+}
