@@ -1,0 +1,1 @@
+export ABACUS_PP_PATH=./ && export ABACUS_ORB_PATH=./ && OMP_NUM_THREADS=1 mpirun -np 16 abacus && mkdir -p pyatb && cp OUT.silica/data-HR-sparse_SPIN0.csr OUT.silica/data-SR-sparse_SPIN0.csr OUT.silica/data-rR-sparse.csr pyatb/ && cd pyatb && OMP_NUM_THREADS=1 mpirun -np 16 pyatb

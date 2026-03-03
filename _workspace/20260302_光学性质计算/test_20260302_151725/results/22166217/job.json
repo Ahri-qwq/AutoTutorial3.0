@@ -1,0 +1,11 @@
+{
+  "job_name": "SiO2_optic",
+  "command": "export ABACUS_PP_PATH=./ && export ABACUS_ORB_PATH=./ && OMP_NUM_THREADS=1 mpirun -np 16 abacus && mkdir -p pyatb && cp OUT.silica/data-HR-sparse_SPIN0.csr OUT.silica/data-SR-sparse_SPIN0.csr OUT.silica/data-rR-sparse.csr pyatb/ && cd pyatb && OMP_NUM_THREADS=1 mpirun -np 16 pyatb",
+  "log_file": "OUT.silica/running_scf.log",
+  "backward_files": [],
+  "project_id": 205855,
+  "platform": "ali",
+  "job_type": "container",
+  "machine_type": "c16_m32_cpu",
+  "image_address": "registry.dp.tech/dptech/prod-19853/abacus-pyatb-open:v0.0.1"
+}

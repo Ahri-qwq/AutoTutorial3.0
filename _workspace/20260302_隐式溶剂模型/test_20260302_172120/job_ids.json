@@ -1,0 +1,8 @@
+{
+  "H2-solvation-scf": {
+    "job_id": "22167460",
+    "status": "waiting",
+    "directory": "H2_solvation",
+    "depends_on": null
+  }
+}

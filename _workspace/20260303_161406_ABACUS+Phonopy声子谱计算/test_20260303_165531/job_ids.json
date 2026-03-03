@@ -1,0 +1,9 @@
+{
+  "Al_FCC-scf": {
+    "job_id": "22182083",
+    "status": "finished",
+    "directory": "Al_FCC_scf",
+    "depends_on": null,
+    "run_time_seconds": 51
+  }
+}

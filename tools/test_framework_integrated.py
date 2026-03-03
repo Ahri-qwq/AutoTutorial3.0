@@ -34,6 +34,9 @@ from test_plugins.elastic_plugin import ElasticPlugin
 from test_plugins.band_plugin import BandPlugin
 from test_plugins.dos_plugin import DOSPlugin
 from test_plugins.dftu_plugin import DFTUPlugin
+from test_plugins.optic_plugin import OpticPlugin
+from test_plugins.solvation_plugin import SolvationPlugin
+from test_plugins.phonopy_plugin import PhonopyPlugin
 
 
 class FullTestExecutor:
@@ -71,6 +74,9 @@ class FullTestExecutor:
             BandPlugin(self.job_manager, self.pp_manager),
             DOSPlugin(self.job_manager, self.pp_manager),
             DFTUPlugin(self.job_manager, self.pp_manager),
+            OpticPlugin(self.job_manager, self.pp_manager),
+            SolvationPlugin(self.job_manager, self.pp_manager),
+            PhonopyPlugin(self.job_manager, self.pp_manager),
         ]
 
         # 存储每个插件的测试信息和任务

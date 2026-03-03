@@ -1,0 +1,31 @@
+INPUT_PARAMETERS
+{
+nspin               1
+package             ABACUS
+fermi_energy        5.5385382545
+fermi_energy_unit   eV
+HR_route            data-HR-sparse_SPIN0.csr
+SR_route            data-SR-sparse_SPIN0.csr
+rR_route            data-rR-sparse.csr
+HR_unit             Ry
+rR_unit             Bohr
+}
+
+LATTICE
+{
+lattice_constant        1.8897261246257702
+lattice_constant_unit   Bohr
+lattice_vector
+7.1199998856 0.0 0.0
+0.0 7.1199998856 0.0
+0.0 0.0 7.1199998856
+}
+
+OPTICAL_CONDUCTIVITY
+{
+occ_band    64
+omega       0 30
+domega      0.01
+eta         0.1
+grid        20 20 20
+}

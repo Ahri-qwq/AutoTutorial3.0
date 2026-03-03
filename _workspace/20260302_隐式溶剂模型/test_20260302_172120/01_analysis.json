@@ -1,0 +1,12 @@
+{
+  "detected_types": [
+    "relax",
+    "band",
+    "solvation"
+  ],
+  "case_names": [
+    "体系",
+    "体系",
+    "H2"
+  ]
+}

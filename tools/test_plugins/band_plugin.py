@@ -20,7 +20,11 @@ class BandPlugin(BaseTestPlugin):
         return "band"
 
     def can_handle(self, tutorial_content: str) -> bool:
-        """判断是否包含能带计算"""
+        """判断是否包含能带计算（排除 Phonopy 声子谱教程）"""
+        # 排除 Phonopy 声子谱教程（其中的 band.conf/BAND 是声子谱路径配置，不是 DFT 能带）
+        phonopy_patterns = [r'phonopy', r'声子谱', r'FORCE_SETS', r'有限位移方法']
+        if any(re.search(p, tutorial_content, re.IGNORECASE) for p in phonopy_patterns):
+            return False
         patterns = [
             r'能带',
             r'band\s*structure',

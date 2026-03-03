@@ -1,0 +1,23 @@
+INPUT_PARAMETERS
+#Parameters (1.General)
+suffix              H2
+calculation         scf
+ntype               1
+nbands              2
+symmetry            0
+pseudo_dir          ./
+
+#Parameters (2.Iteration)
+ecutwfc             60
+scf_thr             1e-6
+scf_nmax            100
+
+#Parameters (3.Basis)
+basis_type          pw
+
+#Parameters (Solvation Model)
+imp_sol             1
+eb_k                80
+tau                 0.000010798
+sigma_k             0.6
+nc_k                0.00037

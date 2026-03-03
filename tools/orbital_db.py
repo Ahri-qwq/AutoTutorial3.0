@@ -52,6 +52,8 @@ ORBITAL_CORRECTIONS = {
     "O_gga_6au_100Ry_2s2p1d.orb": "O_gga_7au_100Ry_2s2p1d.orb",
     # C: 7au 版本不存在，应使用 8au
     "C_gga_7au_100Ry_2s2p1d.orb": "C_gga_8au_100Ry_2s2p1d.orb",
+    # Al: 运行时自动发现（测试阶段用户确认）
+    "Al_gga_7au_100Ry_4s4p1d.orb": "Al_gga_8au_100Ry_4s4p1d.orb",
 }
 
 # 扁平化已知文件名集合（用于快速查询）

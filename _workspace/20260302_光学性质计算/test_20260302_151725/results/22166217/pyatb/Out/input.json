@@ -1,0 +1,261 @@
+{
+    "INPUT_PARAMETERS": {
+        "nspin": 1,
+        "package": "ABACUS",
+        "fermi_energy": 5.5385382545,
+        "fermi_energy_unit": "eV",
+        "HR_route": "data-HR-sparse_SPIN0.csr",
+        "SR_route": "data-SR-sparse_SPIN0.csr",
+        "rR_route": "data-rR-sparse.csr",
+        "binary": 0,
+        "HR_unit": "Ry",
+        "rR_unit": "Bohr",
+        "max_kpoint_num": 8000,
+        "sparse_format": 0
+    },
+    "LATTICE": {
+        "lattice_constant": 1.0000000719817428,
+        "lattice_constant_unit": "Angstrom",
+        "lattice_vector": [
+            [
+                7.1199998856,
+                0.0,
+                0.0
+            ],
+            [
+                0.0,
+                7.1199998856,
+                0.0
+            ],
+            [
+                0.0,
+                0.0,
+                7.1199998856
+            ]
+        ]
+    },
+    "BAND_STRUCTURE": {
+        "wf_collect": false,
+        "kpoint_mode": null
+    },
+    "BANDUNFOLDING": {
+        "stru_file": null,
+        "ecut": 10,
+        "band_range": null,
+        "m_matrix": null,
+        "kpoint_mode": null
+    },
+    "FAT_BAND": {
+        "band_range": null,
+        "stru_file": null,
+        "kpoint_mode": null
+    },
+    "FERMI_ENERGY": {
+        "temperature": 0.0,
+        "electron_num": null,
+        "grid": [
+            10,
+            10,
+            10
+        ],
+        "epsilon": 0.001
+    },
+    "FIND_NODES": {
+        "energy_range": [
+            0.0,
+            0.0
+        ],
+        "initial_grid": [
+            10,
+            10,
+            10
+        ],
+        "initial_threshold": 0.1,
+        "adaptive_grid": [
+            20,
+            20,
+            20
+        ],
+        "adaptive_threshold": 0.001,
+        "k_start": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "k_vect1": [
+            1.0,
+            0.0,
+            0.0
+        ],
+        "k_vect2": [
+            0.0,
+            1.0,
+            0.0
+        ],
+        "k_vect3": [
+            0.0,
+            0.0,
+            1.0
+        ]
+    },
+    "BERRY_CURVATURE": {
+        "method": 0,
+        "occ_band": -1,
+        "kpoint_mode": null
+    },
+    "CHERN_NUMBER": {
+        "method": 0,
+        "occ_band": -1,
+        "k_start": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "k_vect1": [
+            1.0,
+            0.0,
+            0.0
+        ],
+        "k_vect2": [
+            0.0,
+            1.0,
+            0.0
+        ],
+        "integrate_mode": null
+    },
+    "AHC": {
+        "method": 0,
+        "integrate_mode": null
+    },
+    "AEC": {
+        "method": 0,
+        "fermi_range": [
+            -1.0,
+            1.0
+        ],
+        "de": 0.01,
+        "eta": 0.01,
+        "integrate_grid": [
+            4,
+            4,
+            4
+        ]
+    },
+    "OPTICAL_CONDUCTIVITY": {
+        "occ_band": 64,
+        "omega": [
+            0.0,
+            30.0
+        ],
+        "domega": 0.01,
+        "eta": 0.1,
+        "grid": [
+            20,
+            20,
+            20
+        ],
+        "method": 1
+    },
+    "POLARIZATION": {
+        "occ_band": null,
+        "nk1": 8,
+        "nk2": 8,
+        "nk3": 8,
+        "atom_type": null,
+        "stru_file": null,
+        "valence_e": null
+    },
+    "WILSON_LOOP": {
+        "occ_band": null,
+        "k_start": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "k_vect1": [
+            1.0,
+            0.0,
+            0.0
+        ],
+        "k_vect2": [
+            0.0,
+            1.0,
+            0.0
+        ],
+        "nk1": 100,
+        "nk2": 100
+    },
+    "SHIFT_CURRENT": {
+        "occ_band": null,
+        "omega": null,
+        "domega": null,
+        "smearing_method": 1,
+        "eta": 0.01,
+        "grid": null,
+        "method": 1
+    },
+    "FERMI_SURFACE": {
+        "bar": 0.001,
+        "nbands": [
+            0,
+            0
+        ],
+        "kpoint_mode": null
+    },
+    "JDOS": {
+        "occ_band": null,
+        "omega": null,
+        "domega": null,
+        "eta": 0.01,
+        "grid": null
+    },
+    "PDOS": {
+        "stru_file": null,
+        "e_range": null,
+        "de": 0.01,
+        "sigma": 0.001,
+        "kpoint_mode": null
+    },
+    "SPIN_TEXTURE": {
+        "nband": null,
+        "kpoint_mode": null
+    },
+    "BERRY_CURVATURE_DIPOLE": {
+        "omega": null,
+        "domega": null,
+        "integrate_mode": null
+    },
+    "CHIRALITY": {
+        "method": 0,
+        "k_vect": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "radius": 0.01,
+        "point_num": 1000
+    },
+    "SURFACE_STATE": {
+        "cal_surface_method": null,
+        "surface_direction": "c",
+        "energy_windows": null,
+        "coupling_layers": null,
+        "kpoint_mode": null
+    },
+    "CPGE": {
+        "omega": null,
+        "domega": null,
+        "integrate_mode": null
+    },
+    "DRUDE_WEIGHT": {
+        "omega": null,
+        "domega": null,
+        "integrate_mode": null
+    },
+    "REDUCE_BASIS": {
+        "e_range": null,
+        "threshold": 0.02,
+        "band_index_range": null,
+        "kpoint_mode": null
+    }
+}

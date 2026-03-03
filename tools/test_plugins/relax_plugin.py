@@ -21,7 +21,11 @@ class RelaxPlugin(BaseTestPlugin):
         return "relax"
 
     def can_handle(self, tutorial_content: str) -> bool:
-        """判断是否包含结构优化计算"""
+        """判断是否包含结构优化计算（排除 Phonopy 声子谱教程）"""
+        # 排除 Phonopy 声子谱教程（其中的"结构优化"是前置说明，不是主题）
+        phonopy_patterns = [r'phonopy', r'声子谱', r'FORCE_SETS', r'有限位移方法']
+        if any(re.search(p, tutorial_content, re.IGNORECASE) for p in phonopy_patterns):
+            return False
         patterns = [
             r'calculation\s*=\s*(relax|cell-relax)',
             r'结构优化',

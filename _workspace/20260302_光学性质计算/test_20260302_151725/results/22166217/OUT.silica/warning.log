@@ -1,0 +1,84 @@
+ In SCAN_BEGIN, can't find: LATTICE_PARAMETERS block.
+ AUTO_SET NBANDS to 0
+ INPUT  warning : You'd better set mixing_beta_mag >= 0.0!
+ AUTO_SET NBANDS to 77
+      Processor           Atom
+              1             31
+              2             34
+              3             33
+              4             32
+              5             33
+              6             33
+              7             33
+              8             30
+              9             33
+             10             34
+             11             33
+             12             30
+             13             33
+             14             33
+             15             31
+             16             30
+                            startmag_type = 2
+                       charge from rho_at = 3.95377
+                         charge should be = 4
+                            startmag_type = 2
+                       charge from rho_at = 5.99905
+                         charge should be = 6
+
+ SETUP ATOMIC RHO FOR SPIN 1
+                 Electron number from rho = 128
+           total electron number from rho = 128
+                                should be = 128
+                 charge before normalized = 128
+                  charge after normalized = 128
+                 charge before normalized = 128.000002166351
+                  charge after normalized = 128
+                 charge before normalized = 128.000000000001
+                  charge after normalized = 128
+                 charge before normalized = 128.000001956458
+                  charge after normalized = 128.000000000001
+                 charge before normalized = 127.999999999998
+                  charge after normalized = 128
+                 charge before normalized = 128.000001178361
+                  charge after normalized = 128
+                 charge before normalized = 128.000000000013
+                  charge after normalized = 128
+                 charge before normalized = 128.000001299361
+                  charge after normalized = 128
+                 charge before normalized = 128
+                  charge after normalized = 128
+                 charge before normalized = 128.000001141333
+                  charge after normalized = 128
+                 charge before normalized = 127.999999999996
+                  charge after normalized = 128
+                 charge before normalized = 128.000001169694
+                  charge after normalized = 128
+                 charge before normalized = 128
+                  charge after normalized = 128
+                 charge before normalized = 128.000001139448
+                  charge after normalized = 128.000000000001
+                 charge before normalized = 127.999999999997
+                  charge after normalized = 128
+                 charge before normalized = 128.000001136525
+                  charge after normalized = 128
+                 charge before normalized = 128
+                  charge after normalized = 128
+                 charge before normalized = 128.00000113617
+                  charge after normalized = 127.999999999999
+                 charge before normalized = 128.000000000002
+                  charge after normalized = 128
+                 charge before normalized = 128.000001136155
+                  charge after normalized = 128.000000000001
+                 charge before normalized = 127.999999999999
+                  charge after normalized = 128
+                 charge before normalized = 128.000001136149
+                  charge after normalized = 128
+                 charge before normalized = 127.999999999999
+                  charge after normalized = 128
+                 charge before normalized = 128.00000113615
+                  charge after normalized = 128
+                 charge before normalized = 128.000000000006
+                  charge after normalized = 128
+                 charge before normalized = 128.000001136149
+                  charge after normalized = 128.000000000001

@@ -1,0 +1,10 @@
+{
+  "SiO2_optic": {
+    "job_id": "22166217",
+    "status": "waiting",
+    "directory": "SiO2_optic",
+    "depends_on": null,
+    "image": "registry.dp.tech/dptech/prod-19853/abacus-pyatb-open:v0.0.1",
+    "steps": "ABACUS SCF (np=16) → copy HR/SR/rR → PYATB OPTICAL_CONDUCTIVITY (np=16)"
+  }
+}

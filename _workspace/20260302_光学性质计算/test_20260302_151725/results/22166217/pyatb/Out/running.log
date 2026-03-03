@@ -1,0 +1,46 @@
+program start at Mon Mar  2 15:42:56 2026
+processor number is 16
+
+
+------------------------------------------------------
+|                                                    |
+|                     Structure                      |
+|                                                    |
+------------------------------------------------------
+
+Lattice Constant : 1.000000 Angstrom
+Lattice Vector   : 
+       7.120000        0.000000        0.000000 
+       0.000000        7.120000        0.000000 
+       0.000000        0.000000        7.120000 
+
+
+------------------------------------------------------
+|                                                    |
+|               Optical Conductivity                 |
+|                                                    |
+------------------------------------------------------
+
+
+Parameter setting : 
+ >> occ_band : 64
+ >> omega    : 0.0000   30.0000 
+ >> domega   : 0.010000  
+ >> eta      : 0.100000  
+ >> method   : 1
+
+Enter the optical_conductivity calculation module ==> 
+ >> Calculated       8000 k points, took 3.020449e+03 s
+
+
+------------------------------------------------------
+|                                                    |
+|                   Time Statistics                  |
+|                                                    |
+------------------------------------------------------
+
+read_input : 
+ >> Read Input File                :    1.902342e-02 s
+optical_conductivity : 
+ >> calculate optical conductivity :    3.020917e+03 s
+Total time : 0 h 50 m 34 s

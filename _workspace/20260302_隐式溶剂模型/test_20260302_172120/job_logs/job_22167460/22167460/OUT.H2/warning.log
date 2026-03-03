@@ -1,0 +1,20 @@
+                            startmag_type = 2
+                       charge from rho_at = 0.997867
+                         charge should be = 1
+ Warning: negative or imaginary starting charge :  neg = -0.000206562 ima = 3.12696e-15 SPIN = 0
+
+ SETUP ATOMIC RHO FOR SPIN 1
+                 Electron number from rho = 2
+           total electron number from rho = 2
+                                should be = 2
+                 charge before normalized = 2
+                  charge after normalized = 2
+                            startmag_type = 2
+                       charge from rho_at = 0.997866823270309
+                         charge should be = 1
+ Warning: negative or imaginary starting charge :  neg = -0.00020656199294013 ima = 3.12696324245627e-15 SPIN = 0
+
+ SETUP ATOMIC RHO FOR SPIN 1
+                 Electron number from rho = 1.99999999999998
+           total electron number from rho = 1.99999999999998
+                                should be = 2
