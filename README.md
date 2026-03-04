@@ -24,6 +24,18 @@
 pip install -r requirements.txt
 ```
 
+### 1.1 Claude Code配置
+
+**Claude Code：**
+建议使用 Claude Code 官方或代理api运行项目，其他模型也可也运行，但是效果有待验证（暂时没有进行过太多测试，仅尝试过minimax-2.5，但效果不佳）。
+
+**持久记忆**
+开始前建议将根目录下 MEMORY.md 复制到
+```
+~/.claude/projects/<项目路径编码>/memory/MEMORY.md
+```
+或直接告诉Claude让它读取该文件作为该项目的持久记忆。
+
 ### 2. 配置文件
 
 在项目根目录创建 `config.yaml`：
