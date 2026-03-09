@@ -718,7 +718,7 @@ done
 
 建议：
 - 查看日志：_workspace/XXX/test_YYYYMMDD/job_logs/job_21984267/
-- 参考故障排除清单（附录B）
+- 参考故障排除清单（read `tools/testCLAUDE/troubleshooting.md`）
 
 是否继续测试其他案例？(Y/n)
 
@@ -922,7 +922,7 @@ passed = relative_error <= tolerance  # 默认5%
 - 检查教程中的预期结果是否准确
 - 检查INPUT文件参数（ecutwfc、k_spacing等）
 - 查看计算日志是否有警告
-- 参考故障排除清单（附录B）
+- 参考故障排除清单（read `tools/testCLAUDE/troubleshooting.md`）
 
 **写入 issues_log.json：**
 
