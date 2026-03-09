@@ -162,7 +162,19 @@ class FullTestExecutor:
         print("=" * 70)
 
         try:
-            # 加载状态
+            # 先从 state 文件恢复 tutorial_path（continue 模式下可能为空）
+            state_file = self.test_dir / "test_state.json"
+            if state_file.exists():
+                with open(state_file, 'r', encoding='utf-8') as f:
+                    state = json.load(f)
+                    saved_path = state.get('tutorial_path', '')
+                    if saved_path and (not self.tutorial_path.exists() or str(self.tutorial_path) in ('', '.')):
+                        self.tutorial_path = Path(saved_path)
+
+            # 重新分析以恢复 plugin_tests
+            self.phase1_analyze()
+
+            # 加载状态（恢复 job_ids）
             self._load_state()
 
             # Phase 5: 下载结果
@@ -390,7 +402,7 @@ class FullTestExecutor:
         report += f"- 总测试数：{total_tests}\n"
         report += f"- 通过数：{passed_tests}\n"
         report += f"- 失败数：{total_tests - passed_tests}\n"
-        report += f"- 通过率：{passed_tests/total_tests*100:.1f}%\n\n"
+        report += f"- 通过率：{passed_tests/total_tests*100:.1f}%\n\n" if total_tests > 0 else "- 通过率：N/A\n\n"
 
         if passed_tests == total_tests:
             report += "[OK] **所有测试通过！**\n"

@@ -199,7 +199,7 @@ class TDDFTPlugin(BaseTestPlugin):
             self.job_manager.download_job_result(job_id, results_dir)
 
         # ── 验证 1：running_md.log 中 TDDFT 步数是否完成 ──
-        md_logs = list(results_dir.rglob("tddft_si_hybrid/OUT.*/running_md.log"))
+        md_logs = list(results_dir.rglob("running_md.log"))
         if md_logs:
             md_result = self._validate_tddft_log(md_logs[0])
             validation.comparisons.update(md_result)
@@ -215,8 +215,8 @@ class TDDFTPlugin(BaseTestPlugin):
             }
 
         # ── 验证 2：电流输出文件是否生成 ──
-        # ABACUS TDDFT 输出电流到 OUT.*/SPIN1_CURRENT（或类似名称）
-        current_files = list(results_dir.rglob("tddft_si_hybrid/OUT.*/*CURRENT*"))
+        # ABACUS TDDFT 输出电流到 current_total.dat 或 SPIN1_CURRENT（版本依赖）
+        current_files = list(results_dir.rglob("*CURRENT*")) + list(results_dir.rglob("current_total.dat"))
         current_ok = len(current_files) > 0
         validation.comparisons["tddft_current_output"] = {
             "key": "电流输出文件（SPIN1_CURRENT 或类似）是否生成",

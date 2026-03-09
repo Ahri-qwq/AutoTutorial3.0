@@ -1,0 +1,781 @@
+Info: Local MPI proc number: 8,OpenMP thread number: 1,Total thread number: 8,Local thread limit: 16
+                                                                                     
+                              ABACUS v3.10.1
+
+               Atomic-orbital Based Ab-initio Computation at UStc                    
+
+                     Website: http://abacus.ustc.edu.cn/                             
+               Documentation: https://abacus.deepmodeling.com/                       
+                  Repository: https://github.com/abacusmodeling/abacus-develop       
+                              https://github.com/deepmodeling/abacus-develop         
+                      Commit: f71921fe8 (Fri Nov 21 13:49:34 2025 +0800)
+
+ Mon Mar  9 12:08:54 2026
+ MAKE THE DIR         : OUT.Si_tddft_test/
+ MAKE THE STRU DIR    : OUT.Si_tddft_test/STRU/
+ RUNNING WITH DEVICE  : CPU / Intel(R) Xeon(R) Platinum 8163 CPU @ 2.50GHz
+ UNIFORM GRID DIM        : 36 * 36 * 36
+ UNIFORM GRID DIM(BIG)   : 12 * 12 * 12
+ DONE(0.111593   SEC) : SETUP UNITCELL
+ DONE(0.122345   SEC) : INIT K-POINTS
+ ---------------------------------------------------------
+ Molecular Dynamics simulations
+ ---------------------------------------------------------
+ ENSEMBLE                 : NVE
+ Time interval(fs)        : 0.02
+ ---------------------------------------------------------
+ SPIN    KPOINTS         PROCESSORS  THREADS     NBASE       
+ 1       36              8           8           26          
+ ---------------------------------------------------------
+ Use Systematically Improvable Atomic bases
+ ---------------------------------------------------------
+ ELEMENT ORBITALS        NBASE       NATOM       XC          
+ Si      2s2p1d-8au      13          2           
+ ---------------------------------------------------------
+ Initial plane wave basis and FFT box
+ ---------------------------------------------------------
+ DONE(0.125116   SEC) : INIT PLANEWAVE
+ DONE(0.302467   SEC) : LOCAL POTENTIAL
+ ----------------------------------- INIT VEL ---------------------------------------
+ RANDOM VEL ACCORDING TO INITIAL TEMPERATURE: 0 K
+ ------------------------------------- DONE -----------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 0
+ -------------------------------------------
+ START CHARGE      : atomic
+ DONE(0.363086   SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13894863e+02   0.00000000e+00   1.6750e-01   0.35
+ GE2     -2.13915130e+02  -2.02671993e-02   3.6656e-02   0.23
+ GE3     -2.13916870e+02  -1.73999103e-03   2.8677e-03   0.22
+ GE4     -2.13916883e+02  -1.29261048e-05   2.5342e-04   0.23
+ GE5     -2.13916883e+02  -9.16187163e-08   1.8622e-05   0.24
+ GE6     -2.13916883e+02  -5.61460159e-10   4.1649e-06   0.21
+ GE7     -2.13916883e+02   2.00744181e-10   1.4257e-08   0.22
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            0                   0                   
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 1
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(4.7387     SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   8.8922e-10   0.25
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            5.33639e-35         5.61699e-30         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 2
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(7.66716    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   9.2569e-10   0.39
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            2.51332e-34         2.64548e-29         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 3
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(10.6986    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   1.1649e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            1.62295e-31         1.70829e-26         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 4
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(13.7244    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   1.0020e-09   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            4.48118e-29         4.71681e-24         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 5
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(16.7439    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   5.2501e-10   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            6.7518e-28          7.10682e-23         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 6
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(19.7612    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   1.4452e-10   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            1.67037e-27         1.7582e-22          
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 7
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(22.7724    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   9.5163e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            1.42678e-27         1.5018e-22          
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 8
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(25.7793    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   4.7507e-11   0.38
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            5.17561e-28         5.44775e-23         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 9
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(28.7828    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   1.9659e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            4.1102e-29          4.32632e-24         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 10
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(31.7878    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   4.1473e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            7.81998e-29         8.23118e-24         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 11
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(34.8104    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   7.7321e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            7.79854e-28         8.2086e-23          
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 12
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(37.8304    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   9.5283e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            1.76437e-27         1.85714e-22         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 13
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(40.8465    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   2.0075e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            1.58528e-27         1.66864e-22         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 14
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(43.8445    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   4.6896e-11   0.38
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            2.09344e-28         2.20352e-23         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 15
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(46.8553    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   4.5682e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            5.1995e-28          5.4729e-23          
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 16
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(49.8661    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   2.6038e-10   0.38
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            1.60554e-27         1.68996e-22         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 17
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(52.8846    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   2.9974e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            5.99707e-28         6.31241e-23         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 18
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(55.8905    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   1.6810e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            4.98214e-29         5.24411e-24         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 19
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(58.9069    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   5.2559e-11   0.38
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            1.15954e-27         1.22051e-22         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 20
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(61.9173    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   3.8422e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            8.70594e-28         9.16372e-23         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 21
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(64.9455    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   1.6387e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            4.24814e-28         4.47152e-23         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 22
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(67.9553    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   3.8360e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            3.71656e-27         3.91199e-22         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 23
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(70.9624    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   3.3191e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            5.30427e-27         5.58318e-22         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 24
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(73.9698    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   1.9459e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            2.71022e-27         2.85273e-22         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 25
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(77.0084    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   2.3385e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            3.5963e-29          3.7854e-24          
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 26
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(80.0286    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   6.0208e-11   0.38
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            1.82484e-27         1.9208e-22          
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 27
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(83.0539    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   3.1175e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            1.70196e-27         1.79145e-22         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 28
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(86.0564    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   5.1163e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            5.3065e-28          5.58553e-23         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 29
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(89.0655    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   2.2928e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            1.08097e-27         1.13781e-22         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 30
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(92.0921    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   2.8600e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            1.38421e-27         1.45699e-22         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 31
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(95.1019    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   3.5882e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            3.92141e-29         4.12761e-24         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 32
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(98.1239    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   5.3164e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            2.81935e-27         2.9676e-22          
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 33
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(101.129    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   1.7023e-10   0.38
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            6.84914e-27         7.20929e-22         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 34
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(104.138    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   2.1918e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            3.44379e-27         3.62487e-22         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 35
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(107.147    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   1.1069e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            3.33477e-28         3.51012e-23         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 36
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(110.175    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   1.7147e-11   0.38
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            1.71092e-27         1.80088e-22         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 37
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(113.187    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   6.5858e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            6.62649e-27         6.97493e-22         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 38
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(116.196    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   2.0288e-11   0.38
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            5.78867e-27         6.09305e-22         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 39
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(119.236    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   1.4422e-11   0.38
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            1.14576e-27         1.20601e-22         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 40
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(122.289    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   1.9668e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            1.44446e-27         1.52041e-22         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 41
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(125.305    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   2.2852e-11   0.38
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            1.15142e-26         1.21196e-21         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 42
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(128.36     SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   4.2776e-11   0.38
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            1.8398e-26          1.93654e-21         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 43
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(131.369    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   2.9204e-11   0.38
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            8.88063e-27         9.3476e-22          
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 44
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(134.391    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   1.4466e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            4.78895e-28         5.04076e-23         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 45
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(137.398    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   2.8012e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            6.19868e-27         6.52462e-22         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 46
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(140.426    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   3.8047e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            1.41027e-26         1.48442e-21         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 47
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(143.462    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   3.2303e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            4.41095e-27         4.64288e-22         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 48
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(146.457    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   3.7239e-11   0.36
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            2.52899e-28         2.66197e-23         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 49
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(149.46     SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   7.8280e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            9.02665e-27         9.50129e-22         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 50
+ -------------------------------------------
+calculate electric potential
+space_domain_type of electric field is wrong
+ DONE(152.46     SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ GE1     -2.13916883e+02   0.00000000e+00   8.6791e-11   0.37
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -15.7226            -15.7226            1.8448e-26          1.94181e-21         
+ ------------------------------------------------------------------------------------------------
+TIME STATISTICS
+----------------------------------------------------------------------------------------
+      CLASS_NAME                      NAME                TIME/s  CALLS   AVG/s  PER/%  
+----------------------------------------------------------------------------------------
+                       total                              155.46 111      1.40   100.00 
+ Driver                reading                            0.06   1        0.06   0.04   
+ Input_Conv            Convert                            0.00   1        0.00   0.00   
+ Driver                driver_line                        155.40 1        155.40 99.96  
+ UnitCell              check_tau                          0.00   1        0.00   0.00   
+ ESolver_KS_LCAO       before_all_runners                 0.23   1        0.23   0.14   
+ PW_Basis_Sup          setuptransform                     0.01   1        0.01   0.01   
+ PW_Basis_Sup          distributeg                        0.00   1        0.00   0.00   
+ mymath                heapsort                           0.00   3        0.00   0.00   
+ Charge_Mixing         init_mixing                        0.00   1        0.00   0.00   
+ PW_Basis_K            setuptransform                     0.00   1        0.00   0.00   
+ PW_Basis_K            distributeg                        0.00   1        0.00   0.00   
+ PW_Basis              setup_struc_factor                 0.01   51       0.00   0.01   
+ NOrbital_Lm           extra_uniform                      0.04   5        0.01   0.03   
+ Mathzone_Add1         SplineD2                           0.00   5        0.00   0.00   
+ Mathzone_Add1         Cubic_Spline_Interpolation         0.00   5        0.00   0.00   
+ Mathzone_Add1         Uni_Deriv_Phi                      0.04   5        0.01   0.02   
+ ppcell_vl             init_vloc                          0.00   1        0.00   0.00   
+ Run_MD                md_line                            155.14 1        155.14 99.79  
+ Verlet                setup                              4.38   1        4.38   2.82   
+ MD_func               force_virial                       154.82 51       3.04   99.59  
+ ESolver_KS_LCAO_TDDFT runner                             146.70 51       2.88   94.37  
+ ESolver_KS_LCAO       before_scf                         1.65   51       0.03   1.06   
+ atom_arrange          search                             0.01   51       0.00   0.01   
+ atom_arrange          grid_d.init                        0.01   51       0.00   0.01   
+ Grid                  Construct_Adjacent_expand          0.00   51       0.00   0.00   
+ Grid                  Construct_Adjacent_expand_periodic 0.00   102      0.00   0.00   
+ Grid_Technique        init                               0.77   51       0.02   0.49   
+ Grid_BigCell          grid_expansion_index               0.19   102      0.00   0.12   
+ Grid_Driver           Find_atom                          0.02   1224     0.00   0.01   
+ Record_adj            for_2d                             0.10   51       0.00   0.07   
+ LCAO_domain           grid_prepare                       0.00   51       0.00   0.00   
+ Veff                  initialize_HR                      0.01   51       0.00   0.00   
+ OverlapNew            initialize_SR                      0.00   51       0.00   0.00   
+ EkineticNew           initialize_HR                      0.01   51       0.00   0.00   
+ NonlocalNew           initialize_HR                      0.05   51       0.00   0.03   
+ Charge                set_rho_core                       0.00   51       0.00   0.00   
+ Charge                atomic_rho                         0.28   102      0.00   0.18   
+ PW_Basis_Sup          recip2real                         0.12   699      0.00   0.08   
+ PW_Basis_Sup          gathers_scatterp                   0.06   699      0.00   0.04   
+ Potential             init_pot                           0.41   51       0.01   0.27   
+ Potential             update_from_charge                 0.69   108      0.01   0.45   
+ Potential             cal_fixed_v                        0.16   51       0.00   0.11   
+ PotLocal              cal_fixed_v                        0.01   51       0.00   0.01   
+ Potential             cal_v_eff                          0.53   108      0.00   0.34   
+ H_Hartree_pw          v_hartree                          0.05   108      0.00   0.03   
+ PW_Basis_Sup          real2recip                         0.12   807      0.00   0.08   
+ PW_Basis_Sup          gatherp_scatters                   0.06   807      0.00   0.04   
+ PotXC                 cal_v_eff                          0.48   108      0.00   0.31   
+ XC_Functional         v_xc                               0.48   108      0.00   0.31   
+ Potential             interpolate_vrs                    0.00   108      0.00   0.00   
+ H_Ewald_pw            compute_ewald                      0.00   51       0.00   0.00   
+ HSolverLCAO           solve                              1.90   8        0.24   1.22   
+ HamiltLCAO            updateHk                           6.20   5616     0.00   3.99   
+ OperatorLCAO          init                               5.61   16848    0.00   3.61   
+ Veff                  contributeHR                       4.26   57       0.07   2.74   
+ Gint_interface        cal_gint                           13.19  165      0.08   8.48   
+ Gint_interface        cal_gint_vlocal                    4.21   57       0.07   2.71   
+ Gint_Tools            cal_psir_ylm                       1.34   32832    0.00   0.86   
+ Gint_k                transfer_pvpR                      0.06   57       0.00   0.04   
+ OverlapNew            calculate_SR                       0.44   51       0.01   0.28   
+ OverlapNew            contributeHk                       0.14   5616     0.00   0.09   
+ EkineticNew           contributeHR                       0.44   57       0.01   0.28   
+ EkineticNew           calculate_HR                       0.44   51       0.01   0.28   
+ NonlocalNew           contributeHR                       0.62   57       0.01   0.40   
+ NonlocalNew           calculate_HR                       0.62   51       0.01   0.40   
+ OperatorLCAO          contributeHk                       0.27   5616     0.00   0.18   
+ HSolverLCAO           hamiltSolvePsiK                    0.66   288      0.00   0.43   
+ DiagoElpa             elpa_solve                         0.53   288      0.00   0.34   
+ elecstate             cal_dm                             40.52  110      0.37   26.06  
+ psiMulPsiMpi          pdgemm                             40.50  3960     0.01   26.05  
+ DensityMatrix         cal_DMR                            0.18   158      0.00   0.12   
+ ElecStateLCAO         psiToRho                           3.28   57       0.06   2.11   
+ Gint                  transfer_DMR                       0.06   57       0.00   0.04   
+ Gint_interface        cal_gint_rho                       3.22   57       0.06   2.07   
+ Charge_Mixing         get_drho                           0.00   57       0.00   0.00   
+ Charge                mix_rho                            0.01   6        0.00   0.01   
+ Charge                Broyden_mixing                     0.01   6        0.00   0.00   
+ ModuleIO              write_rhog                         3.56   51       0.07   2.29   
+ ESolver_KS_LCAO_TDDFT after_scf                          121.20 51       2.38   77.96  
+ ModuleIO              write_current                      120.95 51       2.37   77.80  
+ TD_current            initialize_vcomm_r                 0.12   51       0.00   0.08   
+ TD_current            initialize_grad_term               0.01   51       0.00   0.01   
+ TD_current            calculate_vcomm_r                  77.97  51       1.53   50.16  
+ module_tddft          snap_psibeta_half_tddft            75.48  31161    0.00   48.55  
+ TD_current            calculate_grad_term                0.48   51       0.01   0.31   
+ ModuleIO              cal_tmp_DM                         0.77   1836     0.00   0.49   
+ ESolver_KS_LCAO       after_scf                          0.25   51       0.00   0.16   
+ ESolver_KS_LCAO       out_deepks_labels                  0.00   51       0.00   0.00   
+ LCAO_Deepks_Interface out_deepks_labels                  75.34  26       2.90   48.46  
+ ESolver_KS_LCAO       cal_force                          8.11   51       0.16   5.22   
+ Force_Stress_LCAO     getForceStress                     8.11   51       0.16   5.22   
+ Forces                cal_force_loc                      0.02   51       0.00   0.01   
+ Forces                cal_force_ew                       0.01   51       0.00   0.01   
+ Forces                cal_force_cc                       0.00   51       0.00   0.00   
+ Forces                cal_force_scc                      0.15   51       0.00   0.10   
+ Force_LCAO            ftable                             6.93   51       0.14   4.46   
+ Force_LCAO            allocate                           1.06   51       0.02   0.68   
+ LCAO_domain           build_ST_new                       1.05   102      0.01   0.68   
+ Force_LCAO            cal_pulay_fs_center2               0.03   102      0.00   0.02   
+ Gint_interface        cal_gint_force                     5.76   51       0.11   3.71   
+ Gint_Tools            cal_dpsir_ylm                      1.82   14688    0.00   1.17   
+ NonlocalNew           cal_force_stress                   1.00   51       0.02   0.64   
+ Verlet                first_half                         0.01   50       0.00   0.00   
+ Charge_Extra          extrapolate_charge                 0.15   50       0.00   0.10   
+ H_TDDFT_pw            cal_fixed_v                        0.15   50       0.00   0.10   
+ H_TDDFT_pw            cal_v_space                        0.00   50       0.00   0.00   
+ Verlet                second_half                        0.00   50       0.00   0.00   
+ Evolve_elec           solve_psi                          10.27  49       0.21   6.61   
+ Efficience            evolve_k                           5.04   1764     0.00   3.24   
+ ESolver_KS_LCAO       after_all_runners                  0.01   1        0.01   0.01   
+ ModuleIO              write_istate_info                  0.01   1        0.01   0.01   
+----------------------------------------------------------------------------------------
+
+
+ START  Time  : Mon Mar  9 12:08:54 2026
+ FINISH Time  : Mon Mar  9 12:11:29 2026
+ TOTAL  Time  : 155
+ SEE INFORMATION IN : OUT.Si_tddft_test/
