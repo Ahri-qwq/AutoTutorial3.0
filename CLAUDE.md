@@ -371,7 +371,17 @@ tutorial_path = "_workspace/<当前任务目录>/07_Final_Tutorial_<标题>.md"
 test_dir      = "_workspace/<当前任务目录>/test_<YYYYMMDD_HHMMSS>/"
 ```
 
-2. 切换到 `testCLAUDE.md` 定义的完整测试流程，从 **Step 1** 开始执行，`tutorial_path` 和 `test_dir` 已知，无需再次询问。
+2. 输出以下信息，暂停等待用户响应：
+```
+即将开始计算测试。关键信息已确认：
+  tutorial_path = _workspace/<当前目录>/07_Final_Tutorial_<标题>.md
+  test_dir      = _workspace/<当前目录>/test_<时间戳>/
+
+建议：运行 /compact 压缩当前上下文（可释放 40–60K tokens），有助于测试流程顺利运行。
+压缩后告诉我"继续测试"即可。若不压缩，直接说"继续测试"也可。
+```
+
+3. 收到"继续测试"后，切换到 `testCLAUDE.md` 定义的完整测试流程，从 **Step 1** 开始执行，`tutorial_path` 和 `test_dir` 已知，无需再次询问。
 
 **Think Aloud：** 说明教程路径、测试目录，以及你对本篇教程计算流程的初步理解（串行/并行任务、依赖关系），为 testCLAUDE.md Step 3 的任务提交做预热。
 
