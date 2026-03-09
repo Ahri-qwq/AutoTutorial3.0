@@ -25,6 +25,10 @@ class BandPlugin(BaseTestPlugin):
         phonopy_patterns = [r'phonopy', r'声子谱', r'FORCE_SETS', r'有限位移方法']
         if any(re.search(p, tutorial_content, re.IGNORECASE) for p in phonopy_patterns):
             return False
+        # 排除 NEB/ATST-Tools 教程
+        neb_patterns = [r'AbacusNEB', r'AbacusAutoNEB', r'ATST-Tools', r'dyneb_run', r'autoneb_run']
+        if any(re.search(p, tutorial_content, re.IGNORECASE) for p in neb_patterns):
+            return False
         patterns = [
             r'能带',
             r'band\s*structure',

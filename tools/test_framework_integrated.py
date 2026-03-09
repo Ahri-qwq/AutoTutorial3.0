@@ -40,6 +40,7 @@ from test_plugins.phonopy_plugin import PhonopyPlugin
 from test_plugins.sdft_plugin import SDFTPlugin
 from test_plugins.elf_plugin import ELFPlugin
 from test_plugins.tddft_plugin import TDDFTPlugin
+from test_plugins.neb_plugin import NEBPlugin
 
 
 class FullTestExecutor:
@@ -83,6 +84,7 @@ class FullTestExecutor:
             PhonopyPlugin(self.job_manager, self.pp_manager),
             ELFPlugin(self.job_manager, self.pp_manager),
             TDDFTPlugin(self.job_manager, self.pp_manager),
+            NEBPlugin(self.job_manager, self.pp_manager),
         ]
 
         # 存储每个插件的测试信息和任务

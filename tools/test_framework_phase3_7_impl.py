@@ -221,6 +221,15 @@ class PseudopotentialManager:
             f"https://github.com/deepmodeling/abacus-develop/raw/develop/tests/PP_ORB/{filename}",
         ]
 
+        # 对于轨道文件，额外尝试 abacusmodeling/ABACUS-orbitals 仓库
+        # 目录结构：SG15_v1.0/Orbitals_v2.0/<Element>_DZP/<filename>
+        if file_type == "orbital":
+            element = filename.split("_")[0] if "_" in filename else ""
+            if element:
+                orb_base = "https://raw.githubusercontent.com/abacusmodeling/ABACUS-orbitals/main/SG15_v1.0/Orbitals_v2.0"
+                for quality in ["DZP", "SZ", "TZDP"]:
+                    urls.append(f"{orb_base}/{element}_{quality}/{filename}")
+
         for url in urls:
             result = subprocess.run(
                 ['curl', '-L', '-o', str(cache_file), url],

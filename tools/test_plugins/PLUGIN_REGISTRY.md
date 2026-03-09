@@ -21,6 +21,7 @@
 | sdft_plugin.py | sdft | `esolver_type = sdft`（INPUT代码块中）| 2026-03-04 | ABACUS SDFT/MDFT 随机密度泛函理论教程（Si SCF+Al MD+Si DOS）|
 | tddft_plugin.py | tddft | `esolver_type = tddft`（INPUT代码块中）| 2026-03-09 | 用 ABACUS 做周期体系 RT-TDDFT：混合规范（Si 原胞 50步）|
 | elf_plugin.py | elf | `out_elf\s+1`、`ELF.cube`、`电子局域函数` | 2026-03-09 | ELF 电子局域函数计算与可视化教程（H₂O PW/LCAO + Fe BCC）|
+| neb_plugin.py | neb | `AbacusNEB`、`AbacusAutoNEB`、`ATST-Tools`、`dyneb_run`、`autoneb_run` | 2026-03-09 | NEB/AutoNEB 过渡态搜索教程（Li-Si + Cy-Pt@graphene），测试 IS SCF |
 
 ---
 

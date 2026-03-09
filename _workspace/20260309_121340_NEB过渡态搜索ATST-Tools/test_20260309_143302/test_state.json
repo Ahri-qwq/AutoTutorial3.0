@@ -1,0 +1,12 @@
+{
+  "tutorial_path": "C:\\MyCode\\AutoTutorial3.0\\_workspace\\20260309_121340_NEB\u8fc7\u6e21\u6001\u641c\u7d22ATST-Tools\\07_Final_Tutorial_\u4f7f\u7528ABACUS\u548cATST-Tools\u8fdb\u884cNEB-AutoNEB\u8fc7\u6e21\u6001\u641c\u7d22.md",
+  "plugin_states": {
+    "neb": {
+      "job_ids": [
+        "22217392"
+      ],
+      "case_name": "Li-in-Si-IS"
+    }
+  },
+  "start_time": "2026-03-09T15:10:38.091622"
+}

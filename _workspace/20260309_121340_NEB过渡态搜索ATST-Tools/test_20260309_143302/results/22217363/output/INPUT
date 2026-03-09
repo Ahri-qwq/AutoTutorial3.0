@@ -1,0 +1,17 @@
+INPUT_PARAMETERS
+#Parameters (1.General)
+suffix              Li-Si-NEB-test
+calculation         scf
+ntype               2
+nspin               1
+symmetry            0
+pseudo_dir          ./
+orbital_dir         ./
+
+#Parameters (2.Iteration)
+ecutwfc             100
+scf_thr             1e-6
+scf_nmax            100
+
+#Parameters (3.Basis)
+basis_type          lcao

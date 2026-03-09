@@ -26,6 +26,10 @@ class ElasticPlugin(BaseTestPlugin):
 
     def can_handle(self, tutorial_content: str) -> bool:
         """判断是否包含弹性常数计算"""
+        # 排除 NEB/ATST-Tools 教程（"Nudged Elastic Band" 含 elastic 词，易误判）
+        neb_patterns = [r'AbacusNEB', r'AbacusAutoNEB', r'ATST-Tools', r'dyneb_run', r'autoneb_run']
+        if any(re.search(p, tutorial_content, re.IGNORECASE) for p in neb_patterns):
+            return False
         patterns = [
             r'弹性常数',
             r'elastic',
