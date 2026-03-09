@@ -524,6 +524,28 @@ python tools/test_framework_integrated.py "$tutorial_path" --test-dir "$test_dir
 - 重跑 prepare 后 `analysis.json` 非空
 - 在 `testCLAUDE.md` **附录D** 的"插件开发历史"表中追加一行（含插件文件名、计算类型、添加日期、首次测试教程）
 
+**写入 issues_log.json：**
+
+```bash
+python -c "
+import json, os
+log_path = '$test_dir/issues_log.json'
+log = json.loads(open(log_path).read()) if os.path.exists(log_path) else {'issues': []}
+log['issues'].append({
+    'type': 'plugin_created',
+    'category': 'user-confirm',
+    'description': '教程计算类型无对应插件，已临时创建 <新插件名>',
+    'resolution': '已创建并注册新插件',
+    'tutorial_keywords': ['<calc_type关键词>'],
+    'insertion_note': '> **📌 说明：** 本教程涉及 <计算类型> 功能，为较新特性，使用前请确认 ABACUS 版本 ≥ <最低版本>。',
+    'step': 'Step 1.5'
+})
+open(log_path, 'w', encoding='utf-8').write(json.dumps(log, ensure_ascii=False, indent=2))
+print('[记录] 已写入 issues_log.json：创建新插件 <新插件名>')
+"
+```
+（将 `<新插件名>`、`<calc_type关键词>`、`<计算类型>`、`<最低版本>` 替换为本次实际值）
+
 ---
 
 **Think Aloud：**
@@ -612,6 +634,28 @@ add_correction('{wrong}', '{correct}')
 
 然后重新调用 get_file() 下载正确文件，继续测试流程。
 
+**同步写入 issues_log.json：**
+
+```bash
+python -c "
+import json, os
+log_path = '$test_dir/issues_log.json'
+log = json.loads(open(log_path).read()) if os.path.exists(log_path) else {'issues': []}
+log['issues'].append({
+    'type': 'file_fix',
+    'category': 'auto',
+    'description': '轨道文件名 {wrong} 不存在，已修正为 {correct}',
+    'resolution': '已更新 orbital_db.py 并重新下载',
+    'tutorial_keywords': ['{wrong_stem}', 'NUMERICAL_ORBITAL', '轨道文件'],
+    'insertion_note': '> **⚠️ 注意：** 轨道文件命名随版本可能变化，如遇文件不存在错误，请到 [ABACUS-orbitals](https://github.com/deepmodeling/abacus-develop/tree/develop/tests/PP_ORB) 查询当前正确文件名。',
+    'step': 'Step 2.3b'
+})
+open(log_path, 'w', encoding='utf-8').write(json.dumps(log, ensure_ascii=False, indent=2))
+print('[记录] 已写入 issues_log.json：轨道文件名修正 {wrong} → {correct}')
+"
+```
+（将 `{wrong}`、`{correct}`、`{wrong_stem}` 替换为本次实际值）
+
 **情况2：GitHub 查询失败（网络问题/API 限速），候选列表为空**
 
 ```
@@ -689,6 +733,30 @@ report['fixes'].append({
 })
 open(report_path, 'w', encoding='utf-8').write(json.dumps(report, ensure_ascii=False, indent=2))
 print('[记录] param_fix_report.json 已更新')
+"
+```
+
+**同步写入 issues_log.json：**
+
+```bash
+python -c "
+import json, os
+log_path = '$test_dir/issues_log.json'
+log = json.loads(open(log_path).read()) if os.path.exists(log_path) else {'issues': []}
+log['issues'].append({
+    'type': 'param_fix',
+    'category': 'auto',
+    'description': 'INPUT 中存在 nbands auto，ABACUS v3.10.x 不支持该写法',
+    'resolution': '已删除 nbands auto 行，ABACUS 自动计算 nbands',
+    'tutorial_keywords': ['nbands', 'INPUT'],
+    'insertion_note': '> **⚠️ 注意：** \`nbands auto\` 在 ABACUS v3.10.x 中已不支持，删除该行即可，ABACUS 会自动确定轨道数。',
+    'step': 'Step 2.5'
+})
+open(log_path, 'w', encoding='utf-8').write(json.dumps(log, ensure_ascii=False, indent=2))
+print('[记录] 已写入 issues_log.json：param_fix nbands auto')
+"
+```
+
 "
 ```
 
