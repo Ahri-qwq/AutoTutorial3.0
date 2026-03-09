@@ -782,6 +782,28 @@ NUMERICAL_ORBITAL
 ./Si_gga_8au_100Ry_2s2p1d.orb
 ```
 
+**若发生了 STRU 格式修复，写入 issues_log.json：**
+
+```bash
+python -c "
+import json, os
+log_path = '$test_dir/issues_log.json'
+log = json.loads(open(log_path).read()) if os.path.exists(log_path) else {'issues': []}
+log['issues'].append({
+    'type': 'file_fix',
+    'category': 'auto',
+    'description': 'STRU 文件使用旧格式（ATOMIC_SPECIES 含4个字段），已自动修复为新格式',
+    'resolution': '已将轨道文件路径拆分到独立 NUMERICAL_ORBITAL 块',
+    'tutorial_keywords': ['ATOMIC_SPECIES', 'NUMERICAL_ORBITAL', 'STRU'],
+    'insertion_note': '> **⚠️ 注意：** ABACUS v3.x 要求 STRU 文件中 \`ATOMIC_SPECIES\` 只含3个字段（元素、质量、赝势），轨道文件路径须单独写在 \`NUMERICAL_ORBITAL\` 块中。',
+    'step': 'Step 2.6'
+})
+open(log_path, 'w', encoding='utf-8').write(json.dumps(log, ensure_ascii=False, indent=2))
+print('[记录] 已写入 issues_log.json：STRU 旧格式修复')
+"
+```
+（仅在实际发生 STRU 格式修复时执行此命令）
+
 **Think Aloud：**
 - 说明创建的目录结构
 - 说明文件下载情况（缓存命中/新下载）
@@ -952,6 +974,28 @@ done
 - 参考故障排除清单（附录B）
 
 是否继续测试其他案例？(Y/n)
+
+**写入 issues_log.json：**
+
+```bash
+python -c "
+import json, os
+log_path = '$test_dir/issues_log.json'
+log = json.loads(open(log_path).read()) if os.path.exists(log_path) else {'issues': []}
+log['issues'].append({
+    'type': 'runtime_error',
+    'category': 'user-confirm',
+    'description': '任务 <Job ID>（<任务名>）计算失败，原因：<分析结论>',
+    'resolution': '<采取的解决措施，或"需用户手动排查">',
+    'tutorial_keywords': ['<失败步骤关键词>', '<计算类型>'],
+    'insertion_note': '> **⚠️ 常见错误：** <面向用户的错误描述和解决建议>',
+    'step': 'Step 4.4'
+})
+open(log_path, 'w', encoding='utf-8').write(json.dumps(log, ensure_ascii=False, indent=2))
+print('[记录] 已写入 issues_log.json：runtime_error <任务名>')
+"
+```
+（将尖括号占位符替换为本次实际值）
 ```
 
 **Think Aloud：**
@@ -1132,6 +1176,28 @@ passed = relative_error <= tolerance  # 默认5%
 - 检查INPUT文件参数（ecutwfc、k_spacing等）
 - 查看计算日志是否有警告
 - 参考故障排除清单（附录B）
+
+**写入 issues_log.json：**
+
+```bash
+python -c "
+import json, os
+log_path = '$test_dir/issues_log.json'
+log = json.loads(open(log_path).read()) if os.path.exists(log_path) else {'issues': []}
+log['issues'].append({
+    'type': 'result_deviation',
+    'category': 'user-confirm',
+    'description': '<参数名> 实际值 <实际值> 与教程预期 <预期值> 相差 <误差>%（容差 <容差>%）',
+    'resolution': '<调整容差后通过 / 需进一步排查>',
+    'tutorial_keywords': ['<参数名>', '预期结果', '<计算类型>'],
+    'insertion_note': '> **💡 提示：** <参数名> 数值对计算精度参数（如 ecutwfc、k_spacing）较敏感，若结果与本教程数值有 <N>% 偏差属正常范围，可适当提高精度参数后重新计算。',
+    'step': 'Step 6.3'
+})
+open(log_path, 'w', encoding='utf-8').write(json.dumps(log, ensure_ascii=False, indent=2))
+print('[记录] 已写入 issues_log.json：result_deviation <参数名>')
+"
+```
+（将尖括号占位符替换为本次实际值）
 ```
 
 **6.4 生成测试报告**
