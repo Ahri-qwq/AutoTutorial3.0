@@ -1,0 +1,12 @@
+{
+  "tutorial": "_workspace/20260304_160920_ABACUS+ELF电子局域函数/07_Final_Tutorial_ABACUS使用教程-ELF电子局域函数计算与可视化.md",
+  "corrections": [
+    {
+      "wrong": "H_gga_6au_100Ry_2s1p.orb",
+      "correct": "H_gga_8au_100Ry_2s1p.orb",
+      "source": "github_candidates + tutorial_note",
+      "reason": "6au版本不存在，8au版本（100Ry，2s1p基组）是正确替代，教程已注明",
+      "timestamp": "2026-03-09T11:21:26.254809"
+    }
+  ]
+}

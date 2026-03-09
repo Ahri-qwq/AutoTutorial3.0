@@ -80,6 +80,7 @@
 | OpticPlugin | optic | `out_mat_hs2` + `OPTICAL_CONDUCTIVITY` |
 | SolvationPlugin | solvation | `imp_sol = 1`、`隐式溶剂` |
 | PhonopyPlugin | phonopy | `phonopy`、`声子谱`、`FORCE_SETS`、`有限位移方法` |
+| ELFPlugin | elf | `out_elf 1`、`ELF.cube`、`电子局域函数` |
 
 **⚠️ 如果你的教程不在以上列表中，`analysis.json` 将为空。**
 此时请直接跳转到 **Step 1.5 创建新插件**，不要在其他步骤排查。
@@ -576,7 +577,7 @@ echo "[KPT内容]"   > $test_dir/<案例名>/01_relax/KPT
 
 Step 1.2 的 `--phase prepare` 命令已自动完成以下操作：
 1. 从本地缓存（`tools/pseudopotentials/`、`tools/orbitals/`）复制已缓存文件
-2. 若未缓存，从 ABACUS 仓库下载并验证（检查 HTML/404 错误）
+2. 若未缓存，从 ABACUS 仓库下载并验证（检查 HTML/404 错误）：计算所需赝势和轨道主要来自这里：datasets/381/ABACUS-APNS-PPORBs-v1(efficiency-clean)、另一个主要来源是这个：abacusmodeling/ABACUS-orbitals。（需要经过判断选择，例如但不限于：1. 用到的轨道文件需要与赝势文件匹配，比如用了SG1.0的赝势，就需要用SG1.0文件夹下的轨道，不能用其他文件夹下的同名轨道；2. 是否考虑自旋-轨道耦合（SOC）的赝势不一样，做SOC相关的计算时只能用对应的轨道（Dojo-NC-FR），不做SOC计算时不能用这一套）
 3. 自动应用文件映射表（如 `Si_gga_7au_100Ry_2s2p1d.orb` → `Si_gga_8au_100Ry_2s2p1d.orb`）
 
 确认 Step 1.2 输出中显示"✅ 所有依赖文件已准备"后继续。若出现 `OrbitalNotFoundError`，按 Step 2.3b 处理。
@@ -1627,6 +1628,7 @@ Si
 | optic_plugin.py | optic | 2026-03-02 | 光学性质（介电函数/吸收谱）计算教程（SiO₂） |
 | solvation_plugin.py | solvation | 2026-03-02 | 隐式溶剂模型使用教程（H₂@水溶液） |
 | phonopy_plugin.py | phonopy | 2026-03-03 | ABACUS+Phonopy 声子谱计算教程（FCC Al） |
+| elf_plugin.py | elf | 2026-03-09 | ELF 电子局域函数计算与可视化教程（H₂O PW/LCAO + Fe BCC） |
 
 > 每次新增插件时，在此表格追加一行。
 

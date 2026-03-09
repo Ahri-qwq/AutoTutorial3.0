@@ -1,0 +1,10 @@
+ read_atom_position  warning : Cartesian or Direct?
+ There are several options for you:
+ Direct
+ Cartesian_angstrom
+ Cartesian_au
+ Cartesian_angstrom_center_xy
+ Cartesian_angstrom_center_xz
+ Cartesian_angstrom_center_yz
+ Cartesian_angstrom_center_xyz
+ UnitCell::setup_cell  warning : Something wrong during read_atom_positions.

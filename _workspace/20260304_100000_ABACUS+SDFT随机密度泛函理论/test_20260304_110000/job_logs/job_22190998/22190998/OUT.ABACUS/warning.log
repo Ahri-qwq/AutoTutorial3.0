@@ -1,0 +1,29 @@
+                            startmag_type = 2
+                       charge from rho_at = 3.95377
+                         charge should be = 4
+ Warning: negative or imaginary starting charge :  neg = -0.000112806 ima = 1.39684e-15 SPIN = 0
+
+ SETUP ATOMIC RHO FOR SPIN 1
+                 Electron number from rho = 8
+           total electron number from rho = 8
+                                should be = 8
+                 charge before normalized = 8
+                  charge after normalized = 8
+ Stochastic_Chebychev  warning : ( Ne relative Chebyshev error = 4.01135e-08 > threshold = 1e-08 ) Maybe you should increase the parameter "nche_sto" for more accuracy.
+ Stochastic_Chebychev  warning : ( Ne relative Chebyshev error = 1.15561e-07 > threshold = 1e-08 ) Maybe you should increase the parameter "nche_sto" for more accuracy.
+ Stochastic_Chebychev  warning : ( Ne relative Chebyshev error = 1.22276e-07 > threshold = 1e-08 ) Maybe you should increase the parameter "nche_sto" for more accuracy.
+ Stochastic_Chebychev  warning : ( Ne relative Chebyshev error = 1.23165e-07 > threshold = 1e-08 ) Maybe you should increase the parameter "nche_sto" for more accuracy.
+ Stochastic_Chebychev  warning : ( Ne relative Chebyshev error = 1.2292e-07 > threshold = 1e-08 ) Maybe you should increase the parameter "nche_sto" for more accuracy.
+ Stochastic_Chebychev  warning : ( Ne relative Chebyshev error = 1.22858e-07 > threshold = 1e-08 ) Maybe you should increase the parameter "nche_sto" for more accuracy.
+ Stochastic_Chebychev  warning : ( Ne relative Chebyshev error = 1.22854e-07 > threshold = 1e-08 ) Maybe you should increase the parameter "nche_sto" for more accuracy.
+ Stochastic_Chebychev  warning : ( Ne relative Chebyshev error = 1.22847e-07 > threshold = 1e-08 ) Maybe you should increase the parameter "nche_sto" for more accuracy.
+ Stochastic_Chebychev  warning : ( Ne relative Chebyshev error = 1.22849e-07 > threshold = 1e-08 ) Maybe you should increase the parameter "nche_sto" for more accuracy.
+                            startmag_type = 2
+                       charge from rho_at = 3.95377434289291
+                         charge should be = 4
+ Warning: negative or imaginary starting charge :  neg = -0.000112805909207592 ima = 1.39683760211347e-15 SPIN = 0
+
+ SETUP ATOMIC RHO FOR SPIN 1
+                 Electron number from rho = 7.99999999999999
+           total electron number from rho = 7.99999999999999
+                                should be = 8

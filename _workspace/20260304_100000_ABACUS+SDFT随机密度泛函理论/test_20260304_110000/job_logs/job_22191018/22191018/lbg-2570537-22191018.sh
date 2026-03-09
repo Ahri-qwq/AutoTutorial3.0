@@ -1,0 +1,1 @@
+OMP_NUM_THREADS=1 mpirun -np 8 abacus 2>&1 | tee abacus.log

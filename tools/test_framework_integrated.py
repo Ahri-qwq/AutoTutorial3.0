@@ -37,6 +37,9 @@ from test_plugins.dftu_plugin import DFTUPlugin
 from test_plugins.optic_plugin import OpticPlugin
 from test_plugins.solvation_plugin import SolvationPlugin
 from test_plugins.phonopy_plugin import PhonopyPlugin
+from test_plugins.sdft_plugin import SDFTPlugin
+from test_plugins.elf_plugin import ELFPlugin
+from test_plugins.tddft_plugin import TDDFTPlugin
 
 
 class FullTestExecutor:
@@ -69,6 +72,7 @@ class FullTestExecutor:
 
         # 初始化插件系统
         self.plugins: List[BaseTestPlugin] = [
+            SDFTPlugin(self.job_manager, self.pp_manager),   # 必须在 DOSPlugin 前注册
             RelaxPlugin(self.job_manager, self.pp_manager),
             ElasticPlugin(self.job_manager, self.pp_manager),
             BandPlugin(self.job_manager, self.pp_manager),
@@ -77,6 +81,8 @@ class FullTestExecutor:
             OpticPlugin(self.job_manager, self.pp_manager),
             SolvationPlugin(self.job_manager, self.pp_manager),
             PhonopyPlugin(self.job_manager, self.pp_manager),
+            ELFPlugin(self.job_manager, self.pp_manager),
+            TDDFTPlugin(self.job_manager, self.pp_manager),
         ]
 
         # 存储每个插件的测试信息和任务

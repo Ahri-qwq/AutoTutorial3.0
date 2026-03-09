@@ -1,0 +1,10 @@
+{
+  "job_name": "ELF-Fe-BCC",
+  "command": "export ABACUS_PP_PATH=./ && export ABACUS_ORB_PATH=./ && OMP_NUM_THREADS=1 mpirun -np 8 abacus",
+  "log_file": "OUT.autotest/running_scf.log",
+  "project_id": 205855,
+  "platform": "ali",
+  "job_type": "container",
+  "machine_type": "c16_m32_cpu",
+  "image_address": "registry.dp.tech/dptech/abacus:LTSv3.10.1"
+}

@@ -1,0 +1,966 @@
+                                                                                     
+                              ABACUS v3.10.1
+
+               Atomic-orbital Based Ab-initio Computation at UStc                    
+
+                     Website: http://abacus.ustc.edu.cn/                             
+               Documentation: https://abacus.deepmodeling.com/                       
+                  Repository: https://github.com/abacusmodeling/abacus-develop       
+                              https://github.com/deepmodeling/abacus-develop         
+                      Commit: f71921fe8 (Fri Nov 21 13:49:34 2025 +0800)
+
+    Start Time is Wed Mar  4 16:13:48 2026
+                                                                                     
+ ------------------------------------------------------------------------------------
+
+ READING GENERAL INFORMATION
+                           global_out_dir = OUT.ABACUS/
+                           global_in_card = INPUT
+                               pseudo_dir = ./
+                              orbital_dir = 
+                                    DRANK = 1
+                                    DSIZE = 8
+                                   DCOLOR = 1
+                                    GRANK = 1
+                                    GSIZE = 1
+
+
+
+
+ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ |                                                                    |
+ | Reading atom information in unitcell:                              |
+ | From the input file and the structure file we know the number of   |
+ | different elments in this unitcell, then we list the detail        |
+ | information for each element, especially the zeta and polar atomic |
+ | orbital number for each element. The total atom number is counted. |
+ | We calculate the nearest atom distance for each atom and show the  |
+ | Cartesian and Direct coordinates for each atom. We list the file   |
+ | address for atomic orbitals. The volume and the lattice vectors    |
+ | in real and reciprocal space is also shown.                        |
+ |                                                                    |
+ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+ READING UNITCELL INFORMATION
+                                    ntype = 1
+                  lattice constant (Bohr) = 1
+              lattice constant (Angstrom) = 0.529177
+
+ READING ATOM TYPE 1
+                               atom label = Al
+                      L=0, number of zeta = 1
+                      L=1, number of zeta = 1
+                      L=2, number of zeta = 1
+             number of atom for this type = 16
+
+                        TOTAL ATOM NUMBER = 16
+DIRECT COORDINATES
+    atom                   x                   y                   z     mag                  vx                  vy                  vz
+taud_Al1            0.0000000000        0.0000000000        0.0000000000  0.0000        0.0000000000        0.0000000000        0.0000000000
+taud_Al2            0.5000000000        0.0000000000        0.0000000000  0.0000        0.0000000000        0.0000000000        0.0000000000
+taud_Al3            0.0000000000        0.5000000000        0.0000000000  0.0000        0.0000000000        0.0000000000        0.0000000000
+taud_Al4            0.5000000000        0.5000000000        0.0000000000  0.0000        0.0000000000        0.0000000000        0.0000000000
+taud_Al5            0.2500000000        0.2500000000        0.0000000000  0.0000        0.0000000000        0.0000000000        0.0000000000
+taud_Al6            0.7500000000        0.2500000000        0.0000000000  0.0000        0.0000000000        0.0000000000        0.0000000000
+taud_Al7            0.2500000000        0.7500000000        0.0000000000  0.0000        0.0000000000        0.0000000000        0.0000000000
+taud_Al8            0.7500000000        0.7500000000        0.0000000000  0.0000        0.0000000000        0.0000000000        0.0000000000
+taud_Al9            0.2500000000        0.0000000000        0.5000000000  0.0000        0.0000000000        0.0000000000        0.0000000000
+taud_Al10           0.7500000000        0.0000000000        0.5000000000  0.0000        0.0000000000        0.0000000000        0.0000000000
+taud_Al11           0.2500000000        0.5000000000        0.5000000000  0.0000        0.0000000000        0.0000000000        0.0000000000
+taud_Al12           0.7500000000        0.5000000000        0.5000000000  0.0000        0.0000000000        0.0000000000        0.0000000000
+taud_Al13           0.0000000000        0.2500000000        0.5000000000  0.0000        0.0000000000        0.0000000000        0.0000000000
+taud_Al14           0.5000000000        0.2500000000        0.5000000000  0.0000        0.0000000000        0.0000000000        0.0000000000
+taud_Al15           0.0000000000        0.7500000000        0.5000000000  0.0000        0.0000000000        0.0000000000        0.0000000000
+taud_Al16           0.5000000000        0.7500000000        0.5000000000  0.0000        0.0000000000        0.0000000000        0.0000000000
+
+
+
+                          Volume (Bohr^3) = 1790.79
+                             Volume (A^3) = 265.367
+
+ Lattice vectors: (Cartesian coordinate: in unit of a_0)
+                +15.3                  +0                  +0
+                   +0               +15.3                  +0
+                   +0                  +0               +7.65
+ Reciprocal vectors: (Cartesian coordinate: in unit of 2 pi/a_0)
+           +0.0653595                  -0                  +0
+                   -0          +0.0653595                  -0
+                   +0                  -0           +0.130719
+ The esolver type has been set to : sdft_pw
+
+ RUNNING WITH DEVICE  : CPU / Intel(R) Xeon(R) Platinum
+
+
+
+
+ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ |                                                                    |
+ | Reading pseudopotentials files:                                    |
+ | The pseudopotential file is in UPF format. The 'NC' indicates that |
+ | the type of pseudopotential is 'norm conserving'. Functional of    |
+ | exchange and correlation is decided by 4 given parameters in UPF   |
+ | file.  We also read in the 'core correction' if there exists.      |
+ | Also we can read the valence electrons number and the maximal      |
+ | angular momentum used in this pseudopotential. We also read in the |
+ | trail wave function, trail atomic density and local-pseudopotential|
+ | on logrithmic grid. The non-local pseudopotential projector is also|
+ | read in if there is any.                                           |
+ |                                                                    |
+ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+                PAO radial cut off (Bohr) = 15
+
+ Read in pseudopotential file is Al_ONCV_PBE-1.0.upf
+                     pseudopotential type = NC
+          exchange-correlation functional = PBE
+                 nonlocal core correction = 0
+                        valence electrons = 11
+                                     lmax = 1
+                           number of zeta = 0
+                     number of projectors = 4
+                           L of projector = 0
+                           L of projector = 0
+                           L of projector = 1
+                           L of projector = 1
+     initial pseudo atomic orbital number = 0
+
+ SETUP THE ELECTRONS NUMBER
+            electron number of element Al = 11
+      total electron number of element Al = 176
+            AUTOSET number of electrons:  = 176
+                                   NLOCAL = 144
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ Warning: the number of valence electrons in pseudopotential > 3 for Al: [Ne] 3s2 3p1
+ Pseudopotentials with additional electrons can yield (more) accurate outcomes, but may be less efficient.
+ If you're confident that your chosen pseudopotential is appropriate, you can safely ignore this warning.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                  
+
+
+
+
+ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ |                                                                    |
+ | Setup plane waves of charge/potential:                             |
+ | Use the energy cutoff and the lattice vectors to generate the      |
+ | dimensions of FFT grid. The number of FFT grid on each processor   |
+ | is 'nrxx'. The number of plane wave basis in reciprocal space is   |
+ | different for charege/potential and wave functions. We also set    |
+ | the 'sticks' for the parallel of FFT. The number of plane waves    |
+ | is 'npw' in each processor.                                        |
+ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+
+ SETUP THE PLANE WAVE BASIS
+ energy cutoff for charge/potential (unit:Ry) = 200
+            fft grid for charge/potential = [ 72, 72, 36 ]
+                        fft grid division = [ 1, 1, 1 ]
+        big fft grid for charge/potential = [ 72, 72, 36 ]
+                                     nbxx = 25920
+                                     nrxx = 25920
+
+ SETUP PLANE WAVES FOR CHARGE/POTENTIAL
+                    number of plane waves = 85515
+                         number of sticks = 3721
+
+ PARALLEL PW FOR CHARGE/POTENTIAL
+     PROC   COLUMNS(POT)             PW
+        1            465          10689
+        2            465          10689
+        3            465          10689
+        4            465          10689
+        5            465          10689
+        6            465          10689
+        7            465          10691
+        8            466          10690
+ --------------- sum -------------------
+        8           3721          85515
+                            number of |g| = 809
+                                  max |g| = 5.06216
+                                  min |g| = 0.00854372
+ DONE : SETUP UNITCELL Time : 0.150145 (SEC)
+
+
+----------- Double Check Mixing Parameters Begin ------------
+mixing_type: broyden
+mixing_beta: 0.8
+mixing_gg0: 1
+mixing_gg0_min: 0.1
+mixing_ndim: 8
+----------- Double Check Mixing Parameters End ------------
+
+
+
+
+ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ |                                                                    |
+ | Setup K-points                                                     |
+ | We setup the k-points according to input parameters.               |
+ | The reduced k-points are set according to symmetry operations.     |
+ | We treat the spin as another set of k-points.                      |
+ |                                                                    |
+ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+
+ SETUP K-POINTS
+                                    nspin = 1
+                   Input type of k points = Monkhorst-Pack(Gamma)
+                                   nkstot = 1
+                               nkstot_ibz = 1
+K-POINTS REDUCTION ACCORDING TO SYMMETRY
+     IBZ    DIRECT_X    DIRECT_Y    DIRECT_Z  WEIGHT  ibz2bz
+       1  0.00000000  0.00000000  0.00000000  1.0000       0
+
+                               nkstot now = 1
+K-POINTS DIRECT COORDINATES
+ KPOINTS    DIRECT_X    DIRECT_Y    DIRECT_Z  WEIGHT
+       1  0.00000000  0.00000000  0.00000000  1.0000
+
+
+           k-point number in this process = 1
+       minimum distributed K point number = 1
+
+K-POINTS CARTESIAN COORDINATES
+ KPOINTS CARTESIAN_X CARTESIAN_Y CARTESIAN_Z  WEIGHT
+       1  0.00000000  0.00000000  0.00000000  2.0000
+
+
+K-POINTS DIRECT COORDINATES
+ KPOINTS    DIRECT_X    DIRECT_Y    DIRECT_Z  WEIGHT
+       1  0.00000000  0.00000000  0.00000000  2.0000
+
+ DONE : INIT K-POINTS Time : 0.181676 (SEC)
+
+
+
+
+
+ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ |                                                                    |
+ | Setup plane waves of wave functions:                               |
+ | Use the energy cutoff and the lattice vectors to generate the      |
+ | dimensions of FFT grid. The number of FFT grid on each processor   |
+ | is 'nrxx'. The number of plane wave basis in reciprocal space is   |
+ | different for charege/potential and wave functions. We also set    |
+ | the 'sticks' for the parallel of FFT. The number of plane wave of  |
+ | each k-point is 'npwk[ik]' in each processor                       |
+ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+
+ SETUP PLANE WAVES FOR WAVE FUNCTIONS
+     energy cutoff for wavefunc (unit:Ry) = 50
+              fft grid for wave functions = [ 72, 72, 36 ]
+                    number of plane waves = 10733
+                         number of sticks = 941
+
+ PARALLEL PW FOR WAVE FUNCTIONS
+     PROC   COLUMNS(POT)             PW
+        1            118           1342
+        2            118           1342
+        3            118           1342
+        4            118           1342
+        5            117           1341
+        6            117           1341
+        7            117           1341
+        8            118           1342
+ --------------- sum -------------------
+        8            941          10733
+ DONE : INIT PLANEWAVE Time : 0.183539 (SEC)
+
+ DONE : LOCAL POTENTIAL Time : 0.200123 (SEC)
+
+
+ SETUP NONLOCAL PSEUDOPOTENTIALS IN PLANE WAVE BASIS
+ Al non-local projectors:
+ projector 1 L=0
+ projector 2 L=0
+ projector 3 L=1
+ projector 4 L=1
+      TOTAL NUMBER OF NONLOCAL PROJECTORS = 128
+
+ Init Non-Local PseudoPotential table : 
+ Init Non-Local-Pseudopotential done.
+ DONE : NON-LOCAL POTENTIAL Time : 0.220349 (SEC)
+
+                                     npwx = 1342
+ DONE : INIT BASIS Time : 0.221542 (SEC)
+
+
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 0
+ -------------------------------------------
+                                 init_chg = atomic
+ DONE : INIT SCF Time : 0.283898 (SEC)
+
+
+ PW ALGORITHM --------------- ION=   1  ELEC=   1--------------------------------
+New Emax Ry49.8261 ; new Emin -7.04196 Ry
+Converge fermi energy = -17.0973 Ry in 23 steps.
+NeRelative Chebyshev Precision: 0.128635E-09
+TSRelative Chebyshev Precision: 1.42906E-09
+Renormalize rho from ne = 176 to targetne = 176
+
+ Density error is 387.680894433
+                          Error Threshold = 0.01
+----------------------------------------------------------
+     Energy           Rydberg                 eV          
+----------------------------------------------------------
+ E_KohnSham     -5677.0071617132     -77239.6449861072    
+ E_Harris       -6459.5970248304     -87887.3263215410    
+ E_Fermi        -17.0972843170       -232.6204870375      
+----------------------------------------------------------
+
+
+ PW ALGORITHM --------------- ION=   1  ELEC=   2--------------------------------
+New Emax Ry49.8260566824 ; new Emin -14.9765341059 Ry
+Converge fermi energy = -18.0316572189 Ry in 26 steps.
+NeRelative Chebyshev Precision: 69.4958832989E-09
+TSRelative Chebyshev Precision: 40.3273141257E-09
+Renormalize rho from ne = 175.999998982 to targetne = 176
+
+ Density error is 2.36266336417
+                          Error Threshold = 0
+----------------------------------------------------------
+     Energy           Rydberg                 eV          
+----------------------------------------------------------
+ E_KohnSham     -5722.8641361292     -77863.5611312049    
+ E_Harris       -5744.6930144615     -78160.5582574728    
+ E_Fermi        -18.0316572189       -245.3332825603      
+----------------------------------------------------------
+
+
+ PW ALGORITHM --------------- ION=   1  ELEC=   3--------------------------------
+Converge fermi energy = -18.1159818649 Ry in 26 steps.
+NeRelative Chebyshev Precision: 67.7221514119E-09
+TSRelative Chebyshev Precision: 40.9936144574E-09
+Renormalize rho from ne = 176.000000675 to targetne = 176
+
+ Density error is 0.0183700945193
+                          Error Threshold = 0
+----------------------------------------------------------
+     Energy           Rydberg                 eV          
+----------------------------------------------------------
+ E_KohnSham     -5723.1969974028     -77868.0899411696    
+ E_Harris       -5723.2688460992     -77869.0674928345    
+ E_Fermi        -18.1159818649       -246.4805782277      
+----------------------------------------------------------
+
+
+ PW ALGORITHM --------------- ION=   1  ELEC=   4--------------------------------
+Converge fermi energy = -18.1151254654 Ry in 26 steps.
+NeRelative Chebyshev Precision: 67.7416711297E-09
+TSRelative Chebyshev Precision: 40.9863704802E-09
+Renormalize rho from ne = 176.000000799 to targetne = 176
+
+ Density error is 0.000137941523531
+                          Error Threshold = 0
+----------------------------------------------------------
+     Energy           Rydberg                 eV          
+----------------------------------------------------------
+ E_KohnSham     -5723.2038362371     -77868.1829882839    
+ E_Harris       -5723.3334007113     -77869.9458033912    
+ E_Fermi        -18.1151254654       -246.4689263142      
+----------------------------------------------------------
+
+
+ PW ALGORITHM --------------- ION=   1  ELEC=   5--------------------------------
+Converge fermi energy = -18.1156641006 Ry in 26 steps.
+NeRelative Chebyshev Precision: 67.7302238973E-09
+TSRelative Chebyshev Precision: 40.9903194387E-09
+Renormalize rho from ne = 175.999998663 to targetne = 176
+
+ Density error is 7.75543072668e-07
+                          Error Threshold = 0
+----------------------------------------------------------
+     Energy           Rydberg                 eV          
+----------------------------------------------------------
+ E_KohnSham     -5723.2040413632     -77868.1857791670    
+ E_KS(sigma->0) -2887.0498517356     -39280.3283936597    
+ E_Harris       -5723.2111878845     -77868.2830125774    
+ E_band         1134.6441193034      15437.6252247176     
+ E_one_elec     1194.7556131481      16255.4840562977     
+ E_Hartree      73.4571458542        999.4357424336       
+ E_xc           -158.8086857475      -2160.7030180577     
+ E_Ewald        -1160.2997353628     -15786.6877888261    
+ E_entropy(-TS) -5672.3083792551     -77175.7147710145    
+ E_descf        0.0000000000         0.0000000000         
+ E_exx          0.0000000000         0.0000000000         
+ E_Fermi        -18.1156641006       -246.4762548228      
+----------------------------------------------------------
+
+
+ charge density convergence is achieved
+ final etot is -77868.185779 eV
+
+ STATE ENERGY(eV) AND OCCUPATIONS    NSPIN == 1
+ 1/1 kpoint (Cartesian) = 0.0000 0.0000 0.0000 (1342 pws)
+
+
+
+------------------------------------------------------------------------------------------
+ TOTAL-FORCE (eV/Angstrom)                                                                
+------------------------------------------------------------------------------------------
+                       Al1       -41.9263363775         4.4852605871        34.4973059141 
+                       Al2       -25.5816094919        36.0712841599        20.5237903609 
+                       Al3        54.1384450623       -69.8934621591         8.9630824837 
+                       Al4        24.2884387885        29.4392013985        65.8503367209 
+                       Al5        47.3861231373       -30.0580695999       -34.5146789120 
+                       Al6       -10.3557372990        12.4323742896        14.1765696828 
+                       Al7        46.0481785715        -8.9342056409       -30.6582613440 
+                       Al8        -9.8797945729        -6.2178197744       -46.1388428561 
+                       Al9        44.8815555764       -29.7612438182        23.3424627219 
+                      Al10        -4.7045953834         1.4678439387       -43.1401150619 
+                      Al11        -0.4394190157       -11.2146245704         8.1045480999 
+                      Al12       -31.9551813129        -2.6463617928        40.0949055089 
+                      Al13       -32.2770922363        39.0510956410       -15.6752575107 
+                      Al14        17.1285979557        12.0322140019        -6.0911035989 
+                      Al15       -30.0270260719        11.5748653322        35.7418332183 
+                      Al16       -46.7245473306        12.1716480067       -75.0765754280 
+------------------------------------------------------------------------------------------
+
+
+
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -5557.8393          -5723.2040          165.36477           1160400.0           
+ ------------------------------------------------------------------------------------------------
+
+
+
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 1
+ -------------------------------------------
+ NEW-OLD atomic charge density approx. for the potential !
+ DONE : INIT SCF Time : 3.84975 (SEC)
+
+
+ PW ALGORITHM --------------- ION=2     ELEC=1   --------------------------------
+Converge fermi energy = -18.0984 Ry in 24 steps.
+NeRelative Chebyshev Precision: 68.0924E-09
+TSRelative Chebyshev Precision: 40.8648E-09
+Renormalize rho from ne = 176.000 to targetne = 176.000
+
+ Density error is 5.81441595926
+                          Error Threshold = 0.0100000000000
+----------------------------------------------------------
+     Energy           Rydberg                 eV          
+----------------------------------------------------------
+ E_KohnSham     -5721.9317860630     -77850.8758577744    
+ E_Harris       -5731.3990971495     -77979.6852332888    
+ E_Fermi        -18.0983533859       -246.2407304662      
+----------------------------------------------------------
+
+
+ PW ALGORITHM --------------- ION=   2  ELEC=   2--------------------------------
+Converge fermi energy = -18.1135506630 Ry in 27 steps.
+NeRelative Chebyshev Precision: 67.7743456987E-09
+TSRelative Chebyshev Precision: 40.9777210483E-09
+Renormalize rho from ne = 175.999999926 to targetne = 176.000000000
+
+ Density error is 0.156571968113
+                          Error Threshold = 0.00000000000
+----------------------------------------------------------
+     Energy           Rydberg                 eV          
+----------------------------------------------------------
+ E_KohnSham     -5722.2397725306     -77855.0662286405    
+ E_Harris       -5722.4017658378     -77857.2702606561    
+ E_Fermi        -18.1135506630       -246.4475000284      
+----------------------------------------------------------
+
+
+ PW ALGORITHM --------------- ION=   2  ELEC=   3--------------------------------
+Converge fermi energy = -18.1138813019 Ry in 25 steps.
+NeRelative Chebyshev Precision: 67.7679525082E-09
+TSRelative Chebyshev Precision: 40.9799061203E-09
+Renormalize rho from ne = 175.999998541 to targetne = 176.000000000
+
+ Density error is 0.000418410598330
+                          Error Threshold = 0.00000000000
+----------------------------------------------------------
+     Energy           Rydberg                 eV          
+----------------------------------------------------------
+ E_KohnSham     -5722.2530575142     -77855.2469801150    
+ E_Harris       -5722.2533394995     -77855.2508167219    
+ E_Fermi        -18.1138813019       -246.4519986012      
+----------------------------------------------------------
+
+
+ PW ALGORITHM --------------- ION=   2  ELEC=   4--------------------------------
+Converge fermi energy = -18.1138736725 Ry in 25 steps.
+NeRelative Chebyshev Precision: 67.7681336829E-09
+TSRelative Chebyshev Precision: 40.9798321741E-09
+Renormalize rho from ne = 176.000000434 to targetne = 176.000000000
+
+ Density error is 1.13930207749e-05
+                          Error Threshold = 0.00000000000
+----------------------------------------------------------
+     Energy           Rydberg                 eV          
+----------------------------------------------------------
+ E_KohnSham     -5722.2531531192     -77855.2482808880    
+ E_Harris       -5722.2526140808     -77855.2409468944    
+ E_Fermi        -18.1138736725       -246.4518947980      
+----------------------------------------------------------
+
+
+ PW ALGORITHM --------------- ION=   2  ELEC=   5--------------------------------
+Converge fermi energy = -18.1138717651 Ry in 23 steps.
+NeRelative Chebyshev Precision: 67.7681763964E-09
+TSRelative Chebyshev Precision: 40.9798163950E-09
+Renormalize rho from ne = 176.000001248 to targetne = 176.000000000
+
+ Density error is 3.95292790546e-08
+                          Error Threshold = 0.00000000000
+----------------------------------------------------------
+     Energy           Rydberg                 eV          
+----------------------------------------------------------
+ E_KohnSham     -5722.2531666959     -77855.2484656074    
+ E_KS(sigma->0) -2886.0253087773     -39266.3887715805    
+ E_Harris       -5722.2534691950     -77855.2525813198    
+ E_band         1135.0464131237      15443.0987129448     
+ E_one_elec     1194.6228143922      16253.6772365301     
+ E_Hartree      73.7210396167        1003.0262012712      
+ E_xc           -158.7943320002      -2160.5077253070     
+ E_Ewald        -1159.3469728674     -15773.7247900477    
+ E_entropy(-TS) -5672.4557158371     -77177.7193880539    
+ E_descf        0.0000000000         0.0000000000         
+ E_exx          0.0000000000         0.0000000000         
+ E_Fermi        -18.1138717651       -246.4518688472      
+----------------------------------------------------------
+
+
+ charge density convergence is achieved
+ final etot is -77855.248466 eV
+
+ STATE ENERGY(eV) AND OCCUPATIONS    NSPIN == 1
+ 1/1 kpoint (Cartesian) = 0.0000 0.0000 0.0000 (1342 pws)
+
+
+
+------------------------------------------------------------------------------------------
+ TOTAL-FORCE (eV/Angstrom)                                                                
+------------------------------------------------------------------------------------------
+                       Al1       -37.3076276620        -7.0475616113        38.5931543434 
+                       Al2       -16.0878956617        34.2978851616        33.2133321001 
+                       Al3        44.0599537032       -68.7973849608        14.8084583095 
+                       Al4        23.2455016186        32.5805826438        77.6537554978 
+                       Al5        37.5352971171       -40.0167437247       -26.1558776231 
+                       Al6       -12.5319431920        47.5863254269        10.2907961556 
+                       Al7        35.8763328174        -7.8562034531       -25.1821936898 
+                       Al8        13.0582458947       -19.5446330653       -54.8185646391 
+                       Al9        42.1689178320       -24.1294025231        28.1728002818 
+                      Al10        -7.6473068040       -24.5958898810       -45.3286348393 
+                      Al11         1.6828954474       -12.6670886685         3.8644488531 
+                      Al12       -29.0583109690        -0.9202041085        40.4485991846 
+                      Al13       -25.8988454996        57.9588032584       -25.3851684011 
+                      Al14        12.1596375346         9.9950088395       -23.1027936860 
+                      Al15       -38.2288157949        12.1459644520        28.0362179911 
+                      Al16       -43.0260363820        11.0105422141       -75.1083298388 
+------------------------------------------------------------------------------------------
+
+
+
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -5557.7491          -5722.2532          164.50405           1154360.1           
+ ------------------------------------------------------------------------------------------------
+
+
+
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 2
+ -------------------------------------------
+ first order charge density extrapolation !
+ DONE : INIT SCF Time : 7.16641 (SEC)
+
+
+ PW ALGORITHM --------------- ION=3     ELEC=1   --------------------------------
+Converge fermi energy = -18.1341 Ry in 23 steps.
+NeRelative Chebyshev Precision: 67.3342E-09
+TSRelative Chebyshev Precision: 41.1281E-09
+Renormalize rho from ne = 176.000 to targetne = 176.000
+
+ Density error is 0.493948633241
+                          Error Threshold = 0.0100000000000
+----------------------------------------------------------
+     Energy           Rydberg                 eV          
+----------------------------------------------------------
+ E_KohnSham     -5720.8355110597     -77835.9602711545    
+ E_Harris       -5716.9331162867     -77782.8654663964    
+ E_Fermi        -18.1341342926       -246.7275546766      
+----------------------------------------------------------
+
+
+ PW ALGORITHM --------------- ION=   3  ELEC=   2--------------------------------
+Converge fermi energy = -18.1166247368 Ry in 27 steps.
+NeRelative Chebyshev Precision: 67.7096969138E-09
+TSRelative Chebyshev Precision: 41.0005909191E-09
+Renormalize rho from ne = 176.000000159 to targetne = 176.000000000
+
+ Density error is 0.0126242860342
+                          Error Threshold = 0.00000000000
+----------------------------------------------------------
+     Energy           Rydberg                 eV          
+----------------------------------------------------------
+ E_KohnSham     -5720.8821399444     -77836.5946896767    
+ E_Harris       -5720.8118142897     -77835.6378600575    
+ E_Fermi        -18.1166247368       -246.4893249480      
+----------------------------------------------------------
+
+
+ PW ALGORITHM --------------- ION=   3  ELEC=   3--------------------------------
+Converge fermi energy = -18.1160322189 Ry in 26 steps.
+NeRelative Chebyshev Precision: 67.7223673438E-09
+TSRelative Chebyshev Precision: 40.9961709498E-09
+Renormalize rho from ne = 175.999999651 to targetne = 176.000000000
+
+ Density error is 0.000252846108629
+                          Error Threshold = 0.00000000000
+----------------------------------------------------------
+     Energy           Rydberg                 eV          
+----------------------------------------------------------
+ E_KohnSham     -5720.8835788516     -77836.6142670142    
+ E_Harris       -5720.9053076801     -77836.9099028918    
+ E_Fermi        -18.1160322189       -246.4812633291      
+----------------------------------------------------------
+
+
+ PW ALGORITHM --------------- ION=   3  ELEC=   4--------------------------------
+Converge fermi energy = -18.1160829544 Ry in 26 steps.
+NeRelative Chebyshev Precision: 67.7212608275E-09
+TSRelative Chebyshev Precision: 40.9965504961E-09
+Renormalize rho from ne = 175.999999594 to targetne = 176.000000000
+
+ Density error is 1.49027942788e-06
+                          Error Threshold = 0.00000000000
+----------------------------------------------------------
+     Energy           Rydberg                 eV          
+----------------------------------------------------------
+ E_KohnSham     -5720.8835587304     -77836.6139932506    
+ E_Harris       -5720.8881715058     -77836.6767532808    
+ E_Fermi        -18.1160829544       -246.4819536206      
+----------------------------------------------------------
+
+
+ PW ALGORITHM --------------- ION=   3  ELEC=   5--------------------------------
+Converge fermi energy = -18.1161008835 Ry in 26 steps.
+NeRelative Chebyshev Precision: 67.7208765131E-09
+TSRelative Chebyshev Precision: 40.9966830747E-09
+Renormalize rho from ne = 175.999998369 to targetne = 176.000000000
+
+ Density error is 1.37296659532e-08
+                          Error Threshold = 0.00000000000
+----------------------------------------------------------
+     Energy           Rydberg                 eV          
+----------------------------------------------------------
+ E_KohnSham     -5720.8835350430     -77836.6136709678    
+ E_KS(sigma->0) -2885.0038918500     -39252.4916813358    
+ E_Harris       -5720.8834714586     -77836.6128058578    
+ E_band         1133.8716211325      15427.1148478994     
+ E_one_elec     1191.6040919218      16212.6054102516     
+ E_Hartree      74.6610968833        1015.8163365435      
+ E_xc           -158.8195463433      -2160.8507840435     
+ E_Ewald        -1156.5698911188     -15735.9406544554    
+ E_entropy(-TS) -5671.7592863860     -77168.2439792639    
+ E_descf        0.0000000000         0.0000000000         
+ E_exx          0.0000000000         0.0000000000         
+ E_Fermi        -18.1161008835       -246.4821975582      
+----------------------------------------------------------
+
+
+ charge density convergence is achieved
+ final etot is -77836.613671 eV
+
+ STATE ENERGY(eV) AND OCCUPATIONS    NSPIN == 1
+ 1/1 kpoint (Cartesian) = 0.0000 0.0000 0.0000 (1342 pws)
+
+
+
+------------------------------------------------------------------------------------------
+ TOTAL-FORCE (eV/Angstrom)                                                                
+------------------------------------------------------------------------------------------
+                       Al1       -22.4121832993       -20.3794192526        38.6839394051 
+                       Al2        -1.1065534190        31.8244208955        38.8183258553 
+                       Al3        34.0000668032       -67.3911671580        20.4177875745 
+                       Al4        21.9166304593        36.2024383803        88.3940291000 
+                       Al5        21.0709466468       -40.7195971285       -27.5555952786 
+                       Al6        -3.5038769163        75.0893759647         8.2982628924 
+                       Al7        24.9682399931         6.1459730563       -33.1724375545 
+                       Al8        25.7085017951       -36.2103720252       -47.1054282190 
+                       Al9        37.7306385944       -17.3873068355        29.3290035359 
+                      Al10       -13.3378539963       -47.9313836927       -40.1233555713 
+                      Al11         3.6677763885       -16.4839354178        -0.6508306188 
+                      Al12       -25.7768426404         3.7561256314        39.1276673548 
+                      Al13       -22.5590890720        68.7709343733       -19.4622143815 
+                      Al14         5.7401142462         7.0847014587       -37.5923154408 
+                      Al15       -47.4254493948         8.0155829613        16.0244027712 
+                      Al16       -38.6810661887         9.6136287888       -73.4312414247 
+------------------------------------------------------------------------------------------
+
+
+
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -5557.7278          -5720.8835          163.15573           1144898.7           
+ ------------------------------------------------------------------------------------------------
+
+
+
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 3
+ -------------------------------------------
+ second order charge density extrapolation !
+ alpha = 2.0064738
+ beta = -1.0067934
+ DONE : INIT SCF Time : 10.4589 (SEC)
+
+
+ PW ALGORITHM --------------- ION=4     ELEC=1   --------------------------------
+Converge fermi energy = -18.1241 Ry in 23 steps.
+NeRelative Chebyshev Precision: 67.5524E-09
+TSRelative Chebyshev Precision: 41.0523E-09
+Renormalize rho from ne = 176.000 to targetne = 176.000
+
+ Density error is 0.0934771508227
+                          Error Threshold = 0.0100000000000
+----------------------------------------------------------
+     Energy           Rydberg                 eV          
+----------------------------------------------------------
+ E_KohnSham     -5719.2565567847     -77814.4774961331    
+ E_Harris       -5718.7402706797     -77807.4530633066    
+ E_Fermi        -18.1240825653       -246.5907939106      
+----------------------------------------------------------
+
+
+ PW ALGORITHM --------------- ION=   4  ELEC=   2--------------------------------
+Converge fermi energy = -18.1226790428 Ry in 27 steps.
+NeRelative Chebyshev Precision: 67.5832078056E-09
+TSRelative Chebyshev Precision: 41.0419816002E-09
+Renormalize rho from ne = 175.999999966 to targetne = 176.000000000
+
+ Density error is 0.00344787999850
+                          Error Threshold = 0.00000000000
+----------------------------------------------------------
+     Energy           Rydberg                 eV          
+----------------------------------------------------------
+ E_KohnSham     -5719.2651971476     -77814.5950543012    
+ E_Harris       -5719.2734631634     -77814.7075192156    
+ E_Fermi        -18.1226790428       -246.5716980075      
+----------------------------------------------------------
+
+
+ PW ALGORITHM --------------- ION=   4  ELEC=   3--------------------------------
+Converge fermi energy = -18.1226453781 Ry in 26 steps.
+NeRelative Chebyshev Precision: 67.5840039169E-09
+TSRelative Chebyshev Precision: 41.0417433597E-09
+Renormalize rho from ne = 175.999998398 to targetne = 176.000000000
+
+ Density error is 1.37390816443e-05
+                          Error Threshold = 0.00000000000
+----------------------------------------------------------
+     Energy           Rydberg                 eV          
+----------------------------------------------------------
+ E_KohnSham     -5719.2649982342     -77814.5923479452    
+ E_Harris       -5719.2740945979     -77814.7161103222    
+ E_Fermi        -18.1226453781       -246.5712399757      
+----------------------------------------------------------
+
+
+ PW ALGORITHM --------------- ION=   4  ELEC=   4--------------------------------
+Converge fermi energy = -18.1226738930 Ry in 27 steps.
+NeRelative Chebyshev Precision: 67.5833953934E-09
+TSRelative Chebyshev Precision: 41.0419515361E-09
+Renormalize rho from ne = 175.999999897 to targetne = 176.000000000
+
+ Density error is 2.20773819339e-07
+                          Error Threshold = 0.00000000000
+----------------------------------------------------------
+     Energy           Rydberg                 eV          
+----------------------------------------------------------
+ E_KohnSham     -5719.2649929569     -77814.5922761444    
+ E_KS(sigma->0) -2884.0601089915     -39239.6508567851    
+ E_Harris       -5719.2657892212     -77814.6031098750    
+ E_band         1131.2624252702      15391.6149169737     
+ E_one_elec     1185.8674114247      16134.5538678864     
+ E_Hartree      76.2739902804        1037.7608770096      
+ E_xc           -158.8947544949      -2161.8740434418     
+ E_Ewald        -1152.1018722362     -15675.1501388801    
+ E_entropy(-TS) -5670.4097679309     -77149.8828387185    
+ E_descf        0.0000000000         0.0000000000         
+ E_exx          0.0000000000         0.0000000000         
+ E_Fermi        -18.1226738930       -246.5716279403      
+----------------------------------------------------------
+
+
+ charge density convergence is achieved
+ final etot is -77814.592276 eV
+
+ STATE ENERGY(eV) AND OCCUPATIONS    NSPIN == 1
+ 1/1 kpoint (Cartesian) = 0.0000 0.0000 0.0000 (1342 pws)
+
+
+
+------------------------------------------------------------------------------------------
+ TOTAL-FORCE (eV/Angstrom)                                                                
+------------------------------------------------------------------------------------------
+                       Al1        -4.1625759236       -34.1169603974        37.7011813523 
+                       Al2        15.6901334729        29.7577872046        37.2525951281 
+                       Al3        24.8705200258       -65.1233255365        24.4092472388 
+                       Al4        21.3808696309        40.4795974123        96.5576728991 
+                       Al5         2.9443263509       -36.3821401738       -36.6953868650 
+                       Al6        10.7393102825        81.7457884293        11.3368880270 
+                       Al7        22.8086310254         3.0773559986       -25.6083556130 
+                       Al8        21.7292780018       -46.8395367008       -31.8898105865 
+                       Al9        32.0898127710        -8.7024437251        23.9831119102 
+                      Al10       -20.6101694600       -57.6459653693       -26.1675138339 
+                      Al11         6.2941401783       -22.0487145795        -6.7901271356 
+                      Al12       -21.4187214116        11.1468398474        35.3013975057 
+                      Al13       -18.5041543022        86.0239835175       -22.5678175818 
+                      Al14         0.1761224775         4.5943281975       -50.9123895731 
+                      Al15       -62.2152019886         5.7318016765         7.2779868150 
+                      Al16       -31.8123211311         8.3016041988       -73.1886796874 
+------------------------------------------------------------------------------------------
+
+
+
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -5557.7801          -5719.2650          161.48492           1133174.3           
+ ------------------------------------------------------------------------------------------------
+
+
+
+
+ --------------------------------------------
+ !FINAL_ETOT_IS -77814.59227614438 eV
+ --------------------------------------------
+
+
+TIME STATISTICS
+-----------------------------------------------------------------------------
+    CLASS_NAME                NAME             TIME/s  CALLS   AVG/s  PER/%  
+-----------------------------------------------------------------------------
+                   total                       13.19  21       0.63   100.00 
+ Driver            reading                     0.07   1        0.07   0.56   
+ Input_Conv        Convert                     0.00   1        0.00   0.00   
+ Driver            driver_line                 13.12  1        13.12  99.44  
+ UnitCell          check_tau                   0.00   1        0.00   0.00   
+ PW_Basis_Sup      setuptransform              0.00   1        0.00   0.02   
+ PW_Basis_Sup      distributeg                 0.00   1        0.00   0.01   
+ mymath            heapsort                    0.00   3        0.00   0.01   
+ Charge_Mixing     init_mixing                 0.00   5        0.00   0.01   
+ PW_Basis_K        setuptransform              0.00   1        0.00   0.01   
+ PW_Basis_K        distributeg                 0.00   1        0.00   0.01   
+ PW_Basis          setup_struc_factor          0.03   4        0.01   0.21   
+ ppcell_vl         init_vloc                   0.01   1        0.01   0.07   
+ ppcell_vnl        init                        0.00   1        0.00   0.02   
+ ppcell_vnl        init_vnl                    0.02   1        0.02   0.14   
+ PSIInit           prepare_init                0.00   1        0.00   0.00   
+ Run_MD            md_line                     12.92  1        12.92  97.96  
+ Nose_Hoover       setup                       3.53   1        3.53   26.77  
+ MD_func           force_virial                12.87  4        3.22   97.55  
+ ESolver_SDFT_PW   runner                      12.70  4        3.18   96.27  
+ ESolver_SDFT_PW   before_scf                  0.15   4        0.04   1.11   
+ ESolver_KS_PW     before_scf                  0.15   4        0.04   1.11   
+ H_Ewald_pw        compute_ewald               0.00   4        0.00   0.01   
+ Charge            set_rho_core                0.00   4        0.00   0.00   
+ Charge            atomic_rho                  0.10   8        0.01   0.78   
+ PW_Basis_Sup      recip2real                  0.09   146      0.00   0.67   
+ PW_Basis_Sup      gathers_scatterp            0.04   146      0.00   0.29   
+ Potential         init_pot                    0.06   4        0.02   0.48   
+ Potential         update_from_charge          0.34   23       0.01   2.61   
+ Potential         cal_fixed_v                 0.00   8        0.00   0.03   
+ PotLocal          cal_fixed_v                 0.00   8        0.00   0.03   
+ Potential         cal_v_eff                   0.34   23       0.01   2.57   
+ H_Hartree_pw      v_hartree                   0.03   23       0.00   0.20   
+ PW_Basis_Sup      real2recip                  0.08   188      0.00   0.59   
+ PW_Basis_Sup      gatherp_scatters            0.03   188      0.00   0.21   
+ PotXC             cal_v_eff                   0.31   23       0.01   2.35   
+ XC_Functional     v_xc                        0.31   23       0.01   2.35   
+ Potential         interpolate_vrs             0.00   23       0.00   0.01   
+ ESolver_SDFT_PW   hamilt2density              11.42  19       0.60   86.59  
+ HSolverPW_SDFT    solve                       11.42  19       0.60   86.57  
+ HSolverPW_SDFT    solve_KS                    0.05   19       0.00   0.40   
+ Nonlocal          getvnl                      0.05   19       0.00   0.40   
+ pp_cell_vnl       getvnl                      0.05   19       0.00   0.40   
+ Structure_Factor  get_sk                      0.02   23       0.00   0.17   
+ Stochastic_Iter   orthog                      0.00   19       0.00   0.00   
+ Stochastic_Iter   checkemm                    3.21   14       0.23   24.32  
+ HamiltSdftPW      hPsi_norm                   10.14  551      0.02   76.88  
+ HamiltSdftPW      hPsi                        10.56  570      0.02   80.03  
+ Operator          EkineticPW                  0.10   570      0.00   0.73   
+ Operator          VeffPW                      8.79   570      0.02   66.59  
+ PW_Basis_K        recip2real                  4.37   25726    0.00   33.12  
+ PW_Basis_K        gathers_scatterp            1.54   25726    0.00   11.70  
+ PW_Basis_K        real2recip                  3.91   24510    0.00   29.63  
+ PW_Basis_K        gatherp_scatters            1.27   24510    0.00   9.60   
+ Operator          NonlocalPW                  1.67   570      0.00   12.69  
+ Nonlocal          add_nonlocal_pp             0.82   570      0.00   6.25   
+ Stochastic_Iter   calPn                       10.28  19       0.54   77.90  
+ Stochastic_Iter   itermu                      0.06   19       0.00   0.42   
+ Stochastic_Iter   calne                       0.05   656      0.00   0.41   
+ Stochastic_Iter   calHsqrtchi                 0.08   19       0.00   0.58   
+ Stochastic_Iter   sum_stoeband                0.53   19       0.03   4.05   
+ Stochastic_Iter   cal_storho                  0.26   19       0.01   1.99   
+ Charge_Mixing     get_drho                    0.02   19       0.00   0.13   
+ Charge_Mixing     inner_product_recip_rho     0.00   19       0.00   0.01   
+ Charge            mix_rho                     0.05   15       0.00   0.39   
+ Charge            Broyden_mixing              0.04   15       0.00   0.30   
+ Charge_Mixing     inner_product_recip_hartree 0.00   42       0.00   0.02   
+ ModuleIO          write_rhog                  0.72   4        0.18   5.48   
+ ESolver_SDFT_PW   after_scf                   0.05   4        0.01   0.36   
+ ESolver_KS_PW     after_scf                   0.05   4        0.01   0.36   
+ Sto_Forces        cal_force                   0.17   4        0.04   1.28   
+ Forces            cal_force_loc               0.03   4        0.01   0.20   
+ Forces            cal_force_ew                0.03   4        0.01   0.20   
+ Sto_Forces        cal_force_nl                0.05   4        0.01   0.38   
+ FS_Nonlocal_tools cal_becp                    6.09   2        3.05   46.19  
+ Forces            cal_force_cc                0.00   4        0.00   0.00   
+ Forces            cal_force_scc               0.06   4        0.02   0.48   
+ Nose_Hoover       first_half                  0.00   3        0.00   0.01   
+ Charge_Extra      extrapolate_charge          0.06   3        0.02   0.47   
+ Nose_Hoover       second_half                 0.00   3        0.00   0.00   
+ ModuleIO          write_istate_info           0.01   1        0.01   0.10   
+-----------------------------------------------------------------------------
+
+
+ NAME-------------------------|MEMORY(MB)--------
+total                         72.52          
+VNL::vkb                      20.96          
+SDFT::chi0_cpu                10.48          
+SDFT::shchi                   10.48          
+Veff<PW>::porter              2.848          
+Veff<PW>::porter1             2.848          
+Meta<PW>::porter              2.848          
+ElecSPW::wfcr                 2.848          
+ElecSPW::wfcr_a               2.848          
+Chg::rho                      1.424          
+Chg::rho_save                 1.424          
+Chg::rho_core                 1.424          
+Pot::veff_fix                 1.424          
+Pot::veff                     1.424          
+Pot::veff_smooth              1.424          
+SF::strucFac                  1.305          
+Nonlocal<PW>::becp            1.000          
+Nonlocal<PW>::ps              1.000          
+ -------------   < 1.0 MB has been ignored ----------------
+ ----------------------------------------------------------
+
+ Start  Time  : Wed Mar  4 16:13:48 2026
+ Finish Time  : Wed Mar  4 16:14:00 2026
+ Total  Time  : 0 h 0 mins 12 secs 

@@ -1,0 +1,20 @@
+{
+  "H2O_PW": {
+    "job_id": "22216368",
+    "status": "submitted",
+    "directory": "H2O_PW",
+    "depends_on": null
+  },
+  "H2O_LCAO": {
+    "job_id": "22216369",
+    "status": "submitted",
+    "directory": "H2O_LCAO",
+    "depends_on": null
+  },
+  "Fe_BCC": {
+    "job_id": "22216370",
+    "status": "submitted",
+    "directory": "Fe_BCC",
+    "depends_on": null
+  }
+}

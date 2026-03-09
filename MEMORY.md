@@ -17,6 +17,8 @@
   - `optic_plugin.py` — 光学性质插件（2026-03-02 新增，SiO₂）
   - `solvation_plugin.py` — 隐式溶剂插件（2026-03-02 新增，H₂@水溶液）
   - `phonopy_plugin.py` — Phonopy声子谱插件（2026-03-03 新增，FCC Al SCF+力）
+  - `sdft_plugin.py` — SDFT/MDFT 插件（2026-03-04 新增，Si SCF+Al MD+Si DOS）
+  - `elf_plugin.py` — ELF 电子局域函数插件（2026-03-09 新增，H₂O PW/LCAO + Fe BCC）
   - `PLUGIN_REGISTRY.md` — 插件注册表（新增插件时必须更新）
 - `tools/orbital_validator.py` — 验证并修复轨道文件名 + nbands auto
 - `tools/fix_stru.py` — 修复 STRU 文件格式
@@ -41,6 +43,8 @@
 | OpticPlugin | optic | `out_mat_hs2` + `OPTICAL_CONDUCTIVITY` |
 | SolvationPlugin | solvation | `imp_sol = 1`、`隐式溶剂` |
 | PhonopyPlugin | phonopy | `phonopy`、`声子谱`、`FORCE_SETS`、`有限位移方法` |
+| SDFTPlugin | sdft | `esolver_type = sdft`（INPUT代码块中，优先于 DOSPlugin）|
+| ELFPlugin | elf | `out_elf 1`、`ELF.cube`、`电子局域函数`（多案例单插件，案例存入 expected_results['cases']）|
 
 ## DFT+U NiO 案例关键参数（已验证通过）
 
@@ -70,3 +74,4 @@
 - testCLAUDE.md 中的框架测试命令：`python tools/test_framework_integrated.py "<path>" --test-dir "<dir>" --phase prepare`（注意是位置参数，不是 `--tutorial`）
 - 新增插件后：更新 `test_framework_integrated.py`、`PLUGIN_REGISTRY.md`、testCLAUDE.md 附录D 三处
 - **工作目录命名**：Step 0 必须用完整格式 `_workspace/YYYYMMDD_HHMMSS_主题/`，**不能只写日期**（历史错误案例：20260302_隐式溶剂模型、20260302_光学性质计算）
+- **时间戳必须从 Bash 获取**：系统上下文只提供日期，不提供时间。Step 0 创建目录前必须执行 `date +"%Y%m%d_%H%M%S"` 获取真实时间戳，**严禁编造时间**（历史错误案例：20260304_**100000**_ABACUS+ShengBTE、20260304_**100000**_ABACUS+SDFT，均因未执行 date 命令导致时间伪造）

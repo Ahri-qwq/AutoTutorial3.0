@@ -1,0 +1,9 @@
+{
+  "Al_FCC-scf": {
+    "job_id": "22190040",
+    "job_group_id": "15962899",
+    "status": "waiting",
+    "directory": "Al_FCC_scf",
+    "depends_on": null
+  }
+}

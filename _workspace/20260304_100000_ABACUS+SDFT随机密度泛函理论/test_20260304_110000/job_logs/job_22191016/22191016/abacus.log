@@ -1,0 +1,199 @@
+Info: Local MPI proc number: 8,OpenMP thread number: 1,Total thread number: 8,Local thread limit: 16
+                                                                                     
+                              ABACUS v3.10.1
+
+               Atomic-orbital Based Ab-initio Computation at UStc                    
+
+                     Website: http://abacus.ustc.edu.cn/                             
+               Documentation: https://abacus.deepmodeling.com/                       
+                  Repository: https://github.com/abacusmodeling/abacus-develop       
+                              https://github.com/deepmodeling/abacus-develop         
+                      Commit: f71921fe8 (Fri Nov 21 13:49:34 2025 +0800)
+
+ Wed Mar  4 16:13:48 2026
+ MAKE THE DIR         : OUT.ABACUS/
+ MAKE THE STRU DIR    : OUT.ABACUS/STRU/
+ RUNNING WITH DEVICE  : CPU / Intel(R) Xeon(R) Platinum
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ Warning: the number of valence electrons in pseudopotential > 3 for Al: [Ne] 3s2 3p1
+ Pseudopotentials with additional electrons can yield (more) accurate outcomes, but may be less efficient.
+ If you're confident that your chosen pseudopotential is appropriate, you can safely ignore this warning.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ UNIFORM GRID DIM        : 72 * 72 * 36
+ UNIFORM GRID DIM(BIG)   : 72 * 72 * 36
+ DONE(0.150155   SEC) : SETUP UNITCELL
+ DONE(0.181687   SEC) : INIT K-POINTS
+ ---------------------------------------------------------
+ Molecular Dynamics simulations
+ ---------------------------------------------------------
+ ENSEMBLE                 : NVT    mode: nhc
+ Time interval(fs)        : 0.2
+ ---------------------------------------------------------
+ SPIN    KPOINTS         PROCESSORS  THREADS     
+ 1       1               8           8           
+ ---------------------------------------------------------
+ Use plane wave basis
+ ---------------------------------------------------------
+ ELEMENT NATOM       XC          
+ Al      16          
+ ---------------------------------------------------------
+ Initial plane wave basis and FFT box
+ ---------------------------------------------------------
+ DONE(0.183549   SEC) : INIT PLANEWAVE
+ DONE(0.20014    SEC) : LOCAL POTENTIAL
+ DONE(0.220363   SEC) : NON-LOCAL POTENTIAL
+ MEMORY FOR PSI (MB)  : 0
+ DONE(0.221555   SEC) : INIT BASIS
+ ----------------------------------- INIT VEL ---------------------------------------
+ RANDOM VEL ACCORDING TO INITIAL TEMPERATURE: 1.1604e+06 K
+ ------------------------------------- DONE -----------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 0
+ -------------------------------------------
+ START CHARGE      : atomic
+ DONE(0.283936   SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ CG1     -7.72396450e+04   0.00000000e+00   3.8768e+02   0.67
+ CG2     -7.78635611e+04  -6.23916145e+02   2.3627e+00   0.69
+ CG3     -7.78680899e+04  -4.52880996e+00   1.8370e-02   0.62
+ CG4     -7.78681830e+04  -9.30471143e-02   1.3794e-04   0.62
+ CG5     -7.78681858e+04  -2.79088312e-03   7.7554e-07   0.62
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -5557.84            -5723.2             165.365             1.1604e+06          
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 1
+ -------------------------------------------
+ DONE(3.8498     SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ CG1     -7.78508759e+04   0.00000000e+00   5.8144e+00   0.63
+ CG2     -7.78550662e+04  -4.19037087e+00   1.5657e-01   0.61
+ CG3     -7.78552470e+04  -1.80751475e-01   4.1841e-04   0.61
+ CG4     -7.78552483e+04  -1.30077297e-03   1.1393e-05   0.60
+ CG5     -7.78552485e+04  -1.84719471e-04   3.9529e-08   0.61
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -5557.75            -5722.25            164.504             1.15436e+06         
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 2
+ -------------------------------------------
+ DONE(7.16647    SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ CG1     -7.78359603e+04   0.00000000e+00   4.9395e-01   0.62
+ CG2     -7.78365947e+04  -6.34418522e-01   1.2624e-02   0.61
+ CG3     -7.78366143e+04  -1.95773375e-02   2.5285e-04   0.61
+ CG4     -7.78366140e+04   2.73763610e-04   1.4903e-06   0.61
+ CG5     -7.78366137e+04   3.22282797e-04   1.3730e-08   0.59
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -5557.73            -5720.88            163.156             1.1449e+06          
+ ------------------------------------------------------------------------------------------------
+ -------------------------------------------
+ STEP OF MOLECULAR DYNAMICS : 3
+ -------------------------------------------
+ DONE(10.459     SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ CG1     -7.78144775e+04   0.00000000e+00   9.3477e-02   0.63
+ CG2     -7.78145951e+04  -1.17558168e-01   3.4479e-03   0.61
+ CG3     -7.78145923e+04   2.70635599e-03   1.3739e-05   0.61
+ CG4     -7.78145923e+04   7.18008215e-05   2.2077e-07   0.60
+ ------------------------------------------------------------------------------------------------
+ Energy (Ry)         Potential (Ry)      Kinetic (Ry)        Temperature (K)     
+ -5557.78            -5719.26            161.485             1.13317e+06         
+ ------------------------------------------------------------------------------------------------
+TIME STATISTICS
+-----------------------------------------------------------------------------
+    CLASS_NAME                NAME             TIME/s  CALLS   AVG/s  PER/%  
+-----------------------------------------------------------------------------
+                   total                       13.19  21       0.63   100.00 
+ Driver            reading                     0.07   1        0.07   0.56   
+ Input_Conv        Convert                     0.00   1        0.00   0.00   
+ Driver            driver_line                 13.12  1        13.12  99.44  
+ UnitCell          check_tau                   0.00   1        0.00   0.00   
+ PW_Basis_Sup      setuptransform              0.00   1        0.00   0.02   
+ PW_Basis_Sup      distributeg                 0.00   1        0.00   0.01   
+ mymath            heapsort                    0.00   3        0.00   0.01   
+ Charge_Mixing     init_mixing                 0.00   5        0.00   0.01   
+ PW_Basis_K        setuptransform              0.00   1        0.00   0.01   
+ PW_Basis_K        distributeg                 0.00   1        0.00   0.01   
+ PW_Basis          setup_struc_factor          0.03   4        0.01   0.21   
+ ppcell_vl         init_vloc                   0.01   1        0.01   0.07   
+ ppcell_vnl        init                        0.00   1        0.00   0.02   
+ ppcell_vnl        init_vnl                    0.02   1        0.02   0.14   
+ PSIInit           prepare_init                0.00   1        0.00   0.00   
+ Run_MD            md_line                     12.92  1        12.92  97.96  
+ Nose_Hoover       setup                       3.53   1        3.53   26.77  
+ MD_func           force_virial                12.87  4        3.22   97.55  
+ ESolver_SDFT_PW   runner                      12.70  4        3.18   96.27  
+ ESolver_SDFT_PW   before_scf                  0.15   4        0.04   1.11   
+ ESolver_KS_PW     before_scf                  0.15   4        0.04   1.11   
+ H_Ewald_pw        compute_ewald               0.00   4        0.00   0.01   
+ Charge            set_rho_core                0.00   4        0.00   0.00   
+ Charge            atomic_rho                  0.10   8        0.01   0.78   
+ PW_Basis_Sup      recip2real                  0.09   146      0.00   0.67   
+ PW_Basis_Sup      gathers_scatterp            0.04   146      0.00   0.29   
+ Potential         init_pot                    0.06   4        0.02   0.48   
+ Potential         update_from_charge          0.34   23       0.01   2.61   
+ Potential         cal_fixed_v                 0.00   8        0.00   0.03   
+ PotLocal          cal_fixed_v                 0.00   8        0.00   0.03   
+ Potential         cal_v_eff                   0.34   23       0.01   2.57   
+ H_Hartree_pw      v_hartree                   0.03   23       0.00   0.20   
+ PW_Basis_Sup      real2recip                  0.08   188      0.00   0.59   
+ PW_Basis_Sup      gatherp_scatters            0.03   188      0.00   0.21   
+ PotXC             cal_v_eff                   0.31   23       0.01   2.35   
+ XC_Functional     v_xc                        0.31   23       0.01   2.35   
+ Potential         interpolate_vrs             0.00   23       0.00   0.01   
+ ESolver_SDFT_PW   hamilt2density              11.42  19       0.60   86.59  
+ HSolverPW_SDFT    solve                       11.42  19       0.60   86.57  
+ HSolverPW_SDFT    solve_KS                    0.05   19       0.00   0.40   
+ Nonlocal          getvnl                      0.05   19       0.00   0.40   
+ pp_cell_vnl       getvnl                      0.05   19       0.00   0.40   
+ Structure_Factor  get_sk                      0.02   23       0.00   0.17   
+ Stochastic_Iter   orthog                      0.00   19       0.00   0.00   
+ Stochastic_Iter   checkemm                    3.21   14       0.23   24.32  
+ HamiltSdftPW      hPsi_norm                   10.14  551      0.02   76.88  
+ HamiltSdftPW      hPsi                        10.56  570      0.02   80.03  
+ Operator          EkineticPW                  0.10   570      0.00   0.73   
+ Operator          VeffPW                      8.79   570      0.02   66.59  
+ PW_Basis_K        recip2real                  4.37   25726    0.00   33.12  
+ PW_Basis_K        gathers_scatterp            1.54   25726    0.00   11.70  
+ PW_Basis_K        real2recip                  3.91   24510    0.00   29.63  
+ PW_Basis_K        gatherp_scatters            1.27   24510    0.00   9.60   
+ Operator          NonlocalPW                  1.67   570      0.00   12.69  
+ Nonlocal          add_nonlocal_pp             0.82   570      0.00   6.25   
+ Stochastic_Iter   calPn                       10.28  19       0.54   77.90  
+ Stochastic_Iter   itermu                      0.06   19       0.00   0.42   
+ Stochastic_Iter   calne                       0.05   656      0.00   0.41   
+ Stochastic_Iter   calHsqrtchi                 0.08   19       0.00   0.58   
+ Stochastic_Iter   sum_stoeband                0.53   19       0.03   4.05   
+ Stochastic_Iter   cal_storho                  0.26   19       0.01   1.99   
+ Charge_Mixing     get_drho                    0.02   19       0.00   0.13   
+ Charge_Mixing     inner_product_recip_rho     0.00   19       0.00   0.01   
+ Charge            mix_rho                     0.05   15       0.00   0.39   
+ Charge            Broyden_mixing              0.04   15       0.00   0.30   
+ Charge_Mixing     inner_product_recip_hartree 0.00   42       0.00   0.02   
+ ModuleIO          write_rhog                  0.72   4        0.18   5.48   
+ ESolver_SDFT_PW   after_scf                   0.05   4        0.01   0.36   
+ ESolver_KS_PW     after_scf                   0.05   4        0.01   0.36   
+ Sto_Forces        cal_force                   0.17   4        0.04   1.28   
+ Forces            cal_force_loc               0.03   4        0.01   0.20   
+ Forces            cal_force_ew                0.03   4        0.01   0.20   
+ Sto_Forces        cal_force_nl                0.05   4        0.01   0.38   
+ FS_Nonlocal_tools cal_becp                    6.09   2        3.05   46.19  
+ Forces            cal_force_cc                0.00   4        0.00   0.00   
+ Forces            cal_force_scc               0.06   4        0.02   0.48   
+ Nose_Hoover       first_half                  0.00   3        0.00   0.01   
+ Charge_Extra      extrapolate_charge          0.06   3        0.02   0.47   
+ Nose_Hoover       second_half                 0.00   3        0.00   0.00   
+ ModuleIO          write_istate_info           0.01   1        0.01   0.10   
+-----------------------------------------------------------------------------
+
+
+ START  Time  : Wed Mar  4 16:13:48 2026
+ FINISH Time  : Wed Mar  4 16:14:00 2026
+ TOTAL  Time  : 12
+ SEE INFORMATION IN : OUT.ABACUS/

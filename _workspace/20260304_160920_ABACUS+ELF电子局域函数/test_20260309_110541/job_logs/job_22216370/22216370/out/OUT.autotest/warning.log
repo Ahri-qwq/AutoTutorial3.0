@@ -1,0 +1,25 @@
+ AUTO_SET NBANDS to 29
+                            startmag_type = 1
+                       charge from rho_at = 15.955
+                         charge should be = 16
+
+ SETUP ATOMIC RHO FOR SPIN 1
+                 Electron number from rho = 18.3
+
+ SETUP ATOMIC RHO FOR SPIN 2
+                 Electron number from rho = 13.7
+           total electron number from rho = 32
+                                should be = 32
+                 charge before normalized = 32.0000000000001
+                  charge after normalized = 32
+                            startmag_type = 1
+                       charge from rho_at = 15.9549914976658
+                         charge should be = 16
+
+ SETUP ATOMIC RHO FOR SPIN 1
+                 Electron number from rho = 18.3
+
+ SETUP ATOMIC RHO FOR SPIN 2
+                 Electron number from rho = 13.7
+           total electron number from rho = 32
+                                should be = 32

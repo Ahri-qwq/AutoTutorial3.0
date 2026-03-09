@@ -1,0 +1,27 @@
+ AUTO_SET NBANDS to 14
+                            startmag_type = 2
+                       charge from rho_at = 0.997867
+                         charge should be = 1
+                            startmag_type = 2
+                       charge from rho_at = 5.99905
+                         charge should be = 6
+ Warning: negative or imaginary starting charge :  neg = -0.000197619 ima = 3.87824e-14 SPIN = 0
+
+ SETUP ATOMIC RHO FOR SPIN 1
+                 Electron number from rho = 8
+           total electron number from rho = 8
+                                should be = 8
+                 charge before normalized = 8
+                  charge after normalized = 8
+                            startmag_type = 2
+                       charge from rho_at = 0.997866823270309
+                         charge should be = 1
+                            startmag_type = 2
+                       charge from rho_at = 5.99904704283839
+                         charge should be = 6
+ Warning: negative or imaginary starting charge :  neg = -0.000197618791498864 ima = 3.87824431508636e-14 SPIN = 0
+
+ SETUP ATOMIC RHO FOR SPIN 1
+                 Electron number from rho = 8.00000000000019
+           total electron number from rho = 8.00000000000019
+                                should be = 8

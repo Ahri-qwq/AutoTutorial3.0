@@ -1,0 +1,12 @@
+{
+  "tutorial_path": "C:\\MyCode\\AutoTutorial3.0\\_workspace\\20260309_110454_ABACUS\u6df7\u5408\u89c4\u8303RTTDDFT\\07_Final_Tutorial_\u6df7\u5408\u89c4\u8303RTTDDFT.md",
+  "plugin_states": {
+    "tddft": {
+      "job_ids": [
+        "22216470"
+      ],
+      "case_name": "tddft_si_hybrid"
+    }
+  },
+  "start_time": "2026-03-09T12:08:45.530686"
+}

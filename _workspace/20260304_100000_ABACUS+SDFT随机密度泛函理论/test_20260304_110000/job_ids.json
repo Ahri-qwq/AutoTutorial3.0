@@ -1,0 +1,5 @@
+{
+  "sdft_si2_scf":  {"job_id": "22190998", "status": "waiting", "directory": "sdft_si2_scf",  "depends_on": null},
+  "sdft_al_md":    {"job_id": "22191016", "status": "waiting", "directory": "sdft_al_md",    "depends_on": null},
+  "sdft_si_sdos":  {"job_id": "22191018", "status": "waiting", "directory": "sdft_si_sdos",  "depends_on": null}
+}

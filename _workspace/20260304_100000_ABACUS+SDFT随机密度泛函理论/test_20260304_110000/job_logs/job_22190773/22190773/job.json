@@ -1,0 +1,10 @@
+{
+  "job_name": "sdft-si-sdos",
+  "command": "OMP_NUM_THREADS=1 mpirun -np 8 abacus 2>&1 | tee abacus.log",
+  "log_file": "OUT.autotest/running_scf.log",
+  "project_id": 205855,
+  "platform": "ali",
+  "job_type": "container",
+  "machine_type": "c16_m32_cpu",
+  "image_address": "registry.dp.tech/dptech/abacus:LTSv3.10.1"
+}

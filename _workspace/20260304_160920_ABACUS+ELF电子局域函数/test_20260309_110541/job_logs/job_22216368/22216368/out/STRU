@@ -1,0 +1,25 @@
+ATOMIC_SPECIES
+H   1.008    H_ONCV_PBE-1.0.upf
+O  15.999    O_ONCV_PBE-1.0.upf
+
+LATTICE_CONSTANT
+1.889726         # Bohr/Å
+
+LATTICE_VECTORS
+14.82   0.00    0.00
+ 0.00  14.82    0.00
+ 0.00   0.00   14.82
+
+ATOMIC_POSITIONS
+Direct
+
+H
+0.0
+2
+0.4274  0.6688  0.2972  0  0  0    # H1
+0.5087  0.7379  0.2679  0  0  0    # H2
+
+O
+0.0
+1
+0.4841  0.7029  0.3264  0  0  0    # O

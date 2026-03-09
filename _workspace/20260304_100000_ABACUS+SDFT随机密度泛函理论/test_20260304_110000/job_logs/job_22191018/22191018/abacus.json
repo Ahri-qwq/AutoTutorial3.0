@@ -1,0 +1,138 @@
+{
+    "comment": "Unless otherwise specified, the unit of energy is eV and the unit of length is Angstrom",
+    "init": {
+        "element": {
+            "Si": "Si"
+        },
+        "orb": {
+            "Si": null
+        },
+        "pp": {
+            "Si": "Si_ONCV_PBE-1.0.upf"
+        },
+        "coordinate": [
+            [
+                0.0,
+                0.0,
+                0.0
+            ]
+        ],
+        "mag": [
+            0.0
+        ],
+        "label": [
+            "Si"
+        ],
+        "cell": [
+            [
+                0.0,
+                5.1,
+                5.1
+            ],
+            [
+                5.1,
+                0.0,
+                5.1
+            ],
+            [
+                5.1,
+                5.1,
+                0.0
+            ]
+        ],
+        "point_group": "O_h",
+        "point_group_in_space": "O_h",
+        "natom": 1,
+        "nband": 10,
+        "natom_each_type": {
+            "Si": 1
+        },
+        "nelectron_each_type": {
+            "Si": 4.0
+        },
+        "nelectron": 4
+    },
+    "output": [
+        {
+            "e_fermi": null,
+            "energy": -161.66055464176262,
+            "scf_converge": null,
+            "force": null,
+            "stress": null,
+            "coordinate": [
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            ],
+            "mag": [
+                0.0
+            ],
+            "cell": [
+                [
+                    0.0,
+                    5.1,
+                    5.1
+                ],
+                [
+                    5.1,
+                    0.0,
+                    5.1
+                ],
+                [
+                    5.1,
+                    5.1,
+                    0.0
+                ]
+            ],
+            "total_mag": 0.0,
+            "absolute_mag": 0.0,
+            "scf": [
+                {
+                    "energy": -161.65177903215176,
+                    "ediff": 0.0,
+                    "drho": 0.05512220799731592,
+                    "time": 0.6494875012326666
+                },
+                {
+                    "energy": -161.59770850937128,
+                    "ediff": 0.054070522780467,
+                    "drho": 0.021840206045614039,
+                    "time": 0.7959227729610987
+                },
+                {
+                    "energy": -161.62664568564603,
+                    "ediff": -0.028937176274752984,
+                    "drho": 0.00012381619256170536,
+                    "time": 0.6199899663990323
+                },
+                {
+                    "energy": -161.6603518663576,
+                    "ediff": -0.03370618071157191,
+                    "drho": 0.00010347701928533396,
+                    "time": 0.6261766315481054
+                },
+                {
+                    "energy": -161.66055464176262,
+                    "ediff": -0.00020277540500523286,
+                    "drho": 4.0945171152651127e-7,
+                    "time": 0.6055132640650669
+                }
+            ]
+        }
+    ],
+    "general_info": {
+        "version": "v3.10.1",
+        "commit": "f71921fe8 (Fri Nov 21 13:49:34 2025 +0800)",
+        "device": "cpu",
+        "mpi_num": 8,
+        "omp_num": 1,
+        "pseudo_dir": "./",
+        "orbital_dir": "",
+        "stru_file": "STRU",
+        "kpt_file": "KPT",
+        "start_time": "2026-03-04 16:14:08",
+        "end_time": "2026-03-04 16:14:15"
+    }
+}

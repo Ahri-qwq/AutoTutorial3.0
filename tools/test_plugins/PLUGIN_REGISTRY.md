@@ -18,6 +18,9 @@
 | optic_plugin.py | optic | `out_mat_hs2` + `OPTICAL_CONDUCTIVITY` | 2026-03-02 | 光学性质（介电函数/吸收谱）计算教程（SiO₂） |
 | solvation_plugin.py | solvation | `imp_sol\s*[=\s]+1`、`隐式溶剂` | 2026-03-02 | 隐式溶剂模型使用教程（H₂@水溶液） |
 | phonopy_plugin.py | phonopy | `phonopy`、`声子谱`、`FORCE_SETS`、`有限位移方法` | 2026-03-03 | ABACUS+Phonopy 声子谱计算教程（FCC Al） |
+| sdft_plugin.py | sdft | `esolver_type = sdft`（INPUT代码块中）| 2026-03-04 | ABACUS SDFT/MDFT 随机密度泛函理论教程（Si SCF+Al MD+Si DOS）|
+| tddft_plugin.py | tddft | `esolver_type = tddft`（INPUT代码块中）| 2026-03-09 | 用 ABACUS 做周期体系 RT-TDDFT：混合规范（Si 原胞 50步）|
+| elf_plugin.py | elf | `out_elf\s+1`、`ELF.cube`、`电子局域函数` | 2026-03-09 | ELF 电子局域函数计算与可视化教程（H₂O PW/LCAO + Fe BCC）|
 
 ---
 
@@ -51,7 +54,6 @@
 | 计算类型 | 核心关键词 | 主要挑战 |
 |----------|-----------|----------|
 | HSE06 杂化泛函 | `exx_hybrid_type = hse` | 计算量大，需增大 maxRunTime |
-| 实时 TDDFT | `esolver_type = tddft` | 结果是轨迹，难以定量对比 |
 | 分子动力学 MD | `calculation = md` | 轨迹验证，不用对比单一数值 |
 | Yukawa DFT+U | `yukawa_potential = 1` | 参数格式与标准 DFT+U 略有不同 |
 

@@ -20,11 +20,17 @@ class DOSPlugin(BaseTestPlugin):
         return "dos"
 
     def can_handle(self, tutorial_content: str) -> bool:
-        """判断是否包含态密度计算（排除 Phonopy 声子谱教程）"""
+        """判断是否包含态密度计算（排除 Phonopy 声子谱教程和 SDFT 教程）"""
         # 排除 Phonopy 声子谱教程（其中"声子态密度 PHDOS"不是 DFT 电子态密度）
         phonopy_patterns = [r'phonopy', r'声子谱', r'FORCE_SETS', r'有限位移方法']
         if any(re.search(p, tutorial_content, re.IGNORECASE) for p in phonopy_patterns):
             return False
+        # 排除 SDFT 教程（由 SDFTPlugin 专门处理）
+        input_block_pattern = r'```[\s\S]*?INPUT_PARAMETERS[\s\S]*?```'
+        input_blocks = re.findall(input_block_pattern, tutorial_content)
+        for block in input_blocks:
+            if re.search(r'esolver_type\s*=?\s*sdft', block, re.IGNORECASE):
+                return False
         patterns = [
             r'态密度',
             r'DOS',
