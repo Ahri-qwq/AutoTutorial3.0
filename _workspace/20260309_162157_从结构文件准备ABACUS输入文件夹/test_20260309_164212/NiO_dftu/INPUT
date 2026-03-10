@@ -1,0 +1,27 @@
+INPUT_PARAMETERS
+pseudo_dir      ./
+orbital_dir     ./
+calculation     scf
+symmetry     0
+ecutwfc     100
+scf_thr     1e-07
+scf_nmax     100
+smearing_method     gauss
+smearing_sigma     0.015
+mixing_type     broyden
+mixing_beta     0.4
+basis_type     lcao
+ks_solver     genelpa
+precision     double  # or single
+#cal_force     1
+#cal_stress     1
+kspacing     0.14 # unit in 1/bohr
+#gamma_only     0
+nspin     2
+onsite_radius     3
+out_mul     1
+dft_plus_u     1
+orbital_corr     2 2 -1
+hubbard_u     3.0 3.0 0
+uramping     3.0
+mixing_restart     0.001
