@@ -1147,6 +1147,87 @@ python tools/orbital_validator.py "{tutorial_path}" --fix
 - 结果对比已完成
 - `test_report.md`已生成
 - 输出："✅ Step 6完成，测试报告已生成"
+
+**6.6 生成结果合理性判断指南（⭐ 每次测试必执行）**
+
+**目标：** 根据本教程的计算类型，检索误差来源、合理范围、判断方法等通用知识，生成供读者参考的"结果解读指南"段落，写入 issues_log.json。
+
+**执行：**
+
+**① 读取计算类型**
+
+从 `$test_dir/01_analysis.json` 的 `detected_types` 字段获取本教程涉及的计算类型列表。
+
+**② 针对每种计算类型检索知识**
+
+对 `detected_types` 中的每种类型，执行以下检索（每种类型 2 个查询）：
+
+| 计算类型 | 查询1（误差来源） | 查询2（判断标准） |
+|---------|----------------|----------------|
+| `relax` | `结构弛豫 收敛 误差 合理范围` | `relax 晶格常数 原子位置 精度判断` |
+| `elastic` | `弹性常数 误差 K点收敛 影响` | `弹性常数 合理偏差 计算精度` |
+| `band` | `能带结构 带隙 PBE 误差 系统偏差` | `能带 带隙 合理范围 泛函影响` |
+| `dos` | `态密度 DOS 误差 展宽影响` | `DOS 积分 费米能 精度判断` |
+| `dftu` | `DFT+U 带隙 U值 误差影响` | `DFT+U 磁矩 收敛 合理范围` |
+| `optic` | `光学性质 光学谱 误差 K点影响` | `光学导纳 介电函数 精度判断` |
+| `solvation` | `隐式溶剂 溶剂化能 误差 模型影响` | `solvation 隐式溶剂模型 合理偏差` |
+| `phonopy` | `声子谱 Phonopy 误差 有限位移` | `声子频率 合理范围 负频 判断` |
+| `sdft` | `随机密度泛函 SDFT 误差 统计涨落` | `SDFT 温度效应 收敛 判断` |
+| `elf` | `电子局域函数 ELF 误差 格点精度` | `ELF 键合特征 合理解读` |
+| `tddft` | `RT-TDDFT 误差 时间步长影响` | `TDDFT 光吸收谱 收敛 判断` |
+| `neb` | `NEB 过渡态 误差 图像数影响` | `NEB 能垒 收敛 合理精度` |
+
+执行示例（以 `dftu` 为例）：
+```bash
+python tools/retriever.py --query "DFT+U 带隙 U值 误差影响" --top_k 5
+python tools/retriever.py --query "DFT+U 磁矩 收敛 合理范围" --top_k 5
+```
+
+**③ 综合生成指南段落**
+
+基于检索结果，结合通用 DFT 知识，为每种计算类型生成以下结构的说明：
+
+```markdown
+## 结果合理性判断
+
+运行本教程案例后，你得到的结果可能与教程中的预期值存在一定偏差。以下是各类结果的判断标准：
+
+### [计算类型1，如：带隙]
+
+- **合理偏差范围：** [X%～Y%，说明原因]
+- **主要误差来源：** [列举 2-3 个，如：泛函选择、K点密度、截断能]
+- **如何判断是否正确：** [具体判断方法，如：关注收敛趋势而非绝对值]
+- **偏差过大时检查：** [排查步骤，如：确认 INPUT 中 ecutwfc 值]
+
+### [计算类型2]
+
+...
+```
+
+**Think Aloud：** 说明检索结果中哪些信息最相关，如何综合成指南，以及你对本教程计算类型的理解。
+
+**④ 写入 issues_log.json**
+
+```bash
+python -c "
+import json, os
+log_path = '$test_dir/issues_log.json'
+log = json.loads(open(log_path, encoding='utf-8').read()) if os.path.exists(log_path) else {'issues': []}
+log['issues'].append({
+    'type': 'result_guide',
+    'category': 'auto',
+    'description': '结果合理性判断指南（基于计算类型：<detected_types 列表>）',
+    'tutorial_keywords': ['结果', '预期', '合理性', '误差', '偏差'],
+    'insertion_note': '<上方③生成的完整 Markdown 段落，包含所有计算类型的判断说明>',
+    'step': 'Step 6.6'
+})
+open(log_path, 'w', encoding='utf-8').write(json.dumps(log, ensure_ascii=False, indent=2))
+print('[记录] 已写入 issues_log.json：result_guide')
+"
+```
+
+**完成标志：** issues_log.json 中已有 `result_guide` 条目，`insertion_note` 包含针对本教程计算类型的完整判断说明。
+
 - 告诉用户测试报告路径
 
 ---
