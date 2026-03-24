@@ -1248,6 +1248,17 @@ ls "$test_dir/issues_log.json" 2>/dev/null && echo "存在" || echo "无问题�
 | `result_deviation` | `💡 提示：` |
 | `plugin_created`（仅FAQ）| `📌 说明：` |
 
+**`result_deviation` 类型特殊处理规则：**
+
+`result_deviation` 类型的 `insertion_note` 由步骤 6.3a 的归因分析自动生成，包含物理解释和具体数据。插入时需：
+
+| 要求 | 说明 |
+|------|------|
+| 完整保留 `insertion_note` 内容 | 不得删减物理解释、实测数值等关键信息 |
+| 在文章相应参数说明处插入 | 通常在教程介绍该参数的段落末尾，或案例结果分析章节 |
+| 插入格式 | `> 📊 **计算验证说明：**{insertion_note}` |
+| 不得改写数值 | `insertion_note` 中的实测值、参考值、偏差%均不得修改 |
+
 **插入位置规则：**
 
 | 情况 | 插入位置 |
@@ -1262,6 +1273,7 @@ ls "$test_dir/issues_log.json" 2>/dev/null && echo "存在" || echo "无问题�
   ✅ "nbands auto" → 插入到第 2 章 INPUT 参数代码块后（第 94 行）
   ✅ "轨道文件名"  → 插入到第 3 章 NUMERICAL_ORBITAL 段落后（第 187 行）
   ✅ "ATOMIC_SPECIES" → 无匹配段落，已追加到附录 FAQ
+  ✅ result_deviation → NiO能隙 → 插入归因说明（dft_systematic：PBE低估15%，实测2.1eV，预期2.4eV）
 ```
 
 ---
@@ -1273,10 +1285,27 @@ ls "$test_dir/issues_log.json" 2>/dev/null && echo "存在" || echo "无问题�
 ```
 [待确认] 发现 N 条建议性注意事项，请确认是否写入教程：
 
-1. 【result_deviation】弹性常数 C11 计算值与教程预期偏差 4.7%（Step 6.3）
-   拟插入位置：第 4 章"预期结果"段落后
+1. 【result_deviation】NiO 能隙实测值与教程预期偏差 12.5%（Step 6.3）
+   拟插入位置：第 4 章"案例验证结果"段落后
    拟插入内容：
-     💡 提示：弹性常数数值对 K 点密度和截断能较敏感，若结果与本教程数值有 5–10% 偏差属正常范围。
+
+   **Before（教程原文）：**
+   ```markdown
+   ### 案例验证结果
+
+   NiO 的带隙为 2.4 eV（实验值），本教程案例计算得到 2.1 eV。
+   ```
+
+   **After（插入归因说明后）：**
+   ```markdown
+   ### 案例验证结果
+
+   NiO 的带隙为 2.4 eV（实验值），本教程案例计算得到 2.1 eV。
+
+   > 📊 **计算验证说明：** 带隙实测值 2.1 eV，教程预期值 2.4 eV，偏差 12.5%（在容差范围内）。
+   > PBE 泛函系统性低估带隙（典型偏差 ±15%），属正常现象。
+   > 建议：如需精确带隙，可改用 HSE06 杂化泛函或 GW 近似。
+   ```
 
    写入？(y/n/edit)
 
