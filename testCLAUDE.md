@@ -1327,6 +1327,7 @@ ls "$test_dir/issues_log.json" 2>/dev/null && echo "存在" || echo "无问题�
 | `file_fix` / `param_fix` | `⚠️ 注意：` |
 | `runtime_error` | `⚠️ 常见错误：` |
 | `result_deviation` | `💡 提示：` |
+| `result_guide` | 无前缀（直接插入完整段落） |
 | `plugin_created`（仅FAQ）| `📌 说明：` |
 
 **`result_deviation` 类型特殊处理规则：**
@@ -1339,6 +1340,17 @@ ls "$test_dir/issues_log.json" 2>/dev/null && echo "存在" || echo "无问题�
 | 在文章相应参数说明处插入 | 通常在教程介绍该参数的段落末尾，或案例结果分析章节 |
 | 插入格式 | 直接插入 `insertion_note` 原文（已包含 `>` blockquote 格式） |
 | 不得改写数值 | `insertion_note` 中的实测值、参考值、偏差%均不得修改 |
+
+**`result_guide` 类型特殊处理规则：**
+
+`result_guide` 类型包含面向读者的通用结果判断指南，由 Step 6.6 通过 RAG 检索生成。插入时需：
+
+| 要求 | 说明 |
+|------|------|
+| 插入到教程末尾"附录"或"常见问题"章节 | 若无此章节，在正文最后一章末尾追加 |
+| 作为独立的二级标题段落插入 | 标题为 `## 结果合理性判断` |
+| 完整保留所有计算类型的说明 | 不得删减任何子节内容 |
+| 若教程已有类似内容 | 合并而非重复，保留原有内容并补充 insertion_note 中的新内容 |
 
 **插入位置规则：**
 
