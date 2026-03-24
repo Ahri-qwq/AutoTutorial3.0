@@ -924,6 +924,48 @@ passed = relative_error <= tolerance  # 默认5%
 - 查看计算日志是否有警告
 - 参考故障排除清单（read `tools/testCLAUDE/troubleshooting.md`）
 
+**6.3a 误差归因分析（⭐ 每个 FAIL 参数必须执行）**
+
+对每个 FAIL 的参数，按以下决策树分析原因，输出结构化结论，然后将结论填入下方 issues_log.json 的 `insertion_note` 字段：
+
+**决策树（按优先级顺序判断）：**
+
+1. **偏差 < 2 倍容差** → 类别 `precision_sensitivity`
+   - 物理解释：偏差在精度参数（ecutwfc/kspacing）收敛效应的正常范围内
+   - insertion_note 模板：`💡 关于 {参数名} 的参考值：本教程参考值为 {预期值}，测试计算得到 {实测值}（偏差 {误差}%），属精度参数收敛效应正常范围，不影响计算结论。`
+
+2. **参数为能隙类**（bandgap / gap / E_gap 等） → 类别 `dft_systematic`
+   - 物理解释：DFT(PBE) 对能隙存在系统性低估，±15–20% 属正常范围
+   - insertion_note 模板：`💡 关于能隙参考值：PBE 泛函能隙存在系统性不确定性（通常 ±15%），参考值 {预期值} eV，测试得到 {实测值} eV。若需精确能隙，建议使用 HSE06 或 GW。`
+
+3. **教程与测试 kspacing 不同** → 类别 `kpoint_mismatch`
+   - 物理解释：K 点密度差异导致收敛结果不同
+   - insertion_note 模板：`💡 关于 {参数名}：教程参考值（{预期值}）基于 kspacing={教程kspacing}，测试使用 kspacing={测试kspacing} 得到 {实测值}（偏差 {误差}%），属 K 点收敛效应。`
+
+4. **参数为总能量类**（total_energy / etot 等） → 类别 `energy_reference`
+   - 物理解释：总能量为大负数，精度参数微小差异导致 eV 级偏移
+   - insertion_note 模板：`💡 关于总能量：参考值 {预期值} eV，测试得到 {实测值} eV（绝对偏差 {绝对误差} eV）。总能量绝对值对精度参数敏感，比较时应关注能量差而非绝对值。`
+
+5. **参数为总磁矩且理论值为零** → 类别 `afm_symmetry`
+   - 物理解释：反铁磁结构总磁矩理论为 0，非零值来自数值精度
+   - insertion_note 模板：`💡 关于总磁矩：反铁磁结构理论总磁矩为 0，测试得到 {实测值} μB（绝对偏差 {绝对误差} μB），说明反铁磁态建立正确，微小偏差属数值精度范围。`
+
+6. **以上均不满足** → 类别 `unknown`
+   - insertion_note 模板：`⚠️ 注意 {参数名} 偏差：测试得到 {实测值}，与参考值 {预期值} 相差 {误差}%，请检查输入参数、ABACUS 版本和赝势文件。`
+
+**Think Aloud：** 对每个 FAIL 参数，逐一说明判断类别的理由、物理解释、以及生成的 insertion_note 内容。
+
+**输出示例：**
+```
+[归因分析] 共 2 个参数 FAIL：
+
+  bandgap_up：偏差 12.3%（容差 15%，属 0.82 倍）
+    → 类别：precision_sensitivity（偏差 < 2 倍容差）
+    → 物理解释：能隙偏差仅为容差的 0.82 倍，属精度参数收敛效应正常范围
+    → insertion_note：💡 关于 bandgap_up 的参考值：本教程参考值为 0.205 eV，
+      测试计算得到 0.180 eV（偏差 12.3%），属精度参数收敛效应正常范围。
+```
+
 **写入 issues_log.json：**
 
 ```bash
@@ -937,7 +979,7 @@ log['issues'].append({
     'description': '<参数名> 实际值 <实际值> 与教程预期 <预期值> 相差 <误差>%（容差 <容差>%）',
     'resolution': '<调整容差后通过 / 需进一步排查>',
     'tutorial_keywords': ['<参数名>', '预期结果', '<计算类型>'],
-    'insertion_note': '> **💡 提示：** <参数名> 数值对计算精度参数（如 ecutwfc、k_spacing）较敏感，若结果与本教程数值有 <N>% 偏差属正常范围，可适当提高精度参数后重新计算。',
+    'insertion_note': '<由步骤 6.3a 归因分析生成的具体文本，必须包含：实测数值、参考值、偏差百分比、物理解释、用户建议>',
     'step': 'Step 6.3'
 })
 open(log_path, 'w', encoding='utf-8').write(json.dumps(log, ensure_ascii=False, indent=2))
