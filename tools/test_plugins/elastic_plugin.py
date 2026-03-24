@@ -255,6 +255,8 @@ class ElasticPlugin(BaseTestPlugin):
                 if len(_ks) >= 2:
                     context['actual_kspacing']   = _ks[0]
                     context['expected_kspacing'] = _ks[1]
+                elif len(_ks) == 1:
+                    context['actual_kspacing'] = _ks[0]
             validation.error_analyses = self.analyze_deviation(
                 validation.comparisons, context
             )

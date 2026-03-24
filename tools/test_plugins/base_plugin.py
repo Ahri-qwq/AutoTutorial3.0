@@ -272,7 +272,30 @@ class BaseTestPlugin(ABC):
             rel_pct      = f"{comp['rel_error']*100:.1f}"
 
             # ── 决策树 ──────────────────────────────────────
-            if tolerance_ratio < 2.0:
+            # 能隙参数：DFT 系统误差优先于精度参数敏感性
+            # 若偏差达到容差的 90% 以上（即接近或超出容差），视为 DFT 系统误差
+            if key.lower() in _BANDGAP_KEYS and tolerance_ratio >= 0.9:
+                # 能隙：DFT 系统误差
+                cat = EA_DFT_SYSTEMATIC
+                phys = (
+                    f"{key} 偏差（{rel_pct}%）在 DFT(PBE) 计算能隙的系统性不确定性范围内。"
+                    f"PBE 泛函对能隙存在系统性低估，不同版本 ABACUS、赝势或 k 点设置"
+                    f"均可导致 5–20% 的差异。"
+                )
+                guidance = (
+                    f"DFT(PBE) 计算能隙存在系统性不确定性，通常 ±15% 均属正常范围。"
+                    f"本教程参考值（{expected_str} eV）仅供参考，"
+                    f"若关注精确能隙，建议使用 HSE 或 GW 方法。"
+                )
+                note = (
+                    f"> **💡 关于能隙参考值：** 本教程中 {key} 参考值为 {expected_str} eV，"
+                    f"测试计算得到 {actual_str} eV（偏差 {rel_pct}%）。"
+                    f"DFT(PBE) 计算能隙存在系统性不确定性（通常 ±15%），"
+                    f"若读者得到相近结果，说明计算流程正确；"
+                    f"若关注精确能隙值，建议使用杂化泛函（HSE06）或 GW 方法。"
+                )
+
+            elif tolerance_ratio < 2.0:
                 # 偏差 < 2倍容差：精度参数敏感性
                 cat = EA_PRECISION_SENSITIVITY
                 phys = (

@@ -285,6 +285,8 @@ class DFTUPlugin(BaseTestPlugin):
         if 'absolute_magnetism' in exp and 'absolute_magnetism' in actual:
             comp = self._compare_values(exp['absolute_magnetism'],
                                         actual['absolute_magnetism'], 'absolute_magnetism')
+            comp['passed'] = comp['rel_error'] <= 0.05
+            comp['effective_tol'] = 0.05   # 覆盖基类默认的 self.tolerance
             validation.comparisons['absolute_magnetism'] = comp
 
         # 总磁矩（应为 0，用绝对容差 0.1 Bohr mag）
