@@ -138,6 +138,9 @@ class DOSPlugin(BaseTestPlugin):
         else:
             validation.warnings.append("未找到可对比的费米能级")
 
+        # ── 误差归因分析 ──────────────────────────────
+        validation.error_analyses = self.analyze_deviation(validation.comparisons)
+
         return validation
 
     def generate_report_section(self, validation: ValidationResult) -> str:
@@ -161,6 +164,13 @@ class DOSPlugin(BaseTestPlugin):
             report += "\n**警告：**\n"
             for warning in validation.warnings:
                 report += f"- {warning}\n"
+
+        # 误差归因分析
+        if validation.error_analyses:
+            report += "\n**误差归因分析：**\n\n"
+            for key, ea in validation.error_analyses.items():
+                report += f"- **{key}**（{ea.category}）：{ea.physical_explanation}\n"
+                report += f"  - 用户建议：{ea.user_guidance}\n"
 
         overall = "✅ 通过" if validation.passed else "❌ 失败"
         report += f"\n**总体结果：** {overall}\n\n"

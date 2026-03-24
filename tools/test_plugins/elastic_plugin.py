@@ -247,6 +247,17 @@ class ElasticPlugin(BaseTestPlugin):
                 actual_results
             )
             validation.passed = all(c['passed'] for c in validation.comparisons.values())
+
+            # ── 误差归因分析（复用已有的 kpoint_note 变量，不重复调用） ──
+            context = {'kspacing_mismatch': kpoint_note is not None}
+            if kpoint_note:
+                _ks = re.findall(r'kspacing=([\d.]+)', kpoint_note)
+                if len(_ks) >= 2:
+                    context['actual_kspacing']   = _ks[0]
+                    context['expected_kspacing'] = _ks[1]
+            validation.error_analyses = self.analyze_deviation(
+                validation.comparisons, context
+            )
         else:
             print(f"  [警告] 未找到 metrics_elastic.json")
             print(f"  [提示] 弹性常数计算需要使用 abacustest 后处理工具")
@@ -296,6 +307,13 @@ class ElasticPlugin(BaseTestPlugin):
             report += "\n**警告：**\n"
             for warning in other_warnings:
                 report += f"- {warning}\n"
+
+        # 误差归因分析
+        if validation.error_analyses:
+            report += "\n**误差归因分析：**\n\n"
+            for key, ea in validation.error_analyses.items():
+                report += f"- **{key}**（{ea.category}）：{ea.physical_explanation}\n"
+                report += f"  - 用户建议：{ea.user_guidance}\n"
 
         overall = "✅ 通过" if validation.passed else "⚠️ 部分完成"
         report += f"\n**总体结果：** {overall}\n\n"
