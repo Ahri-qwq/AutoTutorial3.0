@@ -264,18 +264,21 @@ class DFTUPlugin(BaseTestPlugin):
                                         'total_energy')
             # 使用 0.1% 相对容差（对应 9255 eV 体系约 9.3 eV，远宽于 SCF 精度）
             comp['passed'] = comp['rel_error'] <= 0.001
+            comp['effective_tol'] = 0.001  # 覆盖基类默认的 self.tolerance
             validation.comparisons['total_energy'] = comp
 
         # spin-up 能隙（相对容差 15%）
         if 'bandgap_up' in exp and 'bandgap_up' in actual:
             comp = self._compare_values(exp['bandgap_up'], actual['bandgap_up'], 'bandgap_up')
             comp['passed'] = comp['rel_error'] <= 0.15
+            comp['effective_tol'] = 0.15   # 覆盖基类默认的 self.tolerance
             validation.comparisons['bandgap_up'] = comp
 
         # spin-down 能隙（相对容差 15%）
         if 'bandgap_dn' in exp and 'bandgap_dn' in actual:
             comp = self._compare_values(exp['bandgap_dn'], actual['bandgap_dn'], 'bandgap_dn')
             comp['passed'] = comp['rel_error'] <= 0.15
+            comp['effective_tol'] = 0.15   # 覆盖基类默认的 self.tolerance
             validation.comparisons['bandgap_dn'] = comp
 
         # 绝对磁矩（相对容差 5%）
@@ -295,6 +298,17 @@ class DFTUPlugin(BaseTestPlugin):
             validation.passed = all(c['passed'] for c in validation.comparisons.values())
         else:
             validation.warnings.append("未找到可对比的结果（日志文件可能不存在）")
+
+        # ── 误差归因分析 ──────────────────────────────
+        context = {
+            'kspacing_mismatch': False,   # DFT+U NiO 使用固定 4×4×4，无 kspacing 参数
+        }
+        validation.error_analyses = self.analyze_deviation(
+            validation.comparisons, context
+        )
+        if validation.error_analyses:
+            keys = list(validation.error_analyses.keys())
+            print(f"  [归因] 对 {len(keys)} 个偏差参数完成归因: {keys}")
 
         return validation
 
@@ -324,6 +338,13 @@ class DFTUPlugin(BaseTestPlugin):
             report += "\n**警告：**\n"
             for warn in validation.warnings:
                 report += f"- {warn}\n"
+
+        # 误差归因分析
+        if validation.error_analyses:
+            report += "\n**误差归因分析：**\n\n"
+            for key, ea in validation.error_analyses.items():
+                report += f"- **{key}**（{ea.category}）：{ea.physical_explanation}\n"
+                report += f"  - 用户建议：{ea.user_guidance}\n"
 
         overall = "✅ 通过" if validation.passed else "❌ 失败"
         report += f"\n**总体结果：** {overall}\n\n"
@@ -371,6 +392,8 @@ class DFTUPlugin(BaseTestPlugin):
             'rel_error': rel_error,
             'passed': abs_error <= abs_tol,
             'use_abs': True,
+            'abs_tol': abs_tol,        # 记录实际使用的绝对容差
+            'effective_tol': abs_tol,  # 统一字段名，供 analyze_deviation() 读取
         }
 
     def _extract_actual_results(self, results_dir: Path) -> Dict:
