@@ -1,0 +1,9 @@
+{
+  "Al_scf": {
+    "job_id": "22303005",
+    "status": "waiting",
+    "directory": "Al_scf",
+    "depends_on": null,
+    "note": "22302767 因 job.json 字段名错误(cmd/image_name)导致 cmd 空，已修正重提"
+  }
+}

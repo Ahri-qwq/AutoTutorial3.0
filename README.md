@@ -124,14 +124,32 @@ AutoTutorial3.0/
 │   ├── orbital_validator.py         # 轨道文件名 + INPUT 参数验证工具
 │   ├── orbital_db.py                # 轨道文件映射数据库
 │   ├── fix_stru.py                  # STRU 文件格式修复工具
+│   ├── static_checker.py            # 静态质量检查工具（judgeCLAUDE）
 │   ├── test_framework_integrated.py # 测试框架主入口
 │   ├── test_framework_phase1_analyzer.py
 │   ├── test_framework_phase3_7_impl.py
-│   ├── test_plugins/                # 计算类型插件
+│   ├── test_plugins/                # 计算类型插件（14个）
+│   │   ├── base_plugin.py           # 抽象基类
 │   │   ├── relax_plugin.py          # 结构优化
 │   │   ├── elastic_plugin.py        # 弹性常数
-│   │   ├── band_plugin.py           # 能带计算
-│   │   └── dos_plugin.py            # 态密度
+│   │   ├── band_plugin.py           # 能带结构
+│   │   ├── dos_plugin.py            # 态密度
+│   │   ├── dftu_plugin.py           # DFT+U 强关联
+│   │   ├── optic_plugin.py          # 光学性质
+│   │   ├── solvation_plugin.py      # 隐式溶剂
+│   │   ├── phonopy_plugin.py        # 声子谱
+│   │   ├── sdft_plugin.py           # SDFT/MDFT
+│   │   ├── elf_plugin.py            # 电子局域函数
+│   │   ├── tddft_plugin.py          # RT-TDDFT
+│   │   ├── neb_plugin.py            # NEB 过渡态
+│   │   ├── scf_plugin.py            # SCF 自洽计算
+│   │   └── PLUGIN_REGISTRY.md       # 插件注册表
+│   ├── testCLAUDE/                  # 测试流程模块文档
+│   │   ├── bohrium_setup.md         # Bohrium 配置流程
+│   │   ├── plugin_dev_guide.md      # 插件开发指南
+│   │   ├── plugins_history.md       # 插件开发历史
+│   │   ├── troubleshooting.md       # 故障排除清单
+│   │   └── file_formats.md          # 文件格式参考
 │   ├── orbitals/                    # 轨道文件本地缓存
 │   └── pseudopotentials/            # 赝势文件本地缓存
 │
@@ -209,6 +227,22 @@ python tools/case_parser.py --input "data/input/case.docx"
 python tools/fix_stru.py --stru path/to/STRU
 ```
 
+### static_checker.py — 静态质量检查
+
+检查 7 项可客观判定的教程质量指标（用于 judgeCLAUDE 评分系统）：
+
+```bash
+python tools/static_checker.py --input tutorial.md --output scores.json
+```
+
+- 信息精准与一致性（max 5）
+- 文件来源明确度（max 3）
+- 时效与兼容性（max 4）
+- 可导航性与步骤连贯性（max 1）
+- 结构完整性（max 5）
+- 环境条件明确度（max 3）
+- 图文/代码邻近性（max 3）
+
 ---
 
 ## 使用示例
@@ -253,11 +287,14 @@ python tools/fix_stru.py --stru path/to/STRU
 
 ## 版本历史
 
-### v3.0 (2026.02)
+### v3.0 (2026.02-03)
 - 从自动化 pipeline 模式升级为 Claude Code 协调模式
 - 新增完整的计算测试验证系统（testCLAUDE.md + 插件化测试框架）
+- 新增 14 个计算类型插件：relax, elastic, band, dos, dftu, optic, solvation, phonopy, sdft, elf, tddft, neb, scf
 - 新增 `orbital_validator.py`：自动修正轨道文件名错误和 INPUT 参数兼容性问题
+- 新增 `static_checker.py`：静态质量检查工具（judgeCLAUDE 评分系统）
 - 新增 `fix_stru.py`：自动修复 STRU 文件格式
+- 新增 `testCLAUDE/` 模块文档：bohrium_setup, plugin_dev_guide, troubleshooting 等
 - 新增 `--phase prepare` 模式：Python 仅负责文件准备，Claude 控制所有任务提交决策
 - 新增测试反馈写回机制（Step 7）：测试通过后自动将修正写回教程原文
 

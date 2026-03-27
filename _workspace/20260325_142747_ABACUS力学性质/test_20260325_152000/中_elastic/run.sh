@@ -1,0 +1,1 @@
+OMP_NUM_THREADS=1 mpirun -np 16 abacus | tee out.log

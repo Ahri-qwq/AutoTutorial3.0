@@ -1,0 +1,16 @@
+INPUT_PARAMETERS
+suffix          Si
+pseudo_dir      ./
+orbital_dir     ./
+
+init_chg        file
+calculation     nscf
+ecutwfc         50
+scf_thr         1e-7
+scf_nmax        300
+
+basis_type      lcao
+
+symmetry        0
+out_band        1
+out_bandgap     1

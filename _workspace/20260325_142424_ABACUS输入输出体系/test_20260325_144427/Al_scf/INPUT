@@ -1,0 +1,23 @@
+INPUT_PARAMETERS
+# === 基本参数 ===
+suffix                  Al
+calculation             scf
+symmetry                1
+pseudo_dir              ./
+
+# === 基组 ===
+basis_type              pw
+ecutwfc                 50          # Al 收敛值
+
+# === SCF 迭代 ===
+scf_nmax                100
+scf_thr                 1e-8
+
+# === 展宽（Al 是金属，用 mp 展宽）===
+smearing_method         mp
+smearing_sigma          0.02
+
+# === 混合（金属，mixing_beta 取较小值）===
+mixing_type             broyden
+mixing_beta             0.4
+mixing_gg0              1.0         # 金属开启 Kerker 预处理

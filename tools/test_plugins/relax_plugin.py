@@ -144,10 +144,14 @@ class RelaxPlugin(BaseTestPlugin):
             import shutil
             for pp in test_info.pseudopotentials:
                 pp_file = self.pp_manager.get_file(pp, "pseudopotential")
-                shutil.copy(pp_file, input_dir / pp)
+                target = input_dir / pp
+                if not target.exists():
+                    shutil.copy(pp_file, target)
             for orb in test_info.orbitals:
                 orb_file = self.pp_manager.get_file(orb, "orbital")
-                shutil.copy(orb_file, input_dir / orb)
+                target = input_dir / orb
+                if not target.exists():
+                    shutil.copy(orb_file, target)
 
         # 修复STRU文件 - 添加赝势和轨道文件路径
         stru_file = input_dir / "STRU"

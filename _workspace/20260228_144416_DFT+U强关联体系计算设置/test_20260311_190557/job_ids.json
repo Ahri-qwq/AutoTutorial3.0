@@ -1,0 +1,11 @@
+{
+  "NiO-dftu-scf": {
+    "job_id": "22230433",
+    "job_group_id": "15977317",
+    "status": "finished",
+    "directory": "NiO_dftu",
+    "depends_on": null,
+    "spend_time": 151,
+    "end_time": "2026-03-11 19:12:56"
+  }
+}

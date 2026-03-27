@@ -1,0 +1,534 @@
+{
+    "strains": [
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    -0.009999999999999953,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    -0.0050000000000000044,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.004999999999999893,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.010000000000000009,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    -0.009999999999999953,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    -0.0050000000000000044,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.004999999999999893,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.010000000000000009,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    -0.009999999999999953
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    -0.0050000000000000044
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.004999999999999893
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.010000000000000009
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.0,
+                    -0.01,
+                    0.0
+                ],
+                [
+                    -0.01,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.0,
+                    -0.005,
+                    0.0
+                ],
+                [
+                    -0.005,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.0,
+                    0.005,
+                    0.0
+                ],
+                [
+                    0.005,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.0,
+                    0.01,
+                    0.0
+                ],
+                [
+                    0.01,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.0,
+                    0.0,
+                    -0.01
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    -0.01,
+                    0.0,
+                    0.0
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.0,
+                    0.0,
+                    -0.005
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    -0.005,
+                    0.0,
+                    0.0
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.0,
+                    0.0,
+                    0.005
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.005,
+                    0.0,
+                    0.0
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.0,
+                    0.0,
+                    0.01
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.01,
+                    0.0,
+                    0.0
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    -0.01
+                ],
+                [
+                    0.0,
+                    -0.01,
+                    0.0
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    -0.005
+                ],
+                [
+                    0.0,
+                    -0.005,
+                    0.0
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.005
+                ],
+                [
+                    0.0,
+                    0.005,
+                    0.0
+                ]
+            ]
+        },
+        {
+            "@module": "pymatgen.analysis.elasticity.strain",
+            "@class": "Strain",
+            "input_array": [
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    0.0,
+                    0.0,
+                    0.01
+                ],
+                [
+                    0.0,
+                    0.01,
+                    0.0
+                ]
+            ]
+        }
+    ],
+    "deformed_paths": [
+        "deformed_00",
+        "deformed_01",
+        "deformed_02",
+        "deformed_03",
+        "deformed_04",
+        "deformed_05",
+        "deformed_06",
+        "deformed_07",
+        "deformed_08",
+        "deformed_09",
+        "deformed_10",
+        "deformed_11",
+        "deformed_12",
+        "deformed_13",
+        "deformed_14",
+        "deformed_15",
+        "deformed_16",
+        "deformed_17",
+        "deformed_18",
+        "deformed_19",
+        "deformed_20",
+        "deformed_21",
+        "deformed_22",
+        "deformed_23"
+    ]
+}

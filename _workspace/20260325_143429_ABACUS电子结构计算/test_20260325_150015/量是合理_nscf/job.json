@@ -1,0 +1,9 @@
+{
+  "job_name": "Si_NSCF_band",
+  "command": "OMP_NUM_THREADS=1 mpirun -np 8 abacus",
+  "log_file": "STDOUTERR",
+  "backward_files": ["OUT.Si", "STDOUTERR"],
+  "project_id": 205855,
+  "machine_type": "c16_m32_cpu",
+  "image_address": "registry.dp.tech/dptech/abacus:LTSv3.10.1"
+}

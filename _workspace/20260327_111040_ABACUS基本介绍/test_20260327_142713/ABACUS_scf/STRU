@@ -1,0 +1,5 @@
+ATOMIC_SPECIES          # 元素种类与赝势
+NUMERICAL_ORBITAL       # 轨道文件（LCAO 才需要）
+LATTICE_CONSTANT        # 晶格常数（缩放因子）
+LATTICE_VECTORS         # 晶格矢量
+ATOMIC_POSITIONS        # 原子坐标

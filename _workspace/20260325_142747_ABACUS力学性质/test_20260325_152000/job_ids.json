@@ -1,0 +1,40 @@
+{
+  "Si-elastic-relax": {
+    "job_id": "22303174",
+    "status": "finished",
+    "directory": "中_elastic/relax",
+    "depends_on": null
+  },
+  "Si-elastic-deformed": {
+    "job_ids": {
+      "org": "22303342",
+      "deformed_00": "22303343",
+      "deformed_01": "22303345",
+      "deformed_02": "22303346",
+      "deformed_03": "22303347",
+      "deformed_04": "22303348",
+      "deformed_05": "22303350",
+      "deformed_06": "22303351",
+      "deformed_07": "22303355",
+      "deformed_08": "22303357",
+      "deformed_09": "22303359",
+      "deformed_10": "22303361",
+      "deformed_11": "22303362",
+      "deformed_12": "22303364",
+      "deformed_13": "22303365",
+      "deformed_14": "22303367",
+      "deformed_15": "22303368",
+      "deformed_16": "22303369",
+      "deformed_17": "22303370",
+      "deformed_18": "22303372",
+      "deformed_19": "22303373",
+      "deformed_20": "22303375",
+      "deformed_21": "22303378",
+      "deformed_22": "22303379",
+      "deformed_23": "22303381"
+    },
+    "status": "waiting",
+    "directory": "中_elastic/elastic",
+    "depends_on": "22303174"
+  }
+}

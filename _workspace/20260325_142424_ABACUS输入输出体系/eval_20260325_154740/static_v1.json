@@ -1,0 +1,66 @@
+{
+  "input_file": "_workspace/20260325_142424_ABACUS输入输出体系/process/07_fix.md",
+  "indicators": {
+    "1.3": {
+      "score": 5,
+      "max": 5,
+      "conflicts": [],
+      "note": "无明显数值冲突"
+    },
+    "1.4": {
+      "score": 3,
+      "max": 3,
+      "mentioned_types": [
+        "pseudopotential",
+        "orbital",
+        "structure"
+      ],
+      "source_found": true,
+      "note": "赝势/轨道/结构来源均有交代"
+    },
+    "1.5": {
+      "score": 4,
+      "max": 4,
+      "deprecated_found": [],
+      "note": "未发现废弃参数"
+    },
+    "2.4": {
+      "score": 0,
+      "max": 1,
+      "has_toc": true,
+      "skip_level": true,
+      "over_split": true,
+      "note": "存在标题越级（如 H1→H3）；步骤过度分割（H3/H4 共38个）"
+    },
+    "2.5": {
+      "score": 5,
+      "max": 5,
+      "found": [
+        "background",
+        "config",
+        "execution",
+        "results",
+        "summary"
+      ],
+      "missing": [],
+      "note": "5个必要模块均齐全"
+    },
+    "3.2": {
+      "score": 2,
+      "max": 3,
+      "has_version": false,
+      "has_mpi": true,
+      "has_resource": true,
+      "note": "缺失：['版本号']"
+    },
+    "4.1": {
+      "score": 3,
+      "max": 3,
+      "total_code_blocks": 22,
+      "isolated_blocks": 0,
+      "note": "所有22个代码块均与说明邻近"
+    }
+  },
+  "total_score": 22,
+  "total_max": 24
+}

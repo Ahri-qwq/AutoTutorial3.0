@@ -1,0 +1,20 @@
+INPUT_PARAMETERS
+suffix          Si
+pseudo_dir      ./
+orbital_dir     ./
+
+calculation     scf
+ecutwfc         50
+scf_thr         1e-7
+scf_nmax        300
+
+basis_type      lcao
+
+smearing_method gauss
+smearing_sigma  0.01     # 单位 Ry，半导体可取较小值
+
+mixing_type     broyden
+mixing_beta     0.4
+
+symmetry        1
+out_chg         1        # 输出电荷密度，供 NSCF 步骤读取

@@ -94,48 +94,77 @@ class ElasticPlugin(BaseTestPlugin):
         relax_dir = case_dir / "relax"
         relax_dir.mkdir(exist_ok=True)
 
-        if test_info.input_content:
-            (relax_dir / "INPUT").write_text(test_info.input_content, encoding='utf-8')
-
         # STRU 优先级：
-        # 1. 内联 STRU → 直接使用
-        # 2. abacustest model inputs 命令 → 运行生成
+        # 1. 有 Python 脚本 → 用 abacustest model inputs（脚本已在前面生成了 CIF，INPUT 也由 abacustest 生成）
+        # 2. 内联 STRU → 直接使用（并使用框架提取的 INPUT）
         # 3. 两者都没有 → 报错返回
-        if test_info.stru_content:
-            (relax_dir / "STRU").write_text(test_info.stru_content, encoding='utf-8')
-        else:
-            inputs_cmd = next(
-                (cmd for cmd in test_info.abacustest_commands if "abacustest model inputs" in cmd),
-                None
-            )
-            if inputs_cmd:
-                print(f"  [STRU fallback] 未找到内联STRU，运行: {inputs_cmd}")
+        inputs_cmd = next(
+            (cmd for cmd in test_info.abacustest_commands if "abacustest model inputs" in cmd),
+            None
+        )
+        if test_info.python_scripts and inputs_cmd:
+            # 从 case_dir 找 CIF 文件，运行 abacustest model inputs 生成完整输入
+            cif_files = list(case_dir.glob("*.cif"))
+            if cif_files:
+                cif_file = cif_files[0]
+                print(f"  [abacustest] 用 {cif_file.name} 生成输入文件...")
                 result = subprocess.run(
-                    inputs_cmd,
-                    shell=True,
-                    cwd=str(relax_dir),
+                    ['abacustest', 'model', 'inputs',
+                     '-f', cif_file.name,
+                     '--ftype', 'cif',
+                     '--jtype', 'cell-relax',
+                     '--lcao',
+                     '--folder-syntax', '000000'],
+                    cwd=str(case_dir),
                     capture_output=True,
                     text=True
                 )
-                if result.returncode != 0:
+                if result.returncode == 0:
+                    # abacustest 在 case_dir/000000/ 生成了输入文件，移到 relax_dir（覆盖已有文件）
+                    import shutil as _shutil
+                    gen_dir = case_dir / "000000"
+                    if gen_dir.exists():
+                        for f in gen_dir.iterdir():
+                            dest = relax_dir / f.name
+                            _shutil.move(str(f), str(dest))
+                        _shutil.rmtree(str(gen_dir))
+                    print(f"  [OK] abacustest model inputs 生成了输入文件")
+                else:
                     print(f"  [ERROR] abacustest model inputs 失败: {result.stderr}")
                     return []
-                print(f"  [OK] abacustest model inputs 生成了输入文件")
             else:
-                print(f"  [ERROR] 未找到STRU内容，也未找到 abacustest model inputs 命令")
+                print(f"  [ERROR] 未找到 CIF 文件")
                 return []
+        elif test_info.stru_content:
+            (relax_dir / "STRU").write_text(test_info.stru_content, encoding='utf-8')
+            # 只在非 abacustest 路径下写入框架提取的 INPUT
+            if test_info.input_content:
+                (relax_dir / "INPUT").write_text(test_info.input_content, encoding='utf-8')
+        else:
+            print(f"  [ERROR] 未找到STRU内容，也未找到 abacustest model inputs 命令")
+            return []
 
         if test_info.kpt_content:
             (relax_dir / "KPT").write_text(test_info.kpt_content, encoding='utf-8')
 
-        # 下载赝势和轨道文件
+        # 下载赝势和轨道文件（非必须，abacustest model inputs 会通过环境变量自动处理）
         if self.pp_manager:
             for pp in test_info.pseudopotentials:
-                pp_file = self.pp_manager.get_file(pp, "pseudopotential")
-                shutil.copy(pp_file, relax_dir / pp)
+                try:
+                    pp_file = self.pp_manager.get_file(pp, "pseudopotential")
+                    target = relax_dir / pp
+                    if not target.exists():
+                        shutil.copy(pp_file, target)
+                except Exception as e:
+                    print(f"  [WARN] 赝势 {pp} 下载失败（跳过，abacustest 将通过环境变量查找）: {e}")
             for orb in test_info.orbitals:
-                orb_file = self.pp_manager.get_file(orb, "orbital")
-                shutil.copy(orb_file, relax_dir / orb)
+                try:
+                    orb_file = self.pp_manager.get_file(orb, "orbital")
+                    target = relax_dir / orb
+                    if not target.exists():
+                        shutil.copy(orb_file, target)
+                except Exception as e:
+                    print(f"  [WARN] 轨道 {orb} 下载失败（跳过）: {e}")
 
         # 修复路径格式 - 将绝对路径改为相对路径（解决Bohrium环境变量问题）
         print(f"  [修复] 路径格式 - 改为相对路径")

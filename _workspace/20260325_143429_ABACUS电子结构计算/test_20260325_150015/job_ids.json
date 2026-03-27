@@ -1,0 +1,6 @@
+{
+  "Si_SCF": {"job_id": "22303033", "dir": "量是合理_scf", "status": "submitted"},
+  "Al_SCF": {"job_id": "22303035", "dir": "Al_scf", "status": "submitted"},
+  "Si_NSCF": {"job_id": null, "dir": "量是合理_nscf", "depends_on": "Si_SCF", "status": "pending"},
+  "Al_NSCF_DOS": {"job_id": null, "dir": "量是合理_dos", "depends_on": "Al_SCF", "status": "pending"}
+}

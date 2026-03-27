@@ -1,0 +1,16 @@
+{
+  "detected_types": [
+    "relax",
+    "band",
+    "dos",
+    "dftu",
+    "scf"
+  ],
+  "case_names": [
+    "使用",
+    "使用",
+    "使用",
+    "NiO",
+    "Al"
+  ]
+}

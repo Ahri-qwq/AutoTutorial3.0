@@ -1,0 +1,456 @@
+## 三、案例二：铝（Al）的态密度
+
+### 3.1 体系说明
+
+铝是面心立方结构（FCC），晶格常数 4.0451 Å，空间群 Fm$\bar{3}$m。铝是典型的简单金属：费米能级附近无带隙，DOS 在费米面处连续，导电性好。
+
+本案例目标：
+- TDOS：验证金属特征（费米面处 DOS 不为零）
+- PDOS：分解到 Al 3s 和 3p 轨道，分析轨道贡献
+- 费米能级提取（实际值以计算结果为准）
+
+本案例使用平面波（PW）基组，nspin=1（无磁性）。
+
+---
+
+### 3.2 输入文件准备
+
+#### STRU 文件
+
+Al FCC 4 原子单胞。DOS 计算推荐先用 Atomkit 转换为 1 原子原胞：
+
+```bash
+echo -e "2\n202\n101 STRU\n101" | atomkit
+# 生成 PRIMCELL.STRU（1 原子 FCC 原胞）
+# 在 INPUT 中用 stru_file PRIMCELL.STRU 指定读取原胞
+```
+
+4 原子单胞 STRU：
+
+```
+ATOMIC_SPECIES
+Al  26.982  Al_ONCV_PBE-1.0.upf  upf201
+
+LATTICE_CONSTANT
+1.88972612546
+
+LATTICE_VECTORS
+4.0450551637  0.0000000000  0.0000000000  #latvec1
+0.0000000000  4.0450551637  0.0000000000  #latvec2
+0.0000000000  0.0000000000  4.0450551637  #latvec3
+
+ATOMIC_POSITIONS
+Direct
+Al  #label
+0   #magnetism
+4   #number of atoms
+0.0000000000  0.0000000000  0.0000000000  m  0  0  0
+0.5000000000  0.5000000000  0.0000000000  m  0  0  0
+0.5000000000  0.0000000000  0.5000000000  m  0  0  0
+0.0000000000  0.5000000000  0.5000000000  m  0  0  0
+```
+
+#### INPUT 文件（SCF）
+
+金属计算必须使用 smearing，否则费米面处占据数不连续，SCF 难以收敛：
+
+```
+INPUT_PARAMETERS
+suffix          Al
+pseudo_dir      ./
+
+calculation     scf
+ecutwfc         60
+scf_thr         1e-9
+scf_nmax        100
+
+basis_type      pw
+
+nspin           1
+
+smearing_method gauss    # 高斯展宽，适用于金属
+smearing_sigma  0.02     # 单位 Ry，约 0.272 eV，金属常用值
+
+mixing_type     broyden
+mixing_beta     0.4
+
+symmetry        1
+out_chg         1
+```
+
+关键参数说明：
+
+- `smearing_sigma 0.02 Ry`（约 0.27 eV）：金属取 0.01–0.05 Ry。值越小，基态越准确，但收敛越难；Al 取 0.02 是常用值
+- `ecutwfc 60 Ry`：Al 的 ONCV 赝势通常需要 40–80 Ry
+
+#### KPT 文件（SCF）
+
+```
+K_POINTS
+0
+Gamma
+12 12 12 0 0 0
+```
+
+#### INPUT 文件（NSCF，DOS）
+
+```
+INPUT_PARAMETERS
+suffix          Al
+pseudo_dir      ./
+
+init_chg        file
+calculation     nscf
+ecutwfc         60
+scf_thr         1e-9
+scf_nmax        100
+
+basis_type      pw
+
+nspin           1
+
+smearing_method gauss
+smearing_sigma  0.02
+
+symmetry        0        # NSCF 必须关闭对称性
+
+out_dos         2        # 1=只输出 TDOS；2=同时输出 TDOS 和 PDOS
+dos_sigma       0.07     # DOS 展宽（eV），默认 0.07
+```
+
+`out_dos` 取值：
+- `1`：输出 TDOS，文件为 `OUT.Al/DOS1` 和 `DOS1_smearing.dat`
+- `2`：同时输出 TDOS 和 PDOS，额外生成 `OUT.Al/PDOS`（xml 格式）
+
+`dos_sigma`（eV）：控制输出 DOS 曲线的平滑程度，默认 0.07 eV。k 点较少时可适当增大（0.1–0.2）。
+
+#### KPT 文件（NSCF，DOS）
+
+```
+K_POINTS
+0
+Gamma
+20 20 20 0 0 0
+```
+
+DOS 计算需要比 SCF 更密的 k 网格（建议至少 1.5 倍），不使用 Line 模式。
+
+---
+
+### 3.3 运行计算
+
+```
+Al_dos/
+├── STRU
+├── INPUT_scf          INPUT_nscf
+├── KPT_scf            KPT_nscf
+└── Al_ONCV_PBE-1.0.upf
+```
+
+**Step 1：SCF 计算**
+
+```bash
+cp INPUT_scf INPUT && cp KPT_scf KPT
+mpirun -np 4 abacus | tee scf.log
+grep "convergence" OUT.Al/running_scf.log
+```
+
+**Step 2：NSCF DOS 计算**
+
+```bash
+cp INPUT_nscf INPUT && cp KPT_nscf KPT
+mpirun -np 4 abacus | tee nscf.log
+```
+
+完成后，`OUT.Al/` 目录下应有 `TDOS`、`DOS1_smearing.dat`（总态密度）。
+
+> **注意：** PW 基组下 `out_dos 2` 只输出 TDOS，不生成 `PDOS` 文件——PDOS 依赖 Mulliken 轨道投影，须使用 LCAO 基组。Al 的 TDOS 已足够验证金属特征；PDOS 的获取方法见 3.5 节。
+
+---
+
+### 3.4 费米能级提取与 TDOS 绘图
+
+**提取费米能级：**
+
+```bash
+grep "EFERMI" OUT.Al/running_nscf.log
+# 输出示例：EFERMI = 10.963171515 eV
+```
+
+这里的 EFERMI 是 ABACUS 内部能量参考系下的绝对值（含赝势贡献），用于绘图时将能量零点移到费米面。
+
+**绘制 TDOS 图：**
+
+```bash
+cd OUT.Al/
+```
+
+创建 `config.json`：
+
+```json
+{
+    "tdosfile": "TDOS",
+    "efermi": 10.963171515,
+    "energy_range": [-10, 10],
+    "dos_range": [0, 5],
+    "tdosfig": "tdos.png",
+    "dpi": 300
+}
+```
+
+- `energy_range`：横坐标范围（相对费米能，eV），`[-10, 10]` 可展示 Al 的主要 sp 带
+- `dos_range`：纵坐标范围，需根据实际 DOS 值调整
+
+```bash
+abacus-plot -d
+```
+
+生成 `tdos.png`。Al 金属 TDOS 的典型特征：费米能级处 DOS 连续不为零，曲线平滑，无带隙。
+
+---
+
+### 3.5 PDOS 绘图（需切换 LCAO 基组）
+
+PDOS 依赖 Mulliken 轨道投影，**只有 LCAO 基组**才能输出 `PDOS` 文件。上一节的 PW 基组计算无法直接获得 PDOS，需按以下步骤切换后重新做 NSCF。
+
+**修改 INPUT（NSCF，切换为 LCAO）：**
+
+```
+INPUT_PARAMETERS
+suffix          Al
+pseudo_dir      ./
+orbital_dir     ./
+
+init_chg        file
+calculation     nscf
+ecutwfc         60
+scf_thr         1e-9
+scf_nmax        100
+
+basis_type      lcao          # 改为 lcao
+
+nspin           1
+
+smearing_method gauss
+smearing_sigma  0.02
+
+symmetry        0
+
+out_dos         2
+dos_sigma       0.07
+```
+
+同时在 STRU 的 `ATOMIC_SPECIES` 块后添加：
+
+```
+NUMERICAL_ORBITAL
+Al_gga_8au_60Ry_2s2p1d.orb
+```
+
+> 轨道文件 `Al_gga_8au_60Ry_2s2p1d.orb` 可从 `/abacus-develop/tests/PP_ORB/` 获取，KPT 保持 20×20×20 不变，SCF 的电荷密度复用 PW-SCF 的结果仍然有效。
+
+重新运行 NSCF 后，`OUT.Al/` 目录下会出现 `PDOS` 文件（xml 格式）。
+
+**绘制 PDOS 图：**
+
+修改 `config.json`：
+
+```json
+{
+    "pdosfile": "PDOS",
+    "efermi": 10.963171515,
+    "energy_range": [-10, 10],
+    "dos_range": [0, 5],
+    "figsize": [14, 10],
+    "species": {"Al": [0, 1]},
+    "pdosfig": "pdos.png"
+}
+```
+
+`species` 字段：
+- `"Al": [0, 1]`：输出 Al 的 l=0（s）和 l=1（p）通道
+- l 的对应：`0=s, 1=p, 2=d, 3=f`
+
+```bash
+abacus-plot -d -p -o
+```
+
+命令参数：`-d` 处理 DOS/PDOS，`-p` 分轨道模式，`-o` 输出数据文件到 `PDOS_FILE/` 目录。生成 `pdos.png`。
+
+---
+
+### 3.5b 使用 abacustest 绘制 DOS/PDOS
+
+除 abacus-plot 外，也可以用 abacustest 的 `dos-pdos` 子命令完成后处理绘图。abacustest 会自动读取费米能，无需手动提取和填写 `config.json`。
+
+```bash
+# 绘制 TDOS（默认能量范围 -10~10 eV，相对费米能）
+abacustest model dos-pdos -j Al_dos/
+
+# 按元素分解绘制 PDOS
+abacustest model dos-pdos -j Al_dos/ --plot-type species
+
+# 按壳层（s/p/d 分开）绘制 PDOS
+abacustest model dos-pdos -j Al_dos/ --plot-type shell
+
+# 指定能量范围
+abacustest model dos-pdos -j Al_dos/ --range -15 5
+```
+
+`-j` 参数指向 ABACUS 计算的输入目录（含 INPUT、STRU 等文件），`--plot-type` 支持四种模式：`species`（按元素）、`shell`（按壳层）、`orbital`（按具体轨道，如 p_x）、`atom`（按原子序号）。默认同时保存 `.dat` 数据文件和 `.png` 图像；加 `--suffix` 可为输出文件添加后缀以区分多次运行结果。
+
+> PDOS 绘图同样要求 LCAO 基组，PW 基组计算不会生成 `PDOS` 文件。
+
+---
+
+### 3.6 结果解读
+
+**如何判断 TDOS 结果正确：**
+- 费米面处 DOS 连续且不为零（金属特征）——典型值约 **1.5–2.0 states/eV/cell**
+- 约 -10 eV 处有一个孤立窄峰（Al 3s 态，近自由电子特征）
+- -7 eV 至费米面间 DOS 平滑上升（Al 3p 主带）
+- 若费米面处 DOS 为零，说明 smearing 太小或 k 网格不足
+
+**TDOS 特征（已计算验证）：**
+- 费米能级附近 DOS 连续，确认 Al 是金属（实测费米面处约 1.59 states/eV/cell）
+- 约 -10 eV 处有分离窄峰，对应 Al 3s 态
+- -7 eV 至费米面之间是 Al 3p 主带，曲线平滑
+
+**PDOS 特征（切换 LCAO 基组后）：**
+- Al 3s 轨道：贡献主要在 -10 eV 附近的低能区
+- Al 3p 轨道：覆盖从约 -7 eV 到费米面，是费米面处 DOS 的主要来源
+- Al 是近自由电子金属，s-p 杂化程度低于过渡金属
+
+**费米能量说明：**
+`EFERMI`（如 10.963 eV）是 ABACUS 内部参考系下的绝对值，含赝势贡献，不同赝势版本间数值有差异（正常，差值通常在 0.1 eV 以内）。绘图时将其设为零点，DOS 图横坐标即相对费米能：负值为已占据态，正值为空态。
+
+---
+
+## 四、拓展提示
+
+### 4.1 磁性体系（Fe，nspin=2）
+
+对铁磁/反铁磁体系（如 bcc Fe），在 INPUT 中增加 `nspin 2`，并在 STRU 原子行设置初始磁矩：
+
+```
+Fe  #label
+4.0 #magnetism（初始磁矩，μB）
+1   #number of atoms
+0.0  0.0  0.0  m  0  0  0
+```
+
+`nspin 2` 时，NSCF 输出两套结果：
+- 能带：`BANDS_1.dat`（自旋向上）、`BANDS_2.dat`（自旋向下）
+- DOS：`DOS1`（自旋向上）、`DOS2`（自旋向下）
+
+两套 DOS 共享同一费米能级，绘图时通常将自旋向下取负值叠加显示。bcc Fe 参考参数：晶格常数 2.866 Å，收敛磁矩约 2.2 μB，smearing_sigma 建议 0.002 Ry。
+
+完整 Al/Fe 算例：
+```bash
+git clone https://gitee.com/mcresearch/abacus-user-guide.git
+cd abacus-user-guide/examples/dos_band   # 含 Al/ 和 Fe/ 两个目录
+```
+
+### 4.2 带隙修正：HSE06
+
+PBE 系统性低估带隙（Si: 0.57 eV vs 实验 1.17 eV）。使用 HSE06 可以接近实验值，在 INPUT 中添加：
+
+```
+dft_functional  hse
+hse_omega       0.11    # 屏蔽参数（Bohr^-1），HSE06 默认值
+```
+
+HSE06 需要 LCAO 基组，计算量约为 PBE 的 5–10 倍，且依赖 LibRI 库编译支持。
+
+### 4.3 高对称路径自动生成
+
+Atomkit 可以从结构文件自动生成标准 KPT，避免手动查找高对称点出错：
+
+```bash
+echo -e "3\n301\n3\n101 PRIMCELL.STRU\n0.06" | atomkit
+# 生成 KLINES 文件（即 NSCF 能带的 KPT）
+# 0.06 为 kspacing（Å⁻¹），值越小能带越平滑
+```
+
+### 4.4 常见问题：NSCF 找不到电荷密度文件
+
+NSCF 报"找不到 SPIN1_CHG.cube"的常见原因：
+
+1. `suffix` 不一致：ABACUS 在 `OUT.suffix/` 下找文件，确认 NSCF 的 `suffix` 与 SCF 完全一致
+2. 跨目录：在 INPUT 中设置 `read_file_dir /path/to/OUT.suffix/`
+3. SCF 未收敛：先检查 `grep "convergence" OUT.*/running_scf.log`
+
+---
+
+## 附录
+
+### A. 关键参数速查表
+
+#### SCF/NSCF 通用参数
+
+| 参数 | SCF 典型值 | NSCF 典型值 | 说明 |
+|------|-----------|------------|------|
+| `calculation` | scf | nscf | 计算类型 |
+| `symmetry` | 1 | 0 | NSCF 必须为 0 |
+| `out_chg` | 1 | 不设 | SCF 必须输出电荷密度 |
+| `init_chg` | atomic | file | NSCF 必须读取文件 |
+| `out_band` | 不设 | 1 | 输出能带（NSCF） |
+| `out_dos` | 不设 | 1 或 2 | 1=TDOS；2=TDOS+PDOS（PDOS 仅 LCAO 有效） |
+| `out_bandgap` | 不设 | 1 | 在 log 中输出带隙 |
+| `dos_sigma` | — | 0.07（默认，eV） | DOS 展宽 |
+
+#### 金属 vs 半导体参数对比
+
+| 参数 | 金属（Al） | 半导体（Si） | 说明 |
+|------|-----------|------------|------|
+| `smearing_method` | gauss | gauss | 金属必须用 smearing |
+| `smearing_sigma` | 0.02 Ry | 0.01 Ry | 金属可取较大值 |
+| `nspin` | 1（非磁） | 1 | 磁性体系设 2 |
+| SCF k 网格 | 12×12×12 | 9×9×9 | 金属需更密 |
+| DOS k 网格 | 20×20×20 | 15×15×15 | DOS 比 SCF 更密 |
+
+#### abacus-plot 命令速查
+
+| 命令 | 用途 | config.json 必填字段 |
+|------|------|---------------------|
+| `abacus-plot -b` | 能带图 | bandfile, efermi, kptfile |
+| `abacus-plot -d` | TDOS 图 | tdosfile, efermi |
+| `abacus-plot -d -p -o` | PDOS 图 | pdosfile, efermi, species |
+
+### B. 结果合理性判断
+
+#### 能带结构（Si 类半导体）
+
+| 检查项 | 正常表现 | 异常信号 |
+|--------|---------|---------|
+| SCF 收敛 | `convergence is achieved` | 无此行或迭代到 `scf_nmax` 上限 |
+| BANDS_1.dat 行数 | k 点总数（本案例 211）× 1 行 | 文件为空或只有几行 |
+| EFERMI 值 | 正数，量级约 5–15 eV | 负数或极大值（赝势/结构问题） |
+| 能带图连续性 | 各能带连续，无断裂 | `symmetry 0` 未设，或 KPT 路径不对 |
+| Line 模式带隙读数 | 0.7–0.9 eV（Si，PBE）| 过小（<0.1 eV）可能路径缺 Δ 点 |
+| 均匀网格精确带隙 | ~0.57 eV（Si，PBE）| >1 eV 说明 k 网格不足 |
+
+#### 态密度（Al 类金属）
+
+| 检查项 | 正常表现 | 异常信号 |
+|--------|---------|---------|
+| SCF 收敛 | `convergence is achieved` | 震荡不收敛（加大 `smearing_sigma`） |
+| 费米面处 DOS | > 0，连续（Al ~1.5–2 states/eV/cell） | = 0 说明 k 网格太粗或 smearing 太小 |
+| TDOS 文件 | DOS1 + DOS1_smearing.dat | 文件缺失说明 `out_dos` 未设 |
+| PDOS 文件 | 需要 LCAO 基组才会生成 | PW 基组下 PDOS 不会出现（正常） |
+| EFERMI 一致性 | SCF 与 NSCF 差值 < 0.1 eV | 差值大说明 NSCF 未读入 SCF 电荷密度 |
+
+#### 常见误判说明
+
+- **Si 带隙读数偏高**（0.8–0.9 eV）：Line 模式特性，非计算错误；精确带隙需换均匀 k 网格
+- **EFERMI 与教程示例不同**：正常，绝对值随赝势版本变化；绘图时用自己算出的 EFERMI 值
+- **PDOS 文件不生成**：PW 基组限制，切换 LCAO 基组后重跑 NSCF 即可
+- **能带图出现"断裂"或路径不完整**：检查 NSCF 的 `symmetry 0` 是否设置
+
+### C. 参考资料
+
+1. ABACUS 官方文档 - DOS 和能带：https://mcresearch.github.io/abacus-user-guide/abacus-dos.html
+2. ABACUS 官方文档 - PDOS：https://mcresearch.github.io/abacus-user-guide/abacus-pdos.html
+3. ABACUS 官方文档 - INPUT 参数：https://abacus.deepmodeling.com/en/latest/advanced/input_files/input-main.html
+4. 布里渊区高对称点参考：Setyawan & Curtarolo, Comp. Mater. Sci. 49, 299–312 (2010)
+5. Atomkit 文档：https://vaspkit.com/atomkit.html

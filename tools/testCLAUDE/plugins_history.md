@@ -30,6 +30,7 @@
 | solvation_plugin.py | solvation | 2026-03-02 | 隐式溶剂模型使用教程（H₂@水溶液） |
 | phonopy_plugin.py | phonopy | 2026-03-03 | ABACUS+Phonopy 声子谱计算教程（FCC Al） |
 | elf_plugin.py | elf | 2026-03-09 | ELF 电子局域函数计算与可视化教程（H₂O PW/LCAO + Fe BCC） |
+| scf_plugin.py | scf | 2026-03-25 | ABACUS 输入输出体系：三文件入门与收敛性测试（Al FCC PW SCF） |
 
 > 每次新增插件时，在此表格追加一行。
 

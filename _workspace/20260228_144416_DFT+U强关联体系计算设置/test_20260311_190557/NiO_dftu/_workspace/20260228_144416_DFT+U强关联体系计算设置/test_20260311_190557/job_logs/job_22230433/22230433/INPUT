@@ -1,0 +1,37 @@
+INPUT_PARAMETERS
+pseudo_dir      ./
+orbital_dir     ./
+#Parameters (General)
+suffix                  NiO
+calculation             scf
+esolver_type            ksdft
+symmetry                0
+
+#Parameters (Basis)
+basis_type              lcao
+ecutwfc                 100
+
+#Parameters (Spin)
+nspin                   2
+
+#Parameters (Iteration)
+scf_thr                 1e-7
+scf_nmax                200
+
+#Parameters (Smearing)
+smearing_method         gauss
+smearing_sigma          0.01
+
+#Parameters (Mixing)
+mixing_type             broyden
+mixing_beta             0.4
+
+#Parameters (Output)
+out_bandgap             1
+out_mul                 1
+out_chg                 1
+
+#Parameters (DFT+U)
+dft_plus_u              1
+orbital_corr            2 2 -1
+hubbard_u               5.0 5.0 0.0

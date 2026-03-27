@@ -1,0 +1,105 @@
+---
+title: "ABACUS 力学性质计算：结构优化与弹性常数"
+author: "AutoTutorial 3.0"
+date: "2026-03-25"
+topic: "ABACUS力学性质"
+task_type: "B"
+has_case: true
+word_count: 约3200字
+lines: 627
+chapters: 4
+cases:
+  - name: "h-BN（六方晶系）"
+    atoms: 192
+    calc_type: "cell-relax"
+    key_params:
+      force_thr_ev: 0.01
+      stress_thr: 0.5
+      kspacing: 0.08
+  - name: "Si（立方晶系）"
+    calc_type: "elastic"
+    result_C11: 165.5
+    result_C12: 58.6
+    result_C44: 82.5
+    result_bulk: 94.19
+    result_shear: 70.89
+    result_young: 170.02
+    result_poisson: 0.199
+---
+
+# ABACUS 力学性质计算：结构优化与弹性常数
+
+> 本文由 AutoTutorial 3.0 提供。
+
+# 前言
+
+本教程介绍 ABACUS 中的力学性质计算，涵盖结构优化（几何弛豫）和弹性常数两条主线。
+
+**适用读者：** 有 ABACUS 基本使用经验，了解 INPUT/STRU/KPT 文件格式，做过 SCF 计算的研究者。
+
+**前置知识：**
+- ABACUS 基本输入文件的格式与作用
+- SCF 自洽计算的基本概念
+- LCAO 基组的基本概念
+
+**教程结构：**
+- 第一章：理论背景——几何优化原理 + 弹性张量理论 + 宏观力学性质
+- 第二章：案例一——h-BN 变胞优化（cell-relax，192原子体系）
+- 第三章：案例二——Si 弹性常数（abacustest 自动化工作流）
+- 第四章：注意事项与参数速查
+
+**案例说明：**
+- **h-BN**：六方层状结构，192原子超胞，演示 cell-relax 的完整参数配置与收敛过程。
+- **Si**：立方晶系，3个独立弹性张量元，演示 abacustest 从结构优化到弹性常数的完整自动化流程，结果与实验值对比。
+
+所有案例数据均来自实际计算，未经修改。
+
+---
+
+# 一、理论背景
+
+## 1.1 几何优化：势能面与收敛判据
+
+第一性原理计算中的"结构优化"，本质上是在势能面（Born-Oppenheimer 势能面）上寻找极小值点的过程。给定初始结构，程序计算各原子受力（$F_i = -\partial E / \partial \mathbf{r}_i$）和晶胞应力张量，沿受力方向更新原子坐标。对于 cell-relax，还同步更新晶格参数。重复迭代，直到力与应力均低于设定阈值。
+
+ABACUS 支持两种结构优化模式：
+
+| 计算类型 | INPUT 设置 | 优化自由度 | 典型用途 |
+|---------|-----------|-----------|---------|
+| 固定晶胞优化（ionic relax） | `calculation relax` | 原子位置 | 固定实验晶格参数，优化原子位置 |
+| 变胞优化（variable-cell relax） | `calculation cell-relax` | 原子位置 + 晶格参数 | 充分弛豫后用于弹性/声子等性质计算 |
+
+**cell-relax 的嵌套流程：**
+
+ABACUS 的变胞优化采用嵌套迭代策略：先在当前晶胞约束下做固定晶胞的原子弛豫（一轮 RELAX IONS），再根据应力张量更新晶格参数（RELAX CELL 计数加一），如此循环直到力和应力同时收敛。输出日志中的标记格式为：
+
+```
+-------------------------------------------
+RELAX CELL : 3
+RELAX IONS : 1 (in total: 15)
+-------------------------------------------
+```
+
+这表示第 3 次晶胞更新后的第 1 个（共 15 个）离子步。
+
+### 收敛判据
+
+结构优化由两个阈值控制：
+
+| 参数 | 单位 | 含义 | 典型推荐值 |
+|------|------|------|-----------|
+| `force_thr_ev` | eV/Å | 所有原子受力中最大分量（LARGEST GRAD）的收敛阈值 | 0.01–0.05 |
+| `stress_thr` | kBar | TOTAL-PRESSURE 绝对值的收敛阈值（负值表示拉伸压力，取绝对值与阈值比较） | 0.5–5 |
+
+当 LARGEST GRAD < `force_thr_ev` **且** TOTAL-PRESSURE 绝对值 < `stress_thr` 同时满足时，计算收敛。对于弹性常数计算，残余应力应尽量小，建议 `stress_thr` 取 0.5 kBar 或更严格。
+
+其余常用控制参数：
+
+| 参数 | 含义 | 默认/推荐值 |
+|------|------|-----------|
+| `relax_nmax` | 最大离子步数 | 100 |
+| `cal_force` | 开启受力计算 | 1（relax/cell-relax 时必须） |
+| `cal_stress` | 开启应力张量计算 | 1（cell-relax 时必须） |
+| `out_stru` | 输出优化后结构文件（STRU_ION_D） | 1 |
+
+---

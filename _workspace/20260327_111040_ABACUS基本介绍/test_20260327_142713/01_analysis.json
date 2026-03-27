@@ -1,0 +1,18 @@
+{
+  "detected_types": [
+    "relax",
+    "band",
+    "dos",
+    "dftu",
+    "solvation",
+    "scf"
+  ],
+  "case_names": [
+    "Si",
+    "Si",
+    "Si",
+    "NiO",
+    "H2",
+    "ABACUS"
+  ]
+}

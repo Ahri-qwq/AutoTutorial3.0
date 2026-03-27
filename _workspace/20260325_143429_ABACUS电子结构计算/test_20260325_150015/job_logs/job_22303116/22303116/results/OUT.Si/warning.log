@@ -1,0 +1,21 @@
+ AUTO_SET NBANDS to 14
+ AUTO_SET NBANDS to 14
+      Processor           Atom
+              1             22
+              2             23
+              3             23
+              4             20
+              5             20
+              6             21
+              7             21
+              8             21
+                 charge before normalized = 8
+                  charge after normalized = 8
+                            startmag_type = 2
+                       charge from rho_at = 3.95377434289291
+                         charge should be = 4
+
+ SETUP ATOMIC RHO FOR SPIN 1
+                 Electron number from rho = 8.00000000000002
+           total electron number from rho = 8.00000000000002
+                                should be = 8

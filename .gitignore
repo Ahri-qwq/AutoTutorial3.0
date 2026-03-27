@@ -10,6 +10,7 @@ config.yaml
 /data/分享会和公众号/*
 /data/未经计算测试的教程/*
 /data/docs/*
+docs/*
 
 # 生成的数据和输出
 /old

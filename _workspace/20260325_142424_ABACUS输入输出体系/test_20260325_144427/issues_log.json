@@ -1,0 +1,36 @@
+{
+  "issues": [
+    {
+      "type": "plugin_created",
+      "category": "user-confirm",
+      "description": "教程计算类型(calculation scf)无对应插件，已创建 SCFPlugin",
+      "resolution": "已创建 tools/test_plugins/scf_plugin.py 并注册到 test_framework_integrated.py",
+      "tutorial_keywords": [
+        "calculation scf"
+      ],
+      "insertion_note": "",
+      "step": "Step 1.5"
+    },
+    {
+      "type": "false_trigger",
+      "category": "warning",
+      "description": "教程讲解文字触发了 relax/band/dos/dftu 插件的误识别，但教程无对应完整案例",
+      "resolution": "只提交 Al_scf 目录，跳过使用_relax、使用_nscf、使用_dos、NiO_dftu（均为误触发）",
+      "step": "Step 1.3"
+    },
+    {
+      "type": "result_deviation",
+      "category": "tutorial-fix",
+      "description": "教程附录示例值 -215.847068 eV 错误：实际 ABACUS 计算（含核心修正）得到 -7532.3013985 eV（4原子）。教程3.5节收敛表数据约为 -54 eV/atom，该值来自不含核心修正的赝势能量输出，与当前 ABACUS v3.10.1 输出不一致",
+      "resolution": "需更新教程附录示例值为 -7532.3013985 eV（或按原子 -1883.0753 eV/atom）",
+      "tutorial_keywords": [
+        "FINAL_ETOT_IS",
+        "running_scf.log",
+        "总能量"
+      ],
+      "actual": -7532.3013985,
+      "expected_in_tutorial": -215.847068,
+      "step": "Step 6"
+    }
+  ]
+}

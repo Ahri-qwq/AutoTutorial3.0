@@ -22,6 +22,7 @@
 | tddft_plugin.py | tddft | `esolver_type = tddft`（INPUT代码块中）| 2026-03-09 | 用 ABACUS 做周期体系 RT-TDDFT：混合规范（Si 原胞 50步）|
 | elf_plugin.py | elf | `out_elf\s+1`、`ELF.cube`、`电子局域函数` | 2026-03-09 | ELF 电子局域函数计算与可视化教程（H₂O PW/LCAO + Fe BCC）|
 | neb_plugin.py | neb | `AbacusNEB`、`AbacusAutoNEB`、`ATST-Tools`、`dyneb_run`、`autoneb_run` | 2026-03-09 | NEB/AutoNEB 过渡态搜索教程（Li-Si + Cy-Pt@graphene），测试 IS SCF |
+| scf_plugin.py | scf | INPUT代码块中含 `calculation  scf`，且不含 dft_plus_u/tddft/sdft 等特殊关键词 | 2026-03-25 | ABACUS 输入输出体系：三文件入门与收敛性测试（Al FCC PW SCF） |
 
 ---
 

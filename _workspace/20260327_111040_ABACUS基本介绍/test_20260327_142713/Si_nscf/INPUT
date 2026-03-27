@@ -1,0 +1,6 @@
+INPUT_PARAMETERS
+ntype           1
+pseudo_dir      ./
+ecutwfc         50
+basis_type      pw
+calculation     scf

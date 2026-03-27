@@ -41,6 +41,7 @@ from test_plugins.sdft_plugin import SDFTPlugin
 from test_plugins.elf_plugin import ELFPlugin
 from test_plugins.tddft_plugin import TDDFTPlugin
 from test_plugins.neb_plugin import NEBPlugin
+from test_plugins.scf_plugin import SCFPlugin
 
 
 class FullTestExecutor:
@@ -85,6 +86,7 @@ class FullTestExecutor:
             ELFPlugin(self.job_manager, self.pp_manager),
             TDDFTPlugin(self.job_manager, self.pp_manager),
             NEBPlugin(self.job_manager, self.pp_manager),
+            SCFPlugin(self.job_manager, self.pp_manager),
         ]
 
         # 存储每个插件的测试信息和任务
@@ -255,7 +257,11 @@ class FullTestExecutor:
             test_info = test_data['test_info']
 
             print(f"\n[准备] {plugin.plugin_name} - {test_info.case_name}")
-            input_dirs = plugin.prepare_inputs(test_info, self.test_dir)
+            try:
+                input_dirs = plugin.prepare_inputs(test_info, self.test_dir)
+            except Exception as e:
+                print(f"  [SKIP] 准备失败（跳过此插件）: {e}")
+                continue
 
             if input_dirs:
                 test_data['input_dirs'] = input_dirs

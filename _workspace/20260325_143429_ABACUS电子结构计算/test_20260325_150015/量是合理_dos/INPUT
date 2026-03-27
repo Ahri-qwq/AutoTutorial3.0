@@ -1,0 +1,21 @@
+INPUT_PARAMETERS
+suffix          Al
+pseudo_dir      ./
+
+init_chg        file
+calculation     nscf
+ecutwfc         60
+scf_thr         1e-9
+scf_nmax        100
+
+basis_type      pw
+
+nspin           1
+
+smearing_method gauss
+smearing_sigma  0.02
+
+symmetry        0
+
+out_dos         2
+dos_sigma       0.07

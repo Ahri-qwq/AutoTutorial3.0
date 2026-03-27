@@ -1,0 +1,21 @@
+INPUT_PARAMETERS
+suffix          Al
+pseudo_dir      ./
+
+calculation     scf
+ecutwfc         60
+scf_thr         1e-9
+scf_nmax        100
+
+basis_type      pw
+
+nspin           1
+
+smearing_method gauss
+smearing_sigma  0.02
+
+mixing_type     broyden
+mixing_beta     0.4
+
+symmetry        1
+out_chg         1

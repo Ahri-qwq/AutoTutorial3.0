@@ -1,0 +1,21 @@
+INPUT_PARAMETERS
+
+suffix          Si
+ntype           1
+pseudo_dir      ./
+calculation     cell-relax
+basis_type      pw
+
+ecutwfc         50
+scf_thr         1e-6
+scf_nmax        100
+
+smearing_method gauss
+smearing_sigma  0.01
+
+symmetry        1
+
+force_thr_ev    0.01
+stress_thr      0.5
+relax_nmax      100
+out_stru        1

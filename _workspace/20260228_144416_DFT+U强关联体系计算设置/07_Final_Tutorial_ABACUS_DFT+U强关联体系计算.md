@@ -4,7 +4,7 @@ author: "AutoTutorial 3.0"
 date: "2026-02-28"
 topic: "DFT+U强关联体系计算设置"
 task_type: "C"
-has_case: true
+has_case: true  
 case_system: "反铁磁NiO（LCAO, SCF+DFT+U+omc）"
 word_count: ~5000
 chapters: 5

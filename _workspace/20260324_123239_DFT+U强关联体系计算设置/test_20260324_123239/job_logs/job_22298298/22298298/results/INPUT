@@ -1,0 +1,25 @@
+INPUT_PARAMETERS
+pseudo_dir      ./
+orbital_dir     ./
+suffix              NiO
+calculation         scf
+basis_type          lcao
+nspin               2
+
+ecutwfc             100
+scf_thr             1e-7
+scf_nmax            100
+smearing_method     gauss
+smearing_sigma      0.015
+mixing_type         broyden
+mixing_beta         0.4
+
+#Parameter DFT+U
+dft_plus_u          1
+orbital_corr        2 2 -1
+hubbard_u           5.0 5.0 0.0
+
+#输出控制
+out_bandgap         1
+out_mul             1
+out_chg             1
