@@ -1,0 +1,14 @@
+{
+  "detected_types": [
+    "relax",
+    "band",
+    "dos",
+    "scf"
+  ],
+  "case_names": [
+    "和分析材料",
+    "和分析材料",
+    "和分析材料",
+    "mat1"
+  ]
+}

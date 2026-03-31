@@ -1,0 +1,132 @@
+{
+    "comment": "Unless otherwise specified, the unit of energy is eV and the unit of length is Angstrom",
+    "init": {
+        "element": {
+            "Mg": "Mg",
+            "O": "O"
+        },
+        "orb": {
+            "Mg": "Mg_gga_10au_100Ry_2s1p.orb",
+            "O": "O_gga_6au_100Ry_2s2p1d.orb"
+        },
+        "pp": {
+            "Mg": "Mg_ONCV_PBE-1.0.upf",
+            "O": "O_ONCV_PBE-1.0.upf"
+        },
+        "coordinate": [
+            [
+                0.0,
+                0.0,
+                0.0
+            ],
+            [
+                5.625562271275628,
+                3.2479198916511518,
+                2.296626180135934
+            ]
+        ],
+        "mag": [
+            0.0,
+            0.0
+        ],
+        "label": [
+            "Mg",
+            "O"
+        ],
+        "cell": [
+            [
+                2.9769195488,
+                0.0,
+                0.0
+            ],
+            [
+                1.4884597744,
+                2.57808795428,
+                0.0
+            ],
+            [
+                1.4884597744,
+                0.85936265143,
+                2.43064463329
+            ]
+        ],
+        "point_group": "",
+        "point_group_in_space": "",
+        "natom": 2,
+        "nband": 18,
+        "natom_each_type": {
+            "Mg": 1,
+            "O": 1
+        },
+        "nelectron_each_type": {
+            "Mg": 10.0,
+            "O": 6.0
+        },
+        "nelectron": 16
+    },
+    "output": [
+        {
+            "e_fermi": null,
+            "energy": -1914.9427477146817,
+            "scf_converge": null,
+            "force": null,
+            "stress": null,
+            "coordinate": [
+                [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                [
+                    5.625562271275628,
+                    3.2479198916511518,
+                    2.296626180135934
+                ]
+            ],
+            "mag": [
+                0.0,
+                0.0
+            ],
+            "cell": [
+                [
+                    2.9769195488,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1.4884597744,
+                    2.57808795428,
+                    0.0
+                ],
+                [
+                    1.4884597744,
+                    0.85936265143,
+                    2.43064463329
+                ]
+            ],
+            "total_mag": 0.0,
+            "absolute_mag": 0.0,
+            "scf": [
+                {
+                    "energy": -1914.9427477146817,
+                    "ediff": 0.0,
+                    "drho": 0.0,
+                    "time": 6.135306135487326
+                }
+            ]
+        }
+    ],
+    "general_info": {
+        "version": "v3.10.1",
+        "commit": "f71921fe8 (Fri Nov 21 13:49:34 2025 +0800)",
+        "device": "cpu",
+        "mpi_num": 8,
+        "omp_num": 1,
+        "pseudo_dir": "",
+        "orbital_dir": "",
+        "stru_file": "STRU",
+        "kpt_file": "KPT",
+        "start_time": "2026-03-31 11:52:10",
+        "end_time": "2026-03-31 11:52:38"
+    }
+}

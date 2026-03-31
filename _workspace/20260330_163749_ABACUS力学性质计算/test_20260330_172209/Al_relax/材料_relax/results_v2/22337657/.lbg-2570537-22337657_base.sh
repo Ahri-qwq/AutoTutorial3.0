@@ -1,0 +1,1 @@
+ulimit -s unlimited;ulimit -m unlimited;cd /home/input_lbg-2570537-22337657;touch /home/input_lbg-2570537-22337657/STDOUTERR;/bin/bash /home/input_lbg-2570537-22337657/lbg-2570537-22337657.sh >/home/input_lbg-2570537-22337657/STDOUTERR 2>&1

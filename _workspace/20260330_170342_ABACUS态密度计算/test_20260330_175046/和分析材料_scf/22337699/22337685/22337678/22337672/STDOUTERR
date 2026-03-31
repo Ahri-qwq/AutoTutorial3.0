@@ -1,0 +1,40 @@
+Info: Local MPI proc number: 8,OpenMP thread number: 1,Total thread number: 8,Local thread limit: 16
+                                                                                     
+                              ABACUS v3.10.1
+
+               Atomic-orbital Based Ab-initio Computation at UStc                    
+
+                     Website: http://abacus.ustc.edu.cn/                             
+               Documentation: https://abacus.deepmodeling.com/                       
+                  Repository: https://github.com/abacusmodeling/abacus-develop       
+                              https://github.com/deepmodeling/abacus-develop         
+                      Commit: f71921fe8 (Fri Nov 21 13:49:34 2025 +0800)
+
+ Mon Mar 30 17:54:51 2026
+ MAKE THE DIR         : OUT.ABACUS/
+ RUNNING WITH DEVICE  : CPU / Intel(R) Xeon(R) Platinum 8163 CPU @ 2.50GHz
+ Pseudopotential directory now is : Mg.PD04.PBE.UPF
+ 
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                         NOTICE                           
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ 
+ Couldn't find pseudopotential file.
+ CHECK IN FILE : OUT.ABACUS/warning.log
+ 
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                         NOTICE                           
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+TIME STATISTICS
+------------------------------------------------------------------
+   CLASS_NAME           NAME        TIME/s  CALLS   AVG/s  PER/%  
+------------------------------------------------------------------
+                 total              0.10   1        0.10   100.00 
+ Driver          reading            0.05   1        0.05   47.53  
+ Input_Conv      Convert            0.00   1        0.00   0.43   
+ Driver          driver_line        0.00   1        0.00   0.00   
+ UnitCell        check_tau          0.00   1        0.00   0.00   
+ ESolver_KS_LCAO before_all_runners 0.00   1        0.00   0.00   
+------------------------------------------------------------------
+
+ See output information in : OUT.ABACUS/

@@ -213,6 +213,53 @@ python tools/test_framework_integrated.py continue ./test_dir
 python tools/retriever.py --query "ABACUS SCF计算 参数设置" --top_k 10
 ```
 
+### case_parser.py — 案例解析工具
+
+支持解析目录或文档格式的案例：
+
+```bash
+# 解析目录案例
+python tools/case_parser.py --input "data/training-datas/band/reference/si/"
+
+# 解析文档案例
+python tools/case_parser.py --input "案例文件.docx"
+```
+
+### case_converter.py — 案例批量转换
+
+将 training-datas 中的案例批量转换为标准化 Markdown 文档：
+
+```bash
+python tools/case_converter.py --input "data/training-datas" --output "data/training-datas/cases"
+```
+
+**重要：** 生成的案例文档会自动添加 `chunk_strategy: whole` 标记，确保案例完整性。
+
+---
+
+## 知识库文档规范
+
+### chunk_strategy 标记
+
+在 Markdown 文档的 frontmatter 中添加 `chunk_strategy: whole` 可防止文档被按标题切分：
+
+```yaml
+---
+title: 文档标题
+chunk_strategy: whole
+---
+```
+
+**适用场景：**
+- 案例文档（需要保持 INPUT/STRU/参数在同一检索单元）
+- 配置文件说明
+- 短小的完整教程
+
+**不适用场景：**
+- 长篇技术文档（超过 3000 字符仍会二次切分）
+- 需要精细检索的多章节文档
+
+
 ### case_parser.py — 案例解析
 
 ```bash

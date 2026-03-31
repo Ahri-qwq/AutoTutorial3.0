@@ -27,29 +27,33 @@ class CaseParser:
         初始化解析器
 
         Args:
-            file_path: 案例文件路径
+            file_path: 案例文件路径或目录路径
         """
         self.file_path = file_path
         self.content = ""
-        self.file_type = Path(file_path).suffix.lower()
+        self.is_directory = os.path.isdir(file_path)
+        self.file_type = "" if self.is_directory else Path(file_path).suffix.lower()
+        self.directory_files = {}  # 存储目录中的文件内容
 
     def read_file(self):
         """读取文件内容"""
         if not os.path.exists(self.file_path):
-            print(f"[错误] 文件不存在: {self.file_path}", file=sys.stderr)
+            print(f"[错误] 路径不存在: {self.file_path}", file=sys.stderr)
             sys.exit(1)
 
         try:
-            if self.file_type == ".docx":
+            if self.is_directory:
+                self._read_directory()
+            elif self.file_type == ".docx":
                 self.content = self._read_docx()
             elif self.file_type in [".md", ".txt"]:
                 self.content = self._read_text()
             else:
                 print(f"[错误] 不支持的文件格式: {self.file_type}", file=sys.stderr)
-                print("[提示] 支持的格式: .docx, .md, .txt", file=sys.stderr)
+                print("[提示] 支持的格式: .docx, .md, .txt 或目录", file=sys.stderr)
                 sys.exit(1)
         except Exception as e:
-            print(f"[错误] 读取文件失败: {e}", file=sys.stderr)
+            print(f"[错误] 读取失败: {e}", file=sys.stderr)
             sys.exit(1)
 
     def _read_docx(self):
@@ -70,6 +74,29 @@ class CaseParser:
         with open(self.file_path, 'r', encoding='utf-8', errors='ignore') as f:
             return f.read()
 
+    def _read_directory(self):
+        """读取目录中的ABACUS文件"""
+        abacus_files = ["INPUT", "STRU", "KPT", "KPOINTS"]
+
+        for fname in abacus_files:
+            fpath = os.path.join(self.file_path, fname)
+            if os.path.exists(fpath):
+                with open(fpath, 'r', encoding='utf-8', errors='ignore') as f:
+                    self.directory_files[fname] = f.read()
+
+        # 读取 readme.md（可能在当前目录或上级目录）
+        for readme_path in [
+            os.path.join(self.file_path, "readme.md"),
+            os.path.join(self.file_path, "..", "readme.md")
+        ]:
+            if os.path.exists(readme_path):
+                with open(readme_path, 'r', encoding='utf-8', errors='ignore') as f:
+                    self.directory_files["readme"] = f.read()
+                break
+
+        if not self.directory_files:
+            print(f"[警告] 目录中未找到 ABACUS 文件: {self.file_path}", file=sys.stderr)
+
     def parse(self):
         """
         解析案例内容
@@ -77,12 +104,21 @@ class CaseParser:
         Returns:
             dict: 解析结果
         """
-        result = {
-            "file_structure": self._extract_file_structure(),
-            "parameters": self._extract_parameters(),
-            "workflow": self._extract_workflow(),
-            "special_settings": self._extract_special_settings(),
-        }
+        if self.is_directory:
+            result = {
+                "file_structure": self._extract_file_structure_from_dir(),
+                "parameters": self._extract_parameters_from_dir(),
+                "workflow": self._extract_workflow(),
+                "special_settings": self._extract_special_settings(),
+                "files_content": self.directory_files,
+            }
+        else:
+            result = {
+                "file_structure": self._extract_file_structure(),
+                "parameters": self._extract_parameters(),
+                "workflow": self._extract_workflow(),
+                "special_settings": self._extract_special_settings(),
+            }
         return result
 
     def _extract_file_structure(self):
@@ -112,6 +148,32 @@ class CaseParser:
             files.append(f"轨道文件 ({len(set(orb_files))}个)")
 
         return files if files else ["未识别到文件结构"]
+
+    def _extract_file_structure_from_dir(self):
+        """从目录中提取文件结构"""
+        files = list(self.directory_files.keys())
+        return files if files else ["目录为空"]
+
+    def _extract_parameters_from_dir(self):
+        """从目录的INPUT文件中提取参数"""
+        if "INPUT" not in self.directory_files:
+            return {"提示": "未找到INPUT文件"}
+
+        parameters = {}
+        input_content = self.directory_files["INPUT"]
+
+        for line in input_content.split('\n'):
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+
+            # 匹配 parameter = value 或 parameter value
+            match = re.match(r'(\w+)\s*[=\s]\s*(.+)', line)
+            if match:
+                param, value = match.groups()
+                parameters[param.strip()] = value.strip()
+
+        return parameters if parameters else {"提示": "未识别到参数"}
 
     def _extract_parameters(self):
         """提取关键参数"""
@@ -152,6 +214,16 @@ class CaseParser:
         """提取计算流程"""
         workflow = []
 
+        # 如果是目录，优先从 INPUT 和 readme 提取
+        if self.is_directory:
+            search_content = ""
+            if "INPUT" in self.directory_files:
+                search_content += self.directory_files["INPUT"]
+            if "readme" in self.directory_files:
+                search_content += "\n" + self.directory_files["readme"]
+        else:
+            search_content = self.content
+
         # 查找常见的流程关键词
         workflow_keywords = {
             "结构优化": ["relax", "optimization", "优化", "结构优化"],
@@ -166,20 +238,30 @@ class CaseParser:
 
         for step_name, keywords in workflow_keywords.items():
             for keyword in keywords:
-                if re.search(rf'\b{keyword}\b', self.content, re.IGNORECASE):
+                if re.search(rf'\b{keyword}\b', search_content, re.IGNORECASE):
                     workflow.append(step_name)
                     break
 
         # 尝试提取编号的步骤
-        numbered_steps = re.findall(r'(?:步骤|Step)\s*[：:]\s*(.+?)(?:\n|$)', self.content, re.IGNORECASE)
+        numbered_steps = re.findall(r'(?:步骤|Step)\s*[：:]\s*(.+?)(?:\n|$)', search_content, re.IGNORECASE)
         if numbered_steps:
-            workflow.extend(numbered_steps[:5])  # 最多提取5个步骤
+            workflow.extend(numbered_steps[:5])
 
         return workflow if workflow else ["未识别到明确的计算流程"]
 
     def _extract_special_settings(self):
         """提取特殊设置"""
         special = []
+
+        # 如果是目录，从 INPUT 和 readme 提取
+        if self.is_directory:
+            search_content = ""
+            if "INPUT" in self.directory_files:
+                search_content += self.directory_files["INPUT"]
+            if "readme" in self.directory_files:
+                search_content += "\n" + self.directory_files["readme"]
+        else:
+            search_content = self.content
 
         # 查找特殊设置的关键词
         special_keywords = [
@@ -193,15 +275,15 @@ class CaseParser:
 
         for setting_name, keywords in special_keywords:
             for keyword in keywords:
-                if re.search(rf'\b{keyword}\b', self.content, re.IGNORECASE):
+                if re.search(rf'\b{keyword}\b', search_content, re.IGNORECASE):
                     special.append(setting_name)
                     break
 
         # 查找注释或说明中的特殊设置
         comment_pattern = re.compile(r'(?:注意|注|说明|备注)[：:]\s*(.+?)(?:\n|$)', re.IGNORECASE)
-        comments = comment_pattern.findall(self.content)
+        comments = comment_pattern.findall(search_content)
         if comments:
-            special.extend([f"说明: {c.strip()}" for c in comments[:3]])  # 最多3条
+            special.extend([f"说明: {c.strip()}" for c in comments[:3]])
 
         return special if special else ["未识别到特殊设置"]
 
@@ -217,7 +299,7 @@ def format_output(result, file_path):
     print("案例解析结果")
     print("=" * 80)
     print()
-    print(f"文件: {file_path}")
+    print(f"路径: {file_path}")
     print()
 
     print("## 文件结构")
@@ -243,6 +325,14 @@ def format_output(result, file_path):
     for item in result["special_settings"]:
         print(f"- {item}")
     print()
+
+    # 如果是目录解析，显示文件内容摘要
+    if "files_content" in result and result["files_content"]:
+        print("## 文件内容摘要")
+        for fname, content in result["files_content"].items():
+            lines = len(content.split('\n'))
+            print(f"- {fname}: {lines} 行")
+        print()
 
 
 def main():

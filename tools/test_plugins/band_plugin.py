@@ -200,19 +200,8 @@ class BandPlugin(BaseTestPlugin):
 
     # 辅助方法
     def _extract_case_name(self, content: str) -> str:
-        """提取案例名称"""
-        patterns = [
-            r'案例\d*\s*[-:：]\s*(\w+)',
-            r'#+\s*案例[：:]\s*(\w+)',
-            r'计算(\w+)的',
-        ]
-
-        for pattern in patterns:
-            match = re.search(pattern, content)
-            if match:
-                return match.group(1)
-
-        return "Unknown"
+        """提取案例名称（使用基类通用方法）"""
+        return self.extract_case_name(content)
 
     def _extract_input(self, content: str) -> Optional[str]:
         """提取 INPUT 文件"""

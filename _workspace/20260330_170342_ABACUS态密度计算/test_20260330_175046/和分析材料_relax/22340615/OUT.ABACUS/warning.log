@@ -1,0 +1,16 @@
+ AUTO_SET NBANDS to 18
+ AUTO_SET NBANDS to 18
+ Generate k-points file according to KSPACING: KPT
+      Processor           Atom
+              1             57
+              2             53
+              3             53
+              4             54
+              5             53
+              6             53
+              7             53
+              8             56
+ ModuleIO::read_rhog  warning : Can't open file OUT.ABACUS//ABACUS-CHARGE-DENSITY.restart
+ Charge::init_rho  warning : Failed to read in charge density from file.
+If you want to use atomic charge initialization, 
+please set init_chg to atomic in INPUT.

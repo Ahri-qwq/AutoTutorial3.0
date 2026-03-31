@@ -1,0 +1,28 @@
+{
+  "tutorial_path": "C:\\MyCode\\AutoTutorial3.0\\_workspace\\20260330_170342_ABACUS\u6001\u5bc6\u5ea6\u8ba1\u7b97\\07_Final_Tutorial_ABACUS\u6001\u5bc6\u5ea6\u8ba1\u7b97.md",
+  "plugin_states": {
+    "relax": {
+      "job_ids": [
+        "22340562"
+      ],
+      "case_name": "\u548c\u5206\u6790\u6750\u6599"
+    },
+    "band": {
+      "job_ids": [],
+      "case_name": "\u548c\u5206\u6790\u6750\u6599"
+    },
+    "dos": {
+      "job_ids": [
+        "22340563"
+      ],
+      "case_name": "\u548c\u5206\u6790\u6750\u6599"
+    },
+    "scf": {
+      "job_ids": [
+        "22340564"
+      ],
+      "case_name": "mat1"
+    }
+  },
+  "start_time": "2026-03-31T11:16:00.373436"
+}

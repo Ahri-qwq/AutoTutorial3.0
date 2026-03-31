@@ -1,0 +1,14 @@
+{
+  "detected_types": [
+    "relax",
+    "elastic",
+    "band",
+    "dos"
+  ],
+  "case_names": [
+    "Al",
+    "Al",
+    "Al",
+    "Al"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "detected_types": [
+    "relax",
+    "band",
+    "dos",
+    "scf"
+  ],
+  "case_names": [
+    "Si",
+    "Si",
+    "Si",
+    "Si"
+  ]
+}

@@ -1,0 +1,31 @@
+INPUT_PARAMETERS
+
+# System variables
+calculation         cell-relax
+symmetry            1
+kspacing            0.14
+precision           double
+
+# Plane wave related variables
+ecutwfc             70.0
+pw_diag_nmax        20
+pw_diag_ndim        2
+
+# Electronic structure
+basis_type          pw
+ks_solver           dav_subspace
+smearing_method     gauss
+smearing_sigma      0.015
+mixing_type         broyden
+mixing_beta         0.8
+scf_nmax            100
+scf_thr             1e-08
+
+# Geometry relaxation
+relax_method        cg
+relax_nmax          60
+cal_force           1
+force_thr_ev        0.01
+cal_stress          1
+stress_thr          0.5
+fixed_axes          None

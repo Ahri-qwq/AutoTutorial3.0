@@ -1,0 +1,48 @@
+{
+    "total": 0.0600618,
+    "sub": [
+        {
+            "class_name": "Driver",
+            "sub": [
+                {
+                "name": "driver_line",
+                "cpu_second": 0,
+                "calls": 1,
+                "cpu_second_per_call": 0.000000000000000,
+                "cpu_second_per_total": 0.000000000000000
+                },
+                {
+                "name": "reading",
+                "cpu_second": 0.0501508072957648,
+                "calls": 1,
+                "cpu_second_per_call": 0.050150807295765,
+                "cpu_second_per_total": 0.834986560464805
+                }
+            ]
+        },
+        {
+            "class_name": "Input_Conv",
+            "sub": [
+                {
+                "name": "Convert",
+                "cpu_second": 0.000450879511745939,
+                "calls": 1,
+                "cpu_second_per_call": 0.000450879511746,
+                "cpu_second_per_total": 0.007506924673745
+                }
+            ]
+        },
+        {
+            "class_name": "UnitCell",
+            "sub": [
+                {
+                "name": "check_tau",
+                "cpu_second": 8.69292716032533e-07,
+                "calls": 1,
+                "cpu_second_per_call": 0.000000869292716,
+                "cpu_second_per_total": 0.000014473301112
+                }
+            ]
+        }
+    ]
+}

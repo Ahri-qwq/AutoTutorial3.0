@@ -1,0 +1,25 @@
+ AUTO_SET NBANDS to 18
+ AUTO_SET NBANDS to 18
+ Generate k-points file according to KSPACING: KPT
+      Processor           Atom
+              1             57
+              2             53
+              3             53
+              4             54
+              5             53
+              6             53
+              7             53
+              8             56
+                 charge before normalized = 16
+                  charge after normalized = 16
+                            startmag_type = 2
+                       charge from rho_at = 9.93459672603139
+                         charge should be = 10
+                            startmag_type = 2
+                       charge from rho_at = 5.99904704283839
+                         charge should be = 6
+
+ SETUP ATOMIC RHO FOR SPIN 1
+                 Electron number from rho = 16
+           total electron number from rho = 16
+                                should be = 16

@@ -1,0 +1,2 @@
+ Pseudopotential directory now is : ./Si.upf
+ UnitCell::read_cell_pseudopots  warning : Couldn't find pseudopotential file.

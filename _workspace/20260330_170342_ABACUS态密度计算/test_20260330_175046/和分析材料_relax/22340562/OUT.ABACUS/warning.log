@@ -1,0 +1,2 @@
+ Pseudopotential directory now is : ./Mg.PD04.PBE.UPF
+ UnitCell::read_cell_pseudopots  warning : Couldn't find pseudopotential file.

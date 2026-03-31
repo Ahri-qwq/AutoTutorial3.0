@@ -1,0 +1,123 @@
+Info: Local MPI proc number: 8,OpenMP thread number: 1,Total thread number: 8,Local thread limit: 16
+                                                                                     
+                              ABACUS v3.10.1
+
+               Atomic-orbital Based Ab-initio Computation at UStc                    
+
+                     Website: http://abacus.ustc.edu.cn/                             
+               Documentation: https://abacus.deepmodeling.com/                       
+                  Repository: https://github.com/abacusmodeling/abacus-develop       
+                              https://github.com/deepmodeling/abacus-develop         
+                      Commit: f71921fe8 (Fri Nov 21 13:49:34 2025 +0800)
+
+ Tue Mar 31 11:06:46 2026
+ MAKE THE DIR         : OUT.Si/
+ RUNNING WITH DEVICE  : CPU / Intel(R) Xeon(R) Platinum 8163 CPU @ 2.50GHz
+ UNIFORM GRID DIM        : 45 * 45 * 45
+ UNIFORM GRID DIM(BIG)   : 45 * 45 * 45
+ DONE(0.254665   SEC) : SETUP UNITCELL
+ DONE(0.344538   SEC) : INIT K-POINTS
+ ---------------------------------------------------------
+ ---------------------------------------------------------
+ SPIN    KPOINTS         PROCESSORS  THREADS     
+ 1       221             8           8           
+ ---------------------------------------------------------
+ Use plane wave basis
+ ---------------------------------------------------------
+ ELEMENT NATOM       XC          
+ Si      8           
+ ---------------------------------------------------------
+ Initial plane wave basis and FFT box
+ ---------------------------------------------------------
+ DONE(0.372428   SEC) : INIT PLANEWAVE
+ DONE(0.381721   SEC) : LOCAL POTENTIAL
+ DONE(0.413778   SEC) : NON-LOCAL POTENTIAL
+ MEMORY FOR PSI (MB)  : 51.3787
+ DONE(0.415109   SEC) : INIT BASIS
+ -------------------------------------------
+ NONSELF-CONSISTENT : 
+ -------------------------------------------
+ START CHARGE      : file
+ DONE(1.0877     SEC) : INIT SCF
+ ITER       ETOT/eV          EDIFF/eV         DRHO     TIME/s
+ DS1     -8.55644672e+02   0.00000000e+00   0.0000e+00  94.61
+TIME STATISTICS
+------------------------------------------------------------------------------
+       CLASS_NAME                NAME           TIME/s  CALLS   AVG/s  PER/%  
+------------------------------------------------------------------------------
+                        total                   96.71  15       6.45   100.00 
+ Driver                 reading                 0.05   1        0.05   0.06   
+ Input_Conv             Convert                 0.00   1        0.00   0.00   
+ Driver                 driver_line             96.66  1        96.66  99.94  
+ UnitCell               check_tau               0.00   1        0.00   0.00   
+ PW_Basis_Sup           setuptransform          0.14   1        0.14   0.14   
+ PW_Basis_Sup           distributeg             0.00   1        0.00   0.00   
+ mymath                 heapsort                0.00   3        0.00   0.00   
+ Charge_Mixing          init_mixing             0.00   2        0.00   0.00   
+ PW_Basis_K             setuptransform          0.01   1        0.01   0.01   
+ PW_Basis_K             distributeg             0.00   1        0.00   0.00   
+ PW_Basis               setup_struc_factor      0.00   1        0.00   0.00   
+ ppcell_vl              init_vloc               0.00   1        0.00   0.00   
+ ppcell_vnl             init                    0.00   1        0.00   0.00   
+ ppcell_vnl             init_vnl                0.03   1        0.03   0.03   
+ PSIInit                prepare_init            0.00   1        0.00   0.00   
+ Ions                   opt_ions                95.43  1        95.43  98.67  
+ ESolver_KS_PW          runner                  95.43  1        95.43  98.67  
+ ESolver_KS_PW          before_scf              0.67   1        0.67   0.69   
+ H_Ewald_pw             compute_ewald           0.00   1        0.00   0.00   
+ Charge                 set_rho_core            0.00   1        0.00   0.00   
+ ModuleIO               read_rhog               0.03   1        0.03   0.03   
+ PW_Basis_Sup           recip2real              0.01   13       0.00   0.01   
+ PW_Basis_Sup           gathers_scatterp        0.00   13       0.00   0.00   
+ Potential              init_pot                0.01   1        0.01   0.01   
+ Potential              update_from_charge      0.02   2        0.01   0.02   
+ Potential              cal_fixed_v             0.00   1        0.00   0.00   
+ PotLocal               cal_fixed_v             0.00   1        0.00   0.00   
+ Potential              cal_v_eff               0.02   2        0.01   0.02   
+ H_Hartree_pw           v_hartree               0.00   2        0.00   0.00   
+ PW_Basis_Sup           real2recip              0.01   15       0.00   0.01   
+ PW_Basis_Sup           gatherp_scatters        0.00   15       0.00   0.00   
+ PotXC                  cal_v_eff               0.02   2        0.01   0.02   
+ XC_Functional          v_xc                    0.02   2        0.01   0.02   
+ Potential              interpolate_vrs         0.00   2        0.00   0.00   
+ PSIInit                initialize_psi          0.62   1        0.62   0.64   
+ Nonlocal               getvnl                  0.41   442      0.00   0.43   
+ pp_cell_vnl            getvnl                  0.41   442      0.00   0.43   
+ Structure_Factor       get_sk                  0.13   442      0.00   0.13   
+ psi_initializer_random initialize              0.42   221      0.00   0.44   
+ psi_initializer        random_t                0.31   111      0.00   0.32   
+ psi_initializer_random random_t                0.31   111      0.00   0.32   
+ ESolver_KS_PW          hamilt2density_single   94.58  1        94.58  97.79  
+ HSolverPW              solve                   94.58  1        94.58  97.79  
+ Diago_DavSubspace      diag_once               94.31  633      0.15   97.52  
+ Diago_DavSubspace      first                   5.15   633      0.01   5.33   
+ DavSubspace            hpsi_func               62.61  16115    0.00   64.74  
+ Operator               hPsi                    62.57  16115    0.00   64.70  
+ Operator               EkineticPW              0.24   16115    0.00   0.25   
+ Operator               VeffPW                  57.31  16115    0.00   59.26  
+ PW_Basis_K             recip2real              27.85  216914   0.00   28.79  
+ PW_Basis_K             gathers_scatterp        12.50  216914   0.00   12.92  
+ PW_Basis_K             real2recip              25.74  216914   0.00   26.62  
+ PW_Basis_K             gatherp_scatters        10.93  216914   0.00   11.30  
+ Operator               NonlocalPW              4.97   16115    0.00   5.14   
+ Nonlocal               add_nonlocal_pp         2.22   16115    0.00   2.29   
+ Diago_DavSubspace      cal_elem                3.42   16115    0.00   3.54   
+ Diago_DavSubspace      diag_zhegvx             17.60  16115    0.00   18.20  
+ Diago_DavSubspace      cal_grad                63.18  15482    0.00   65.33  
+ Diago_DavSubspace      check_update            0.01   15482    0.00   0.01   
+ Diago_DavSubspace      last                    5.29   8693     0.00   5.47   
+ Diago_DavSubspace      refresh                 2.99   8060     0.00   3.09   
+ Charge_Mixing          get_drho                0.00   1        0.00   0.00   
+ Charge_Mixing          inner_product_recip_rho 0.00   1        0.00   0.00   
+ ModuleIO               write_rhog              0.12   1        0.12   0.12   
+ ESolver_KS_PW          after_scf               0.03   1        0.03   0.03   
+ Charge                 atomic_rho              0.00   1        0.00   0.00   
+ ModuleIO               write_istate_info       0.04   1        0.04   0.04   
+ ModuleIO               nscf_band               0.82   1        0.82   0.84   
+------------------------------------------------------------------------------
+
+
+ START  Time  : Tue Mar 31 11:06:46 2026
+ FINISH Time  : Tue Mar 31 11:08:15 2026
+ TOTAL  Time  : 89
+ SEE INFORMATION IN : OUT.Si/

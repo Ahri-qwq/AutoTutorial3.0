@@ -35,8 +35,8 @@ DB_PATH = os.path.join(ROOT_DIR, "data", "chroma_db")
 COLLECTION_NAME = "abacus_knowledge"
 
 # 切分参数（字符级的二次切分上限；语义切分会优先保持段落/标题/代码块）
-CHUNK_SIZE = 900
-OVERLAP = 120
+CHUNK_SIZE = 3000
+OVERLAP = 200
 
 # 支持的文件类型
 SUPPORTED_EXTS = [".md", ".txt", ".docx", ".pdf"]
@@ -186,6 +186,12 @@ def _split_by_markdown_sections(text: str) -> List[Chunk]:
         content = "".join(buf).strip()
         if content:
             section_path = " > ".join(header_stack) if header_stack else "(no_heading)"
+            # 将完整标题路径写入 chunk 文本开头（参与 embedding，提供语境）
+            # 使用原始文档标题（包含 H1），不做过滤
+            # Agent 结合正文内容综合判断，不被元数据强制锚定
+            if header_stack:
+                header_prefix = " > ".join(header_stack)
+                content = f"[{header_prefix}]\n{content}"
             chunks.append(Chunk(text=content, section_path=section_path, span_start=buf_start, span_end=end_pos))
         buf = []
 
@@ -251,6 +257,16 @@ def split_document(filepath: str, text: str) -> List[Chunk]:
 
     if not text or not text.strip():
         return []
+
+    # 检查 Markdown frontmatter 中的 chunk_strategy
+    if ext == ".md" and text.startswith("---"):
+        lines = text.split('\n', 20)  # 只检查前20行
+        for line in lines[1:]:
+            if line.strip() == "---":
+                break
+            if "chunk_strategy:" in line and "whole" in line:
+                # 整个文档作为一个 chunk
+                return [Chunk(text=text, section_path="", span_start=0, span_end=len(text))]
 
     if ext == ".md":
         base = _split_by_markdown_sections(text)

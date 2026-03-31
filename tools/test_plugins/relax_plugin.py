@@ -267,22 +267,8 @@ class RelaxPlugin(BaseTestPlugin):
 
     # 辅助方法
     def _extract_case_name(self, content: str) -> str:
-        """提取案例名称"""
-        # 尝试多种格式
-        patterns = [
-            r'案例\d*\s*[-:：]\s*(\w+)',  # 案例1 - Si 或 案例：Si
-            r'#+\s*案例[：:]\s*(\w+)',     # ## 案例：Si
-            r'计算(\w+)的',                 # 计算Si的弹性模量
-            r'##\s*(\w+)的弹性',           # ## Si的弹性
-        ]
-
-        for pattern in patterns:
-            match = re.search(pattern, content)
-            if match:
-                return match.group(1)
-
-        # 默认名称
-        return "Unknown"
+        """提取案例名称（使用基类通用方法）"""
+        return self.extract_case_name(content)
 
     def _extract_input(self, content: str) -> Optional[str]:
         """提取 INPUT 文件"""

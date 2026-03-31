@@ -216,20 +216,8 @@ class SCFPlugin(BaseTestPlugin):
     # ── 辅助方法 ──────────────────────────────────────
 
     def _extract_case_name(self, content: str) -> str:
-        """提取案例名称（优先识别 Al、Si 等元素名）"""
-        patterns = [
-            r'Al\s+FCC',
-            r'Al FCC',
-            r'铝.*?FCC',
-        ]
-        for p in patterns:
-            if re.search(p, content):
-                return "Al"
-        # fallback：提取 suffix 参数
-        match = re.search(r'suffix\s+(\w+)', content)
-        if match:
-            return match.group(1)
-        return "Al"
+        """提取案例名称（使用基类通用方法）"""
+        return self.extract_case_name(content)
 
     def _extract_input(self, content: str) -> Optional[str]:
         """

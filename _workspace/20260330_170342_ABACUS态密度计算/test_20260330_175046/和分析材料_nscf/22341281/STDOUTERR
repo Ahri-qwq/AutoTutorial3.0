@@ -1,0 +1,103 @@
+                                                                                     
+                              ABACUS v3.10.1
+
+               Atomic-orbital Based Ab-initio Computation at UStc                    
+
+                     Website: http://abacus.ustc.edu.cn/                             
+               Documentation: https://abacus.deepmodeling.com/                       
+                  Repository: https://github.com/abacusmodeling/abacus-develop       
+                              https://github.com/deepmodeling/abacus-develop         
+                      Commit: f71921fe8 (Fri Nov 21 13:49:34 2025 +0800)
+
+ Info: Local MPI proc number: 8,OpenMP thread number: 1,Total thread number: 8,Local thread limit: 16
+Tue Mar 31 11:47:08 2026
+ MAKE THE DIR         : OUT.ABACUS/
+ RUNNING WITH DEVICE  : CPU / Intel(R) Xeon(R) Platinum
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ Warning: the number of valence electrons in pseudopotential > 2 for Mg: [Ne] 3s2
+ Pseudopotentials with additional electrons can yield (more) accurate outcomes, but may be less efficient.
+ If you're confident that your chosen pseudopotential is appropriate, you can safely ignore this warning.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ UNIFORM GRID DIM        : 36 * 36 * 36
+ UNIFORM GRID DIM(BIG)   : 12 * 12 * 12
+ DONE(0.175396   SEC) : SETUP UNITCELL
+ DONE(0.341771   SEC) : INIT K-POINTS
+ ---------------------------------------------------------
+ ---------------------------------------------------------
+ SPIN    KPOINTS         PROCESSORS  THREADS     NBASE       
+ 1       2920            8           8           18          
+ ---------------------------------------------------------
+ Use Systematically Improvable Atomic bases
+ ---------------------------------------------------------
+ ELEMENT ORBITALS        NBASE       NATOM       XC          
+ Mg      2s1p0d-10au     5           1           
+ O       2s2p1d-7au      13          1           
+ ---------------------------------------------------------
+ Initial plane wave basis and FFT box
+ ---------------------------------------------------------
+ DONE(0.476037   SEC) : INIT PLANEWAVE
+ DONE(0.721551   SEC) : LOCAL POTENTIAL
+ -------------------------------------------
+ NONSELF-CONSISTENT : 
+ -------------------------------------------
+ START CHARGE      : file
+
+ WARNING: "init_chg" is enabled but ABACUS failed to read charge density from file.
+ Please check if there is SPINX_CHG.cube (X=1,...) or {suffix}-CHARGE-DENSITY.restart in the directory.
+ 
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                         NOTICE                           
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ 
+ Failed to read in charge density from file.
+If you want to use atomic charge initialization, 
+please set init_chg to atomic in INPUT.
+ CHECK IN FILE : OUT.ABACUS/warning.log
+ 
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                         NOTICE                           
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+TIME STATISTICS
+----------------------------------------------------------------------------------
+   CLASS_NAME                   NAME                TIME/s  CALLS   AVG/s  PER/%  
+----------------------------------------------------------------------------------
+                 total                              0.82   9        0.09   100.00 
+ Driver          reading                            0.07   1        0.07   8.14   
+ Input_Conv      Convert                            0.00   1        0.00   0.05   
+ Driver          driver_line                        0.00   1        0.00   0.00   
+ UnitCell        check_tau                          0.00   1        0.00   0.00   
+ ESolver_KS_LCAO before_all_runners                 0.61   1        0.61   74.52  
+ PW_Basis_Sup    setuptransform                     0.01   1        0.01   0.92   
+ PW_Basis_Sup    distributeg                        0.00   1        0.00   0.05   
+ mymath          heapsort                           0.00   3        0.00   0.04   
+ Charge_Mixing   init_mixing                        0.00   1        0.00   0.00   
+ PW_Basis_K      setuptransform                     0.05   1        0.05   6.29   
+ PW_Basis_K      distributeg                        0.00   1        0.00   0.03   
+ PW_Basis        setup_struc_factor                 0.00   1        0.00   0.02   
+ NOrbital_Lm     extra_uniform                      0.01   8        0.00   1.23   
+ Mathzone_Add1   SplineD2                           0.00   8        0.00   0.02   
+ Mathzone_Add1   Cubic_Spline_Interpolation         0.00   8        0.00   0.52   
+ ppcell_vl       init_vloc                          0.00   1        0.00   0.48   
+ Ions            opt_ions                           0.00   1        0.00   0.00   
+ ESolver_KS_LCAO runner                             0.00   1        0.00   0.00   
+ ESolver_KS_LCAO before_scf                         0.00   1        0.00   0.00   
+ atom_arrange    search                             0.00   1        0.00   0.12   
+ atom_arrange    grid_d.init                        0.00   1        0.00   0.11   
+ Grid            Construct_Adjacent_expand          0.00   1        0.00   0.01   
+ Grid            Construct_Adjacent_expand_periodic 0.00   2        0.00   0.01   
+ Grid_Technique  init                               0.07   1        0.07   8.29   
+ Grid_BigCell    grid_expansion_index               0.01   2        0.00   1.14   
+ Grid_Driver     Find_atom                          0.00   14       0.00   0.04   
+ Record_adj      for_2d                             0.01   1        0.01   1.44   
+ LCAO_domain     grid_prepare                       0.00   1        0.00   0.00   
+ Veff            initialize_HR                      0.00   1        0.00   0.03   
+ OverlapNew      initialize_SR                      0.00   1        0.00   0.03   
+ EkineticNew     initialize_HR                      0.00   1        0.00   0.06   
+ NonlocalNew     initialize_HR                      0.00   1        0.00   0.31   
+ Charge          set_rho_core                       0.00   1        0.00   0.00   
+ ModuleIO        read_rhog                          0.00   1        0.00   0.00   
+----------------------------------------------------------------------------------
+
+ See output information in : OUT.ABACUS/

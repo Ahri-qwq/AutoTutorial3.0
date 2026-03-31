@@ -1,0 +1,60 @@
+{
+    "total": 0.105485,
+    "sub": [
+        {
+            "class_name": "Driver",
+            "sub": [
+                {
+                "name": "driver_line",
+                "cpu_second": 0,
+                "calls": 1,
+                "cpu_second_per_call": 0.000000000000000,
+                "cpu_second_per_total": 0.000000000000000
+                },
+                {
+                "name": "reading",
+                "cpu_second": 0.0657824961805424,
+                "calls": 1,
+                "cpu_second_per_call": 0.065782496180542,
+                "cpu_second_per_total": 0.623616966341648
+                }
+            ]
+        },
+        {
+            "class_name": "ESolver_KS_LCAO",
+            "sub": [
+                {
+                "name": "before_all_runners",
+                "cpu_second": 0,
+                "calls": 1,
+                "cpu_second_per_call": 0.000000000000000,
+                "cpu_second_per_total": 0.000000000000000
+                }
+            ]
+        },
+        {
+            "class_name": "Input_Conv",
+            "sub": [
+                {
+                "name": "Convert",
+                "cpu_second": 0.000375906907184032,
+                "calls": 1,
+                "cpu_second_per_call": 0.000375906907184,
+                "cpu_second_per_total": 0.003563591208847
+                }
+            ]
+        },
+        {
+            "class_name": "UnitCell",
+            "sub": [
+                {
+                "name": "check_tau",
+                "cpu_second": 1.01154878606735e-06,
+                "calls": 1,
+                "cpu_second_per_call": 0.000001011548786,
+                "cpu_second_per_total": 0.000009589465616
+                }
+            ]
+        }
+    ]
+}

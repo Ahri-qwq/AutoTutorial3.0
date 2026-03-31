@@ -1,0 +1,59 @@
+ AUTO_SET NBANDS to 32
+ Generate k-points file according to KSPACING: KPT
+                            startmag_type = 2
+                       charge from rho_at = 10.9185
+                         charge should be = 11
+
+ SETUP ATOMIC RHO FOR SPIN 1
+                 Electron number from rho = 44
+           total electron number from rho = 44
+                                should be = 44
+                 charge before normalized = 44
+                  charge after normalized = 44
+ scf  warning : Threshold on eigenvalues was too large.
+                            startmag_type = 2
+                       charge from rho_at = 10.9184765187199
+                         charge should be = 11
+
+ SETUP ATOMIC RHO FOR SPIN 1
+                 Electron number from rho = 43.9999999999998
+           total electron number from rho = 43.9999999999998
+                                should be = 44
+                            startmag_type = 2
+                       charge from rho_at = 10.9184765187199
+                         charge should be = 11
+
+ SETUP ATOMIC RHO FOR SPIN 1
+                 Electron number from rho = 43.9999999999997
+           total electron number from rho = 43.9999999999997
+                                should be = 44
+                 charge before normalized = 43.9999999999785
+                  charge after normalized = 43.9999999999999
+ scf  warning : Threshold on eigenvalues was too large.
+                            startmag_type = 2
+                       charge from rho_at = 10.9184765187199
+                         charge should be = 11
+
+ SETUP ATOMIC RHO FOR SPIN 1
+                 Electron number from rho = 43.9999999999997
+           total electron number from rho = 43.9999999999997
+                                should be = 44
+                            startmag_type = 2
+                       charge from rho_at = 10.9184765187199
+                         charge should be = 11
+
+ SETUP ATOMIC RHO FOR SPIN 1
+                 Electron number from rho = 43.9999999999999
+           total electron number from rho = 43.9999999999999
+                                should be = 44
+                 charge before normalized = 43.9999999999913
+                  charge after normalized = 44
+ scf  warning : Threshold on eigenvalues was too large.
+                            startmag_type = 2
+                       charge from rho_at = 10.9184765187199
+                         charge should be = 11
+
+ SETUP ATOMIC RHO FOR SPIN 1
+                 Electron number from rho = 43.9999999999999
+           total electron number from rho = 43.9999999999999
+                                should be = 44

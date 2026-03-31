@@ -17,8 +17,10 @@
 
 - `tools/test_framework_integrated.py` — 主框架，注册所有插件
 - `tools/test_plugins/` — 插件目录
-  - `base_plugin.py` — 抽象基类（BaseTestPlugin, TestInfo, ValidationResult）
-  - `relax_plugin.py`, `elastic_plugin.py`, `band_plugin.py`, `dos_plugin.py`
+  - `base_plugin.py` — 抽象基类（BaseTestPlugin, TestInfo, ValidationResult, ErrorAnalysis）
+    - `extract_case_name(content)` — 智能提取案例名（避免代词，优先级：案例标记 > 材料体系 > STRU元素）
+    - `analyze_deviation()` — 偏差分析（判断教程错误 vs 平台差异 vs 物理合理）
+  - `relax_plugin.py`, `elastic_plugin.py`, `band_plugin.py`, `dos_plugin.py`, `scf_plugin.py` — 已集成偏差分析
   - `dftu_plugin.py` — DFT+U 插件（2026-02-28 新增，NiO AFM SCF）
   - `optic_plugin.py` — 光学性质插件（2026-03-02 新增，SiO₂）
   - `solvation_plugin.py` — 隐式溶剂插件（2026-03-02 新增，H₂@水溶液）
@@ -28,6 +30,7 @@
   - `tddft_plugin.py` — RT-TDDFT 混合规范插件（2026-03-09 新增，Si 原胞 50步）
   - `neb_plugin.py` — NEB/ATST-Tools 插件（2026-03-09 新增，Li-Si IS SCF 验证）
   - `PLUGIN_REGISTRY.md` — 插件注册表（新增插件时必须更新）
+- `tools/case_parser.py` — 案例解析工具（支持 .docx/.md 文件或 ABACUS 计算目录）
 - `tools/orbital_validator.py` — 验证并修复轨道文件名 + nbands auto
 - `tools/fix_stru.py` — 修复 STRU 文件格式
 
@@ -105,3 +108,4 @@
 - 备用源：`abacusmodeling/ABACUS-orbitals/SG15_v1.0/Orbitals_v2.0/<Element>_DZP/`
   - URL 格式：`https://raw.githubusercontent.com/abacusmodeling/ABACUS-orbitals/main/SG15_v1.0/Orbitals_v2.0/{Element}_{quality}/{filename}`
   - 已验证：`Li_gga_8au_100Ry_4s1p.orb`（4s1p=DZP）已缓存到 `tools/orbitals/`
+

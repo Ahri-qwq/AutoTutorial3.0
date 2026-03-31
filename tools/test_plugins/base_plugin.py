@@ -428,3 +428,63 @@ class BaseTestPlugin(ABC):
             )
 
         return analyses
+
+    def extract_case_name(self, content: str) -> str:
+        """
+        通用案例名提取方法（避免提取代词）
+
+        优先级：
+        1. 明确的案例标记："案例：Si"、"案例1：TiO2"
+        2. 材料体系标记："材料体系：NiO"、"**材料体系**：Al"
+        3. STRU文件中的元素符号
+        4. 避免提取代词（它、他、她、这、那等）
+        """
+        import re
+
+        # 中文代词黑名单
+        PRONOUNS = {'它', '他', '她', '这', '那', '其', '此', '该'}
+
+        # 1. 明确的案例标记
+        patterns = [
+            r'案例\d*\s*[-:：]\s*(\w+)',
+            r'#+\s*案例[：:]\s*(\w+)',
+        ]
+        for pattern in patterns:
+            match = re.search(pattern, content)
+            if match:
+                name = match.group(1)
+                if name not in PRONOUNS:
+                    return name
+
+        # 2. 材料体系标记
+        material_patterns = [
+            r'材料体系[：:]\s*(\w+)',
+            r'\*\*材料体系\*\*[：:]\s*(\w+)',
+        ]
+        for pattern in material_patterns:
+            match = re.search(pattern, content)
+            if match:
+                name = match.group(1)
+                if name not in PRONOUNS:
+                    return name
+
+        # 3. 从STRU文件提取元素符号
+        stru_pattern = r'```[^\n]*\n(ATOMIC_SPECIES[\s\S]+?)```'
+        stru_match = re.search(stru_pattern, content)
+        if stru_match:
+            stru_content = stru_match.group(1)
+            # 提取元素符号（第一列）
+            element_pattern = r'^([A-Z][a-z]?)\s+[\d.]+'
+            element_matches = re.findall(element_pattern, stru_content, re.MULTILINE)
+            if element_matches:
+                # 如果只有一种元素，直接返回
+                if len(set(element_matches)) == 1:
+                    return element_matches[0]
+                # 如果有多种元素，组合返回（如 NiO）
+                unique_elements = []
+                for elem in element_matches:
+                    if elem not in unique_elements:
+                        unique_elements.append(elem)
+                return ''.join(unique_elements)
+
+        return "Unknown"

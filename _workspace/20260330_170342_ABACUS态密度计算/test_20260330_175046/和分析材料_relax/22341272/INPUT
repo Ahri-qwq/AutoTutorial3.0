@@ -1,0 +1,26 @@
+INPUT_PARAMETERS
+pseudo_dir      ./
+orbital_dir     ./
+
+# System variables
+calculation         relax        # 结构优化
+symmetry            0
+kspacing            0.08
+precision           double
+
+# Plane wave related variables
+ecutwfc             100
+
+# Electronic structure
+basis_type          lcao
+ks_solver           genelpa
+smearing_method     gauss
+smearing_sigma      0.015
+mixing_type         broyden
+mixing_beta         0.8
+scf_nmax            100
+scf_thr             1e-07
+
+# Relax settings
+relax_nmax          50
+force_thr_ev        0.01

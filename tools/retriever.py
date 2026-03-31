@@ -99,8 +99,10 @@ class CommandLineRetriever:
             docs = results['documents'][0]
             metas = results['metadatas'][0]
             for i, doc in enumerate(docs):
-                source = metas[i].get('source', 'Unknown')
-                retrieved_docs.append((doc, source))
+                # 优先返回 doc_path（相对路径），降级到裸文件名 source
+                # doc_path 配合 chunk 文本内的标题前缀，减少元数据强锚定
+                doc_path = metas[i].get('doc_path', metas[i].get('source', 'Unknown'))
+                retrieved_docs.append((doc, doc_path))
 
         return retrieved_docs
 
