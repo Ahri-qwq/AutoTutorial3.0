@@ -261,11 +261,11 @@ pip install python-docx
 
 ---
 
-## 在Claude Code中使用
+## 在Claude Code或其他Agent中使用
 
-这些工具设计用于在Claude Code执行流程时调用。
+这些工具设计用于在Agent执行流程时调用。
 
-**在CLAUDE.md中的使用示例：**
+**在01_tutorial.md中的使用示例：**
 
 ```markdown
 ### Step 1: 知识调研
@@ -278,7 +278,7 @@ python tools/retriever.py --query "主题 物理原理 参数设置" --top_k 10
 读取输出结果，保存到 01_research.md
 ```
 
-**Claude Code会：**
+**Agent会：**
 1. 执行Bash命令
 2. 读取终端输出
 3. 分析检索结果质量
@@ -337,7 +337,7 @@ python tools/fix_stru.py --stru path/to/STRU
 ## static_checker.py - 静态质量检查工具
 
 ### 功能
-检查 7 项可客观判定的教程质量指标（用于 judgeCLAUDE 评分系统）：
+检查 7 项可客观判定的教程质量指标（用于 03_evaluation 评分系统）：
 1. 信息精准与一致性（max 5）
 2. 文件来源明确度（max 3）
 3. 时效与兼容性（max 4）
@@ -390,17 +390,17 @@ python tools/test_framework_integrated.py continue ./test_dir
 - scf（SCF 自洽计算）
 
 ### 插件开发
-参考 `testCLAUDE/plugin_dev_guide.md` 和 `test_plugins/PLUGIN_REGISTRY.md`。
+参考 `02_calculation/plugin_dev_guide.md` 和 `test_plugins/PLUGIN_REGISTRY.md`。
 
 ---
 
-## testCLAUDE/ 模块文档
+## 02_calculation/ 模块文档
 
 ### bohrium_setup.md
 Bohrium 配置流程 + CLI 命令速查表。
 
 ### plugin_dev_guide.md
-插件自主创建流程（testCLAUDE.md Step 1.5）。
+插件自主创建流程（02_calculation.md Step 1.5）。
 
 ### plugins_history.md
 插件开发历史表，记录所有插件的添加时间和首次测试教程。
@@ -416,12 +416,12 @@ job.json/analysis.json/STRU 格式参考（Step 2 时加载）。
 ## 工具依赖关系
 
 ```
-教程生成流程（CLAUDE.md）
+教程生成流程（01_tutorial.md）
 ├── retriever.py          # Step 1, 3
 ├── case_parser.py        # Step 1
 └── orbital_validator.py  # Step 7
 
-计算测试流程（testCLAUDE.md）
+计算测试流程（02_calculation.md）
 ├── test_framework_integrated.py  # 主框架
 │   ├── test_framework_phase1_analyzer.py
 │   └── test_framework_phase3_7_impl.py
@@ -444,5 +444,5 @@ job.json/analysis.json/STRU 格式参考（Step 2 时加载）。
     └── scf_plugin.py
 
 质量评估
-└── static_checker.py     # judgeCLAUDE 评分
+└── static_checker.py     # 03_evaluation 评分
 ```

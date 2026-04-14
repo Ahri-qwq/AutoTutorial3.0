@@ -1,8 +1,8 @@
-# judgeCLAUDE.md - ABACUS 教程质量评估指南
+# judge01_tutorial.md - ABACUS 教程质量评估指南
 
 ## 你的身份
 
-你是一位 ABACUS 教程质量评审员。你的任务是对 AutoTutorial 3.0 生成的教程进行多维度量化评分，并量化 testCLAUDE 计算校验对教程质量的贡献。
+你是一位 ABACUS 教程质量评审员。你的任务是对 AutoTutorial 3.0 生成的教程进行多维度量化评分，并量化 02_calculation 计算校验对教程质量的贡献。
 
 ---
 
@@ -125,7 +125,7 @@ cat "$eval_dir/static_v2.json"
 
 ---
 
-### Step 2: 读取 testCLAUDE 结果（3.1 评分）
+### Step 2: 读取 02_calculation 结果（3.1 评分）
 
 **目标：** 从 test_report.md 中提取 3.1 案例可跑通的客观评分
 
@@ -259,7 +259,7 @@ python tools/retriever.py --query "[主题] 常见设置 收敛标准" --top_k 5
 
 **3.4 结果可验证性（满分 6）**
 - 检查：教程中是否写明了具体数值参考值，供读者自行比对
-- V2 中由 testCLAUDE 写回的实测数值 → 高分；V1 中 LLM 估算的数值 → 根据合理性酌情给分
+- V2 中由 02_calculation 写回的实测数值 → 高分；V1 中 LLM 估算的数值 → 根据合理性酌情给分
 - 注意：此项 V1/V2 要单独评（因参考值是否为实测直接影响可信度）
 
 **4.2 冗余噪音控制（满分 2）**
@@ -270,12 +270,12 @@ python tools/retriever.py --query "[主题] 常见设置 收敛标准" --top_k 5
 
 **5.1 易错提醒覆盖度（满分 2）**
 - 检查：高危操作（如内存暴增、文件路径冲突）是否有 Warning 提示
-- 注意：testCLAUDE Step 8 会将 `⚠️ 注意：` / `⚠️ 常见错误：` 块插入 V2，V1 通常缺少这些内容。**此项须对 V1 单独评分**（在 Step 3.5 中执行）
+- 注意：02_calculation Step 8 会将 `⚠️ 注意：` / `⚠️ 常见错误：` 块插入 V2，V1 通常缺少这些内容。**此项须对 V1 单独评分**（在 Step 3.5 中执行）
 
 **5.2 快速排错机制（满分 5）**
 - 检查：典型报错（如 SCF 不收敛、文件找不到）是否有可操作的 Troubleshooting
 - 参考文章的标准：有专门的报错→原因→解决步骤段落
-- 注意：testCLAUDE Step 8 的 `⚠️ 常见错误：` 块属于短提示而非完整 Troubleshooting；若无 runtime_error 类记录，V1/V2 此项差异可忽略，复用 V2 分数
+- 注意：02_calculation Step 8 的 `⚠️ 常见错误：` 块属于短提示而非完整 Troubleshooting；若无 runtime_error 类记录，V1/V2 此项差异可忽略，复用 V2 分数
 
 **5.3 物理收敛性分析（满分 8）**
 - 检查：是否教用户如何验证结果精度（K 点/截断能收敛测试、SCF 收敛判据、结果对比参考值）
@@ -299,11 +299,11 @@ python tools/retriever.py --query "[主题] 常见设置 收敛标准" --top_k 5
 
 **3.5 V1 的单独评分（3.4 + 5.1）**
 
-回到 V1（`process/07_fix.md`），单独评估两个 testCLAUDE 写回内容影响的指标：
+回到 V1（`process/07_fix.md`），单独评估两个 02_calculation 写回内容影响的指标：
 
 **3.4（V1）：** 只检查是否有数值参考值存在，以及数值是否看起来合理（LLM 估算的数值通常与实测有 5–15% 偏差）
 
-**5.1（V1）：** 检查 V1 中的 Warning 提示数量与质量。V1 中的 Warning 完全来自 LLM 生成，V2 额外包含 testCLAUDE Step 8 基于实际运行发现插入的 `⚠️ 注意：` / `⚠️ 常见错误：` 块。
+**5.1（V1）：** 检查 V1 中的 Warning 提示数量与质量。V1 中的 Warning 完全来自 LLM 生成，V2 额外包含 02_calculation Step 8 基于实际运行发现插入的 `⚠️ 注意：` / `⚠️ 常见错误：` 块。
 
 **Think Aloud：** 分别说明 V1 的 3.4 和 5.1 得分，与 V2 的差异
 
@@ -348,7 +348,7 @@ python tools/retriever.py --query "[主题] 常见设置 收敛标准" --top_k 5
 
 V1 总分: XX.X / 100
 V2 总分: XX.X / 100
-ΔS:     +XX.X（testCLAUDE 贡献）
+ΔS:     +XX.X（02_calculation 贡献）
 ```
 
 **等级判定：**
@@ -373,7 +373,7 @@ V2 总分: XX.X / 100
 # 教程质量评估报告
 
 **评估时间：** YYYY-MM-DD HH:MM
-**评估框架：** judgeCLAUDE.md
+**评估框架：** judge01_tutorial.md
 **教程主题：** [从文件名/内容提取]
 **评估文件：**
   - V1：[v1_path]
@@ -407,7 +407,7 @@ V2 总分: XX.X / 100
 | 2.3 工作流覆盖与顺畅度 | 7% | X.X | X.X | LLM |
 | 2.4 可导航性与步骤连贯性 | 1% | X.X | X.X | 静态 |
 | 2.5 结构完整性 | 5% | X.X | X.X | 静态 |
-| 3.1 案例可跑通 | 15% | 0 | X.X | testCLAUDE |
+| 3.1 案例可跑通 | 15% | 0 | X.X | 02_calculation |
 | 3.2 环境条件明确度 | 3% | X.X | X.X | 静态 |
 | 3.4 结果可验证性 | 6% | X.X | X.X | LLM |
 | 4.1 图文/代码邻近性 | 3% | X.X | X.X | 静态 |
@@ -452,7 +452,7 @@ V2 总分: XX.X / 100
 
 ### 类别 3：实操与可执行性
 
-**[3.1] 案例可跑通 V1: 0/15 / V2: X/15** — [说明 testCLAUDE 结果：任务状态、SCF 收敛、参数误差 PASS/FAIL 汇总]
+**[3.1] 案例可跑通 V1: 0/15 / V2: X/15** — [说明 02_calculation 结果：任务状态、SCF 收敛、参数误差 PASS/FAIL 汇总]
 
 **[3.2] 环境条件明确度 X/3（V1: X / V2: X）** — [说明版本号/MPI/资源说明的覆盖情况]
 
@@ -468,7 +468,7 @@ V2 总分: XX.X / 100
 
 ### 类别 5：容错与深度分析
 
-**[5.1] 易错提醒覆盖度 V1: X/2 / V2: X/2** — [V1 说明 LLM 生成的 Warning 数量；V2 说明 testCLAUDE 补充的 ⚠️ 块内容]
+**[5.1] 易错提醒覆盖度 V1: X/2 / V2: X/2** — [V1 说明 LLM 生成的 Warning 数量；V2 说明 02_calculation 补充的 ⚠️ 块内容]
 
 **[5.2] 快速排错机制 X/5** — [说明 Troubleshooting 覆盖的报错类型，或指出缺失]
 
@@ -510,7 +510,7 @@ V2 总分: XX.X / 100
 
 V1 总分：XX.X / 100（[等级]）
 V2 总分：XX.X / 100（[等级]）
-ΔS：+XX.X（testCLAUDE 贡献）
+ΔS：+XX.X（02_calculation 贡献）
 
 评估报告：[eval_report_path]
 ```

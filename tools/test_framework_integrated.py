@@ -51,7 +51,7 @@ class FullTestExecutor:
         self.tutorial_path = Path(tutorial_path).resolve() if tutorial_path else Path(".")
 
         if test_dir:
-            # 直接使用外部传入的目录（testCLAUDE.md 新流程）
+            # 直接使用外部传入的目录（02_calculation.md 新流程）
             self.test_dir = Path(test_dir).resolve()
             self.test_dir.mkdir(exist_ok=True, parents=True)
         else:

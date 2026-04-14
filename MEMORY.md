@@ -3,9 +3,9 @@
 ## 项目结构
 
 - **根目录：** `C:\MyCode\AutoTutorial3.0\`
-- **教程生成流程：** `CLAUDE.md`（7步 + Step 8 测试询问，含 compact 暂停点）
-- **计算测试流程：** `testCLAUDE.md`（~1346行，核心流程 Step 0–7）
-- **testCLAUDE 模块目录：** `tools/testCLAUDE/`（按需读取，减少上下文压力）
+- **教程生成流程：** `01_tutorial.md`（7步 + Step 8 测试询问，含 compact 暂停点）
+- **计算测试流程：** `02_calculation.md`（~1346行，核心流程 Step 0–7）
+- **02_calculation 模块目录：** `tools/02_calculation/`（按需读取，减少上下文压力）
   - `bohrium_setup.md` — Bohrium 配置流程 + CLI 命令速查（Step 0 未配置时加载）
   - `plugin_dev_guide.md` — 插件自主创建流程 Step 1.5（detected_types=[] 时加载）
   - `plugins_history.md` — 插件开发历史表（新增插件只追加此文件一行）
@@ -88,8 +88,8 @@
 
 ## 重要约定
 
-- testCLAUDE.md 中的框架测试命令：`python tools/test_framework_integrated.py "<path>" --test-dir "<dir>" --phase prepare`（注意是位置参数，不是 `--tutorial`）
-- 新增插件后：更新 `test_framework_integrated.py`、`PLUGIN_REGISTRY.md`、`tools/testCLAUDE/plugins_history.md` 三处（不再需要修改 testCLAUDE.md 主文件）
+- 02_calculation.md 中的框架测试命令：`python tools/test_framework_integrated.py "<path>" --test-dir "<dir>" --phase prepare`（注意是位置参数，不是 `--tutorial`）
+- 新增插件后：更新 `test_framework_integrated.py`、`PLUGIN_REGISTRY.md`、`tools/02_calculation/plugins_history.md` 三处（不再需要修改 02_calculation.md 主文件）
 - **工作目录命名**：Step 0 必须用完整格式 `_workspace/YYYYMMDD_HHMMSS_主题/`，**不能只写日期**（历史错误案例：20260302_隐式溶剂模型、20260302_光学性质计算）
 - **时间戳必须从 Bash 获取**：系统上下文只提供日期，不提供时间。Step 0 创建目录前必须执行 `date +"%Y%m%d_%H%M%S"` 获取真实时间戳，**严禁编造时间**（历史错误案例：20260304_**100000**_ABACUS+ShengBTE、20260304_**100000**_ABACUS+SDFT，均因未执行 date 命令导致时间伪造）
 

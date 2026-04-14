@@ -1,12 +1,12 @@
 # AutoTutorial 3.0
 
-**AutoTutorial 3.0** 是一个专为 **ABACUS** 第一性原理计算软件设计的智能教程生成与验证系统。通过 **Claude Code** 协调 RAG 检索、案例解析和计算测试工具，自动生成高质量教程，并可将教程提交到 Bohrium 云平台进行实际计算验证。
+**AutoTutorial 3.0** 是一个专为 **ABACUS** 第一性原理计算软件设计的智能教程生成与验证系统。通过 **Agent Harness系统** 协调 RAG 检索、案例解析和计算测试工具，自动生成高质量教程，并可将教程提交到 Bohrium 云平台进行实际计算验证。
 
 ---
 
 ## 核心特性
 
-- **Claude Code 协调**：使用 Claude Code 作为主控，通过自然语言对话完成教程生成全流程
+- **Agent Harness系统**：用结构化 Markdown 文件（而非硬编码）来定义和控制 AI 智能体的工作流
 - **RAG 知识检索**：从本地知识库检索相关文档，确保内容准确性
 - **案例驱动生成**：支持上传案例文件（.docx/.md），自动提取参数和文件结构
 - **多轮审查机制**：内容审查、案例审查、风格审查，确保教程质量
@@ -26,7 +26,7 @@ pip install -r requirements.txt
 
 ### 1.1 Claude Code配置
 
-**Claude Code：**
+**如果使用Claude Code执行测项目：**
 建议使用 Claude Code 官方或代理api运行项目，其他模型也可也运行，但是效果有待验证（暂时没有进行过太多测试，仅尝试过minimax-2.5，但效果不佳）。
 
 **持久记忆**
@@ -69,19 +69,19 @@ bohr config set project_id <your-project-id>
 
 ### 6. 开始使用
 
-在 Claude Code 中输入：
+在 Agent 对话中输入中输入：
 
 ```
-请按照CLAUDE.md生成一篇关于"ABACUS SCF自洽计算"的教程
+请按照01_tutorial.md生成一篇关于"ABACUS SCF自洽计算"的教程
 ```
 
 ---
 
 ## 工作流程
 
-系统分为两个阶段：**教程生成**（CLAUDE.md）和**计算测试**（testCLAUDE.md）。
+系统分为两个阶段：**教程生成**（01_tutorial.md）和**计算测试**（02_calculation.md）。
 
-### 阶段一：教程生成（CLAUDE.md）
+### 阶段一：教程生成（01_tutorial.md）
 
 | 步骤 | 内容 |
 |------|------|
@@ -93,16 +93,16 @@ bohr config set project_id <your-project-id>
 | Step 5 | 案例审查（完整性、准确性，如有案例） |
 | Step 6 | 风格审查（去 AI 腔、语言打磨） |
 | Step 7 | 最终输出（含轨道文件名自动验证） |
-| **Step 8** | **询问是否执行计算测试，确认后切换到 testCLAUDE.md** |
+| **Step 8** | **询问是否执行计算测试，确认后切换到 02_calculation.md** |
 
-### 阶段二：计算测试（testCLAUDE.md）
+### 阶段二：计算测试（02_calculation.md）
 
 | 步骤 | 内容 |
 |------|------|
 | Step 0 | 初始化 Bohrium 配置 |
 | Step 1 | 调用 `--phase prepare` 解析教程、准备输入文件 |
 | Step 2 | 验证输入文件（轨道文件、INPUT 参数、STRU 格式） |
-| Step 3 | Claude 读教程，Think Aloud 分析任务依赖，手工提交 Bohrium 任务 |
+| Step 3 | Agent 读教程，Think Aloud 分析任务依赖，手工提交 Bohrium 任务 |
 | Step 4 | 监控任务状态 |
 | Step 5 | 下载计算结果 |
 | Step 6 | 对比结果，生成测试报告 |
@@ -114,8 +114,8 @@ bohr config set project_id <your-project-id>
 
 ```
 AutoTutorial3.0/
-├── CLAUDE.md                        # 教程生成指南（核心）
-├── testCLAUDE.md                    # 计算测试指南
+├── 01_tutorial.md                        # 教程生成指南（核心）
+├── 02_calculation.md                    # 计算测试指南
 ├── README.md                        # 本文件
 │
 ├── tools/
@@ -124,7 +124,7 @@ AutoTutorial3.0/
 │   ├── orbital_validator.py         # 轨道文件名 + INPUT 参数验证工具
 │   ├── orbital_db.py                # 轨道文件映射数据库
 │   ├── fix_stru.py                  # STRU 文件格式修复工具
-│   ├── static_checker.py            # 静态质量检查工具（judgeCLAUDE）
+│   ├── static_checker.py            # 静态质量检查工具（03_evaluation）
 │   ├── test_framework_integrated.py # 测试框架主入口
 │   ├── test_framework_phase1_analyzer.py
 │   ├── test_framework_phase3_7_impl.py
@@ -144,7 +144,7 @@ AutoTutorial3.0/
 │   │   ├── neb_plugin.py            # NEB 过渡态
 │   │   ├── scf_plugin.py            # SCF 自洽计算
 │   │   └── PLUGIN_REGISTRY.md       # 插件注册表
-│   ├── testCLAUDE/                  # 测试流程模块文档
+│   ├── 02_calculation/                  # 测试流程模块文档
 │   │   ├── bohrium_setup.md         # Bohrium 配置流程
 │   │   ├── plugin_dev_guide.md      # 插件开发指南
 │   │   ├── plugins_history.md       # 插件开发历史
@@ -200,7 +200,7 @@ python tools/orbital_validator.py process/07_fix.md --fix
 ### test_framework_integrated.py — 计算测试框架
 
 ```bash
-# 仅准备输入文件（Claude 控制任务提交）
+# 仅准备输入文件（Agent 控制任务提交）
 python tools/test_framework_integrated.py tutorial.md --test-dir ./test_dir --phase prepare
 
 # 任务完成后继续后处理
@@ -276,7 +276,7 @@ python tools/fix_stru.py --stru path/to/STRU
 
 ### static_checker.py — 静态质量检查
 
-检查 7 项可客观判定的教程质量指标（用于 judgeCLAUDE 评分系统）：
+检查 7 项可客观判定的教程质量指标（用于 03_evaluation 评分系统）：
 
 ```bash
 python tools/static_checker.py --input tutorial.md --output scores.json
@@ -297,17 +297,17 @@ python tools/static_checker.py --input tutorial.md --output scores.json
 ### 生成教程（无案例）
 
 ```
-请按照CLAUDE.md生成一篇关于"ABACUS能带计算"的教程
+请按照01_tutorial.md生成一篇关于"ABACUS能带计算"的教程
 ```
 
 ### 生成教程（基于案例）
 
 ```
-请按照CLAUDE.md生成一篇关于"ABACUS弹性常数计算"的教程，
+请按照01_tutorial.md生成一篇关于"ABACUS弹性常数计算"的教程，
 案例文件是 data/input/elastic_case.docx，请围绕案例展开
 ```
 
-生成完成后，Claude 会询问是否执行计算测试。选择"是"后自动切换到 testCLAUDE.md 流程。
+生成完成后，Agent 会询问是否执行计算测试。选择"是"后自动切换到 02_calculation.md 流程。
 
 ---
 
@@ -335,14 +335,14 @@ python tools/static_checker.py --input tutorial.md --output scores.json
 ## 版本历史
 
 ### v3.0 (2026.02-03)
-- 从自动化 pipeline 模式升级为 Claude Code 协调模式
-- 新增完整的计算测试验证系统（testCLAUDE.md + 插件化测试框架）
+- 从自动化 pipeline 模式升级为 Agent Harness 协调模式
+- 新增完整的计算测试验证系统（02_calculation.md + 插件化测试框架）
 - 新增 14 个计算类型插件：relax, elastic, band, dos, dftu, optic, solvation, phonopy, sdft, elf, tddft, neb, scf
 - 新增 `orbital_validator.py`：自动修正轨道文件名错误和 INPUT 参数兼容性问题
-- 新增 `static_checker.py`：静态质量检查工具（judgeCLAUDE 评分系统）
+- 新增 `static_checker.py`：静态质量检查工具（03_evaluation 评分系统）
 - 新增 `fix_stru.py`：自动修复 STRU 文件格式
-- 新增 `testCLAUDE/` 模块文档：bohrium_setup, plugin_dev_guide, troubleshooting 等
-- 新增 `--phase prepare` 模式：Python 仅负责文件准备，Claude 控制所有任务提交决策
+- 新增 `02_calculation/` 模块文档：bohrium_setup, plugin_dev_guide, troubleshooting 等
+- 新增 `--phase prepare` 模式：Python 仅负责文件准备，Agent 控制所有任务提交决策
 - 新增测试反馈写回机制（Step 7）：测试通过后自动将修正写回教程原文
 
 ### v2.0 (2026.01)

@@ -21,7 +21,7 @@ import shutil
 class OrbitalNotFoundError(Exception):
     """
     轨道文件下载失败且无已知映射时抛出。
-    携带 GitHub 候选列表，供 Claude 在 testCLAUDE.md 流程中处理。
+    携带 GitHub 候选列表，供 Agent 在 02_calculation.md 流程中处理。
 
     Attributes:
         filename: 请求的错误文件名

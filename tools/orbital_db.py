@@ -116,7 +116,7 @@ def query_github_candidates(element: str) -> list:
         ]
     except Exception:
         # 任何失败（网络、rate limit、API 结构变更）均返回空列表
-        # 空列表触发 testCLAUDE.md 2.3b 的「手动输入」分支，不会静默丢失错误
+        # 空列表触发 02_calculation.md 2.3b 的「手动输入」分支，不会静默丢失错误
         return []
 
 

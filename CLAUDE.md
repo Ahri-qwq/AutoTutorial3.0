@@ -199,6 +199,19 @@
 - 将前言、所有章节、附录汇总
 - 保存为 `process/03_draft_full.md`（完整初稿）
 
+**拼接命令**（PowerShell）：
+```powershell
+$files = @('03_00_前言.md', '03_chapter_01_*.md', '03_chapter_02_*.md', '03_chapter_03_*.md', '03_chapter_04_*.md', '03_chapter_05_*.md', '03_chapter_06_*.md', '03_99_附录.md')
+$content = ""
+foreach ($f in $files) {
+    $content += Get-Content $f -Encoding UTF8 -Raw
+    $content += "`n`n---`n`n"
+}
+$content | Set-Content '03_draft_full.md' -Encoding UTF8 -NoNewline
+```
+> ⚠️ **关键**：必须用 `-Raw` 参数，否则换行符会丢失。
+
+
 **3.5 写作原则**
 - **避免AI腔**：不用"在当今..."、"值得注意的是..."、"综上所述..."
 - **代码块完整**：包含文件名、参数对齐、必要说明
@@ -345,6 +358,14 @@ chapters: N
 - 创建 `07_Final_Tutorial_<教程标题>.md`
 - 包含元数据、完整文章内容
 
+**PowerShell 命令**：
+```powershell
+$draft = Get-Content process\03_draft_full.md -Encoding UTF8 -Raw
+$metadata = "---`ntitle: `"教程标题`"`nauthor: `"AutoTutorial 3.0`"`ndate: `"YYYY-MM-DD`"`n---`n`n"
+$metadata + $draft | Set-Content '07_Final_Tutorial_教程标题.md' -Encoding UTF8 -NoNewline
+```
+> ⚠️ **关键**：必须用 `-Raw` 参数，否则换行符会丢失。
+
 **7.4 生成工作总结**
 - 创建`08_summary.md`
 - 任务信息、执行统计、最终成果、质量保证
@@ -395,11 +416,11 @@ test_dir      = "_workspace/<当前任务目录>/test_<YYYYMMDD_HHMMSS>/"
 压缩后告诉我"继续测试"即可。若不压缩，直接说"继续测试"也可。
 ```
 
-3. 收到"继续测试"后，切换到 `testCLAUDE.md` 定义的完整测试流程，从 **Step 1** 开始执行，`tutorial_path` 和 `test_dir` 已知，无需再次询问。
+3. 收到"继续测试"后，切换到 `02_calculation.md` 定义的完整测试流程，从 **Step 1** 开始执行，`tutorial_path` 和 `test_dir` 已知，无需再次询问。
 
-**Think Aloud：** 说明教程路径、测试目录，以及你对本篇教程计算流程的初步理解（串行/并行任务、依赖关系），为 testCLAUDE.md Step 3 的任务提交做预热。
+**Think Aloud：** 说明教程路径、测试目录，以及你对本篇教程计算流程的初步理解（串行/并行任务、依赖关系），为 02_calculation.md Step 3 的任务提交做预热。
 
-**完成标志：** 用户选择"否"则直接完成；用户选择"是"则切换到 testCLAUDE.md Step 1。
+**完成标志：** 用户选择"否"则直接完成；用户选择"是"则切换到 02_calculation.md Step 1。
 
 ---
 
@@ -466,6 +487,26 @@ cal_stress = 1
 2. 读取输出结果
 3. 理解案例内容
 4. 保存到 process/01_research.md
+
+---
+
+## 文件编码规范（重要）
+
+**所有文件读写必须使用 UTF-8 without BOM 编码。**
+
+### PowerShell 命令
+
+| 操作 | 正确命令 |
+|------|---------|
+| 读取文件 | `Get-Content path -Encoding UTF8 -Raw` |
+| 写入文件 | `$content \| Set-Content path -Encoding UTF8 -NoNewline` |
+| 多文件拼接 | 见 Step 3.4 / 7.3 |
+
+> ⚠️ **关键**：`-Raw` 保留换行符，`-Encoding UTF8` 避免乱码。
+
+### OpenClaw 工具
+
+OpenClaw 的 `read`/`write`/`edit` 自动处理 UTF-8 编码，可安全使用。
 
 ---
 

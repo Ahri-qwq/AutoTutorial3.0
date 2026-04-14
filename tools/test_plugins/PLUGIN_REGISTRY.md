@@ -34,7 +34,7 @@
 1. 阅读教程，找到核心 INPUT 关键词
 2. 查表：已注册插件中是否有匹配的 can_handle 关键词？
    ├── 有匹配 → 关键词格式问题（空格/大小写），检查教程写法
-   └── 无匹配 → 需要创建新插件，执行 testCLAUDE.md Step 1.5
+   └── 无匹配 → 需要创建新插件，执行 02_calculation.md Step 1.5
 ```
 
 ---
@@ -44,14 +44,14 @@
 1. 创建 `tools/test_plugins/<type>_plugin.py`
 2. 在 `tools/test_framework_integrated.py` 中导入并注册
 3. 在本表追加一行（格式同上）
-4. 在 `testCLAUDE.md` 正文"已支持计算类型"表中追加一行
-5. 在 `testCLAUDE.md` 附录D"插件开发历史"表中追加一行
+4. 在 `02_calculation.md` 正文"已支持计算类型"表中追加一行
+5. 在 `02_calculation.md` 附录D"插件开发历史"表中追加一行
 
 ---
 
 ## 已知待扩展的计算类型
 
-以下计算类型尚无插件，遇到时按 testCLAUDE.md Step 1.5 创建：
+以下计算类型尚无插件，遇到时按 02_calculation.md Step 1.5 创建：
 
 | 计算类型 | 核心关键词 | 主要挑战 |
 |----------|-----------|----------|

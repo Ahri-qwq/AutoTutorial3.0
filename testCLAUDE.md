@@ -1,4 +1,4 @@
-# testCLAUDE.md - ABACUS教程计算测试指南
+# 02_calculation.md - ABACUS教程计算测试指南
 
 ## 你的身份
 
@@ -42,7 +42,7 @@
 **触发方式：**
 用户提供简单指令：
 ```
-请按照testCLAUDE.md测试教程：_workspace/XXX/07_final.md
+请按照02_calculation.md测试教程：_workspace/XXX/07_final.md
 ```
 
 **行为：**
@@ -54,7 +54,7 @@
 **触发方式：**
 用户在指令中包含"逐步确认"或"手动确认"：
 ```
-请按照testCLAUDE.md测试教程：_workspace/XXX/07_final.md，逐步确认
+请按照02_calculation.md测试教程：_workspace/XXX/07_final.md，逐步确认
 ```
 
 **行为：**
@@ -147,7 +147,7 @@ bohr project list
 
 **0.2 Bohrium完整配置流程（仅在未配置时执行）**
 
-→ **read `tools/testCLAUDE/bohrium_setup.md`** 获取完整配置流程和 Bohrium CLI 命令速查。
+→ **read `tools/02_calculation/bohrium_setup.md`** 获取完整配置流程和 Bohrium CLI 命令速查。
 按其中步骤执行完成后，删除状态文件（如存在），输出"✅ Step 0完成，环境就绪"，继续 Step 1。
 
 ---
@@ -288,10 +288,10 @@ python tools/test_framework_integrated.py "$tutorial_path" --test-dir "$test_dir
 
 ### Step 1.5：创建新测试插件（⭐ 自主扩展框架，仅 detected_types 为空时执行）
 
-→ **read `tools/testCLAUDE/plugin_dev_guide.md`** 获取完整插件创建流程（含 1.5.1–1.5.4 步骤、代码模板、验证方法）。
-→ **read `tools/testCLAUDE/plugins_history.md`** 参考已有插件的开发模式和历史记录。
+→ **read `tools/02_calculation/plugin_dev_guide.md`** 获取完整插件创建流程（含 1.5.1–1.5.4 步骤、代码模板、验证方法）。
+→ **read `tools/02_calculation/plugins_history.md`** 参考已有插件的开发模式和历史记录。
 
-完成插件创建、注册、验证后，在 `tools/testCLAUDE/plugins_history.md` 末尾追加一行记录，然后继续 Step 2。
+完成插件创建、注册、验证后，在 `tools/02_calculation/plugins_history.md` 末尾追加一行记录，然后继续 Step 2。
 
 ---
 
@@ -718,7 +718,7 @@ done
 
 建议：
 - 查看日志：_workspace/XXX/test_YYYYMMDD/job_logs/job_21984267/
-- 参考故障排除清单（read `tools/testCLAUDE/troubleshooting.md`）
+- 参考故障排除清单（read `tools/02_calculation/troubleshooting.md`）
 
 是否继续测试其他案例？(Y/n)
 
@@ -922,7 +922,7 @@ passed = relative_error <= tolerance  # 默认5%
 - 检查教程中的预期结果是否准确
 - 检查INPUT文件参数（ecutwfc、k_spacing等）
 - 查看计算日志是否有警告
-- 参考故障排除清单（read `tools/testCLAUDE/troubleshooting.md`）
+- 参考故障排除清单（read `tools/02_calculation/troubleshooting.md`）
 
 **6.3a 误差归因分析（⭐ 每个 FAIL 参数必须执行）**
 
@@ -1276,7 +1276,7 @@ python tools/orbital_validator.py "$tutorial_path" --fix
 **7.4 Think Aloud：说明修改结果**
 
 - 说明修改了哪些行
-- 判断是否需要重走 CLAUDE.md 审查流程：
+- 判断是否需要重走 01_tutorial.md 审查流程：
   - 只删除 `nbands auto`：**无需**重走审查（参数删除不影响文章内容）
   - 轨道文件名替换：**建议**重走 Step 5（案例审查），确保文件名一致性
 
@@ -1410,7 +1410,7 @@ ls "$test_dir/issues_log.json" 2>/dev/null && echo "存在" || echo "无问题�
 
 - 用户输入 `y`：按照"拟插入位置"写入教程
 - 用户输入 `n`：跳过，记录"已跳过"
-- 用户输入 `edit`：Claude 请用户直接提供修改后的文本，确认后写入
+- 用户输入 `edit`：Agent 请用户直接提供修改后的文本，确认后写入
 
 ---
 
@@ -1473,11 +1473,11 @@ ls "$test_dir/issues_log.json" 2>/dev/null && echo "存在" || echo "无问题�
 
 | 模块文件 | 内容 | 何时读取 |
 |---------|------|---------|
-| `tools/testCLAUDE/bohrium_setup.md` | Bohrium 配置流程 + CLI 命令速查 | Step 0 环境未配置时 |
-| `tools/testCLAUDE/plugin_dev_guide.md` | 插件自主创建完整流程（Step 1.5）| detected_types 为空时 |
-| `tools/testCLAUDE/plugins_history.md` | 插件开发历史 + 扩展场景参考 | Step 1.5 创建新插件时 |
-| `tools/testCLAUDE/troubleshooting.md` | 8 类故障排除清单 | Step 4.4 任务失败 / Step 6.3 结果偏差时 |
-| `tools/testCLAUDE/file_formats.md` | job.json / analysis.json / STRU 格式 | Step 2 生成输入文件时 |
+| `tools/02_calculation/bohrium_setup.md` | Bohrium 配置流程 + CLI 命令速查 | Step 0 环境未配置时 |
+| `tools/02_calculation/plugin_dev_guide.md` | 插件自主创建完整流程（Step 1.5）| detected_types 为空时 |
+| `tools/02_calculation/plugins_history.md` | 插件开发历史 + 扩展场景参考 | Step 1.5 创建新插件时 |
+| `tools/02_calculation/troubleshooting.md` | 8 类故障排除清单 | Step 4.4 任务失败 / Step 6.3 结果偏差时 |
+| `tools/02_calculation/file_formats.md` | job.json / analysis.json / STRU 格式 | Step 2 生成输入文件时 |
 
 ---
 
